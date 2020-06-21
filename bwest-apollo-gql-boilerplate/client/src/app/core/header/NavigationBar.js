@@ -16,7 +16,12 @@ import styled from 'styled-components';
 function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuHandler = () => {
-    console.log(isMenuOpen);
+    // console.log(isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const overlayHandler = () => {
+    // console.log('Overlay Clicked!');
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -67,40 +72,43 @@ function NavigationBar() {
       </Navbar>
 
       <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
-        <ul className='menu-list'>
-          <li className='menu-item'>
-            <Nav.Link>Tools</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link href='/add-tool'>Add Tool</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>DYI</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>Neighbors</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>About</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>Cart</Nav.Link>
-          </li>
-        </ul>
-        <ul id='menu-secondary-navigation'>
-          <li>
-            <Nav.Link>Account</Nav.Link>
-          </li>
-          <li>
-            <Nav.Link>FAQs</Nav.Link>
-          </li>
-          <li>
-            <Nav.Link>Terms of Use and Policies</Nav.Link>
-          </li>
-          <li>
-            <Nav.Link>Contact</Nav.Link>
-          </li>
-        </ul>
+        <div className={isMenuOpen ? 'overlay' : 'overlay d-block'} onClick={overlayHandler}></div>
+        <div className='menu-list'>
+          <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
+            <li className='menu-item'>
+              <Nav.Link>Tools</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link href='/add-tool'>Add Tool</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>DYI</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>Neighbors</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>About</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>Cart</Nav.Link>
+            </li>
+          </ul>
+          <ul id='menu-secondary-navigation'>
+            <li>
+              <Nav.Link>Account</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>FAQs</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>Terms of Use and Policies</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>Contact</Nav.Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </NavigationWrapper>
   ) : (
@@ -144,7 +152,9 @@ function NavigationBar() {
           </div>
         </Nav>
       </Navbar>
+
       <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
+        <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
         <div className='menu-list'>
           <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
             <li className='menu-item'>
@@ -397,6 +407,7 @@ const NavigationWrapper = styled.div`
     z-index: 998;
 
     .menu-list {
+      position: relative;
       background-color: var(--color-light);
       text-transform: uppercase;
       transform: translateX(100%);
@@ -408,6 +419,7 @@ const NavigationWrapper = styled.div`
       transition: transform 200ms ease;
       top: 0;
       right: 0;
+      z-index: 999;
 
       .menu-item {
         list-style: none;
