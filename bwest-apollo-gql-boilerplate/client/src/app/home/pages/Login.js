@@ -112,7 +112,7 @@ function Login(props) {
         <p className='text-center foot-note'>&copy; 2020 - {currentYear} Neighborly</p>
 
         {/* Back Home */}
-        <Link className='return-home' to={routes.HOME}>
+        <Link className='return-home-btn' to={routes.HOME}>
           <MdArrowBack className='arrow-left' /> Return Home
         </Link>
       </LoginWrapper>
@@ -169,7 +169,6 @@ const LoginWrapper = styled.div`
   .login-header {
     text-align: center;
     font-weight: 300;
-    letter-spacing: 1px;
     font-size: var(--app-font-size-8);
   }
 
@@ -181,7 +180,7 @@ const LoginWrapper = styled.div`
     &:hover,
     &:active,
     &:focus {
-      background-color: var(--color-accent-dark);
+      background-color: var(--color-accent);
     }
   }
 

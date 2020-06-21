@@ -56,23 +56,26 @@
   }
 }
 
-.return-home {
+.return-home-btn {
   display: flex;
   position: absolute;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--color-light);
   top: 2rem;
   right: 2rem;
 
   .arrow-left {
     height: 1.5em;
     width: 1.5em;
-    transition: all 0.3s ease;
     margin-right: 8px;
+    transition: margin 0.1s ease;
   }
 
   &:hover {
     text-decoration: none;
+    color: var(--color-accent-light);
 
     .arrow-left {
       margin-right: 12px;

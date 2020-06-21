@@ -140,7 +140,7 @@ function Register(props) {
         <p className='text-center foot-note'>&copy; 2020 - {currentYear} Neighborly</p>
 
         {/* Back Home */}
-        <Link className='return-home' to={routes.HOME}>
+        <Link className='return-home-btn' to={routes.HOME}>
           <MdArrowBack className='arrow-left' /> Return Home
         </Link>
       </RegisterWrapper>
@@ -224,7 +224,7 @@ const RegisterWrapper = styled.div`
     &:hover,
     &:active,
     &:focus {
-      background-color: var(--color-accent-dark);
+      background-color: var(--color-accent);
     }
   }
 
