@@ -7,3 +7,25 @@
     color: var(--color-light);
   }
 }
+
+.nav-menubar-wrapper {
+  .nav-link {
+    display: none !important;
+  }
+}
+
+.nav-search-wrapper {
+  display: none !important;
+}
+
+@media (orientation: landscape) and (min-width: 1170px) {
+  .nav-menubar-wrapper {
+    .nav-link {
+      display: block !important;
+    }
+  }
+
+  .nav-search-wrapper {
+    display: flex !important;
+  }
+}

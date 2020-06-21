@@ -34,13 +34,13 @@ function NavigationBar() {
           <img src={brandLogo} className='brand-logo p-2' alt='Neighborly' />
         </Navbar.Brand>
         {/* searchbar */}
-        <Form inline className='p-2 flex-grow-1'>
+        <Form inline className='p-2 flex-grow-1 nav-search-wrapper'>
           <FormControl type='text' name='search' autoComplete='off' placeholder='Search' className='mr-sm-2 nav-search-input' required />
           <Button type='submit' variant='info' className='nav-search-btn'>
             <FiSearch />
           </Button>
         </Form>
-        <Nav className='ml-auto p-2'>
+        <Nav className='ml-auto p-2 nav-menubar-wrapper'>
           <Nav.Link>
             <div className='item welcome-user'>
               <div className='avatar'>
@@ -66,7 +66,7 @@ function NavigationBar() {
         </Nav>
       </Navbar>
 
-      <div className={isMenuOpen ? 'mobile-nav-show' : 'mobile-nav'}>
+      <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
         <ul className='menu-list'>
           <li className='menu-item'>
             <Nav.Link>Tools</Nav.Link>
@@ -84,6 +84,20 @@ function NavigationBar() {
             <Nav.Link>About</Nav.Link>
           </li>
           <li className='menu-item'>
+            <Nav.Link>Cart</Nav.Link>
+          </li>
+        </ul>
+        <ul id='menu-secondary-navigation'>
+          <li>
+            <Nav.Link>Account</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link>FAQs</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link>Terms of Use and Policies</Nav.Link>
+          </li>
+          <li>
             <Nav.Link>Contact</Nav.Link>
           </li>
         </ul>
@@ -96,13 +110,13 @@ function NavigationBar() {
           <img src={brandLogo} className='brand-logo' alt='Neighborly' />
         </Navbar.Brand>
         {/* searchbar */}
-        <Form inline className='p-2 flex-grow-1'>
+        <Form inline className='p-2 flex-grow-1 nav-search-wrapper'>
           <FormControl type='text' name='search' autoComplete='off' placeholder='Search' className='mr-sm-2 nav-search-input' required />
           <Button type='submit' variant='info' className='nav-search-btn'>
             <FiSearch />
           </Button>
         </Form>
-        <Nav className='ml-auto'>
+        <Nav className='ml-auto nav-menubar-wrapper'>
           <Nav.Link
             href={routes.LOGIN}
             active={activeItem === 'login'}
@@ -130,24 +144,40 @@ function NavigationBar() {
           </div>
         </Nav>
       </Navbar>
-      <div className={isMenuOpen ? 'mobile-nav-show' : 'mobile-nav'}>
-        <ul className='menu-list'>
-          <li className='menu-item'>
-            <Nav.Link>Tools</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>DYI</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>Neighbors</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>About</Nav.Link>
-          </li>
-          <li className='menu-item'>
-            <Nav.Link>Contact</Nav.Link>
-          </li>
-        </ul>
+      <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
+        <div className='menu-list'>
+          <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
+            <li className='menu-item'>
+              <Nav.Link>Tools</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>DYI</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>Neighbors</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>About</Nav.Link>
+            </li>
+            <li className='menu-item'>
+              <Nav.Link>Cart</Nav.Link>
+            </li>
+          </ul>
+          <ul id='menu-secondary-navigation'>
+            <li>
+              <Nav.Link>Account</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>FAQs</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>Terms of Use and Policies</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link>Contact</Nav.Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </NavigationWrapper>
   );
@@ -168,68 +198,6 @@ const NavigationWrapper = styled.div`
 
       img {
         width: 100%;
-      }
-    }
-  }
-
-  .mobile-nav {
-    visibility: hidden;
-    opacity: 0;
-    overflow: hidden;
-    max-height: 0;
-    min-height: 100vh;
-    -webkit-transition: all 250ms ease-in-out;
-    -o-transition: all 250ms ease-in-out;
-    transition: all 250ms ease-in-out;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1007;
-    color: #3f4555;
-  }
-
-  .mobile-nav-show {
-    display: flex;
-    justify-content: flex-end;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-    opacity: 1;
-    overflow: hidden;
-    max-height: 0;
-    min-height: 100vh;
-    transition: all 250ms ease-in-out;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 998;
-    color: #ffffff;
-
-    .menu-list {
-      background-color: var(--color-secondary);
-      text-transform: uppercase;
-      max-width: 300px;
-      max-height: 0;
-      min-height: 100vh;
-      padding: 8rem 2rem 2rem;
-      top: 0;
-      right: 0;
-
-      .menu-item {
-        list-style: none;
-        font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
-        font-weight: 500;
-        font-size: 2rem;
-
-        a {
-          color: var(--color-light);
-          transition: all 0.3s ease;
-
-          &:hover {
-            color: var(--color-primary);
-          }
-        }
       }
     }
   }
@@ -282,6 +250,60 @@ const NavigationWrapper = styled.div`
       justify-content: flex-end;
     }
 
+    .hamburger {
+      width: 47px;
+      height: 47px;
+
+      .inner {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        margin-top: -1px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .hamburger {
+      background: 0 0;
+      border: 0 transparent solid;
+      padding: 4.7px;
+      display: inline-block;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      text-transform: none;
+      margin: 0;
+      overflow: visible;
+      opacity: 1;
+      transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      span.bar {
+        content: '';
+        width: 100%;
+        height: 2px;
+        display: block;
+        position: absolute;
+        background-color: var(--color-light);
+        border-radius: 0;
+      }
+
+      span.bar:nth-child(1) {
+        top: -8px;
+        transition-delay: 0.22s;
+      }
+
+      span.bar:nth-child(2) {
+        transition-delay: 0.24s;
+      }
+
+      span.bar:nth-child(3) {
+        top: 8px;
+      }
+    }
+
     .hamburger--criss-cross {
       .inner {
         &::before,
@@ -323,18 +345,6 @@ const NavigationWrapper = styled.div`
       }
     }
 
-    .hamburger {
-      width: 47px;
-      height: 47px;
-
-      .inner {
-        position: relative;
-        margin: 0;
-        width: 100%;
-        margin-top: -1px;
-      }
-    }
-
     .active {
       .inner {
         &::before,
@@ -368,42 +378,82 @@ const NavigationWrapper = styled.div`
         width: 50%;
       }
     }
+  }
 
-    .hamburger {
-      background: 0 0;
-      border: 0 transparent solid;
-      padding: 4.7px;
-      display: inline-block;
-      cursor: pointer;
-      font: inherit;
-      color: inherit;
+  .mobile-nav {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    max-height: 0;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 200ms ease-in-out;
+    z-index: 998;
+
+    .menu-list {
+      background-color: var(--color-light);
+      text-transform: uppercase;
+      transform: translateX(100%);
+      width: 100%;
+      max-width: 300px;
+      max-height: 0;
+      min-height: 100vh;
+      padding: 8rem 2rem 2rem;
+      transition: transform 200ms ease;
+      top: 0;
+      right: 0;
+
+      .menu-item {
+        list-style: none;
+        font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 2rem;
+
+        a {
+          color: var(--color-secondary);
+
+          &:hover {
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-nav-show {
+    visibility: visible;
+    opacity: 1;
+
+    .menu-list {
+      transform: translateX(0);
+    }
+  }
+
+  .menu-primary-navigation-container {
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    padding-left: 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #d8d8d8;
+  }
+
+  #menu-secondary-navigation {
+    padding-left: 0;
+    margin: 0;
+    color: var(--color-primary);
+
+    li {
+      list-style: none;
       text-transform: none;
-      margin: 0;
-      overflow: visible;
-      opacity: 1;
-      transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-      span.bar {
-        content: '';
-        width: 100%;
-        height: 2px;
-        display: block;
-        position: absolute;
-        background-color: var(--color-light);
-        border-radius: 0;
-      }
-
-      span.bar:nth-child(1) {
-        top: -8px;
-        transition-delay: 0.22s;
-      }
-
-      span.bar:nth-child(2) {
-        transition-delay: 0.24s;
-      }
-
-      span.bar:nth-child(3) {
-        top: 8px;
+      .nav-link {
+        padding: 0.5rem 0 0 1rem;
       }
     }
   }
