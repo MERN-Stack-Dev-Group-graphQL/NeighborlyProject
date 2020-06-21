@@ -1,0 +1,25 @@
+.form-input {
+  input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    padding: 0 30px !important;
+    border-radius: 25px !important;
+    border: none !important;
+    margin-bottom: 8px;
+    outline: 0;
+  }
+
+  label {
+    display: none !important;
+  }
+}
+
+.form-button {
+  display: block;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  border-radius: 25px !important;
+  padding: 0 30px !important;
+}

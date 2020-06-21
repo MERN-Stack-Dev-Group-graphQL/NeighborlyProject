@@ -1,0 +1,110 @@
+/*
+Colors
+*/
+//Variables
+
+//Colors
+$red: #ef4b46;
+$blue: dodgerblue;
+$yellow: rgba(239, 181, 67, 1);
+
+:root {
+  // Primary Colors
+  --color-primary: rgb(23, 162, 184);
+  // Secondary Colors
+  --color-secondary: rgb(16, 43, 70);
+  --color-secondary-dark: rgb(11, 35, 58);
+  // --color-secondary-dark: rgb(180, 99, 33);
+  // Accent and Other Colors
+  --color-accent: rgb(255, 192, 127);
+  --color-accent-light: rgb(238, 178, 0);
+  --color-accent-dark: rgb(213, 174, 65);
+  --color-grey: rgb(122, 140, 158);
+  --color-grey-dark: rgb(122, 140, 158);
+  --color-base: rgba(27, 27, 58);
+  --color-dark: rgba(21, 25, 34);
+  --color-deep-dark: rgba(0, 0, 0);
+  --color-lime-light: rgb(241, 250, 238);
+  --color-light: rgb(243, 247, 251);
+  --color-deep-light: rgba(255, 255, 255);
+  --color-black: hsla(0, 0%, 0%, 1);
+  --color-core-light: #f4fbfe;
+  --color-white: #ffffff;
+}
+
+/*
+Breakpoints
+*/
+:root {
+  --app-button-sm-height: 40px;
+  --app-button-md-height: 32px;
+  --app-button-lg-height: 40px;
+  --app-button-xl-height: 44px;
+  --app-button-xxl-height: 56px;
+}
+@media (orientation: landscape) and (min-width: 1690px) {
+  :root {
+    --app-button-sm-height: 28px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1170px) {
+  :root {
+    --app-button-md-height: 40px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1690px) {
+  :root {
+    --app-button-md-height: 44px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1170px) {
+  :root {
+    --app-button-lg-height: 48px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1690px) {
+  :root {
+    --app-button-lg-height: 60px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1170px) {
+  :root {
+    --app-button-xl-height: 64px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1690px) {
+  :root {
+    --app-button-xl-height: 72px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1170px) {
+  :root {
+    --app-button-xxl-height: 64px;
+  }
+}
+@media (orientation: landscape) and (min-width: 1690px) {
+  :root {
+    --app-button-xxl-height: 72px;
+  }
+}
+
+:root {
+  --app-page-content: calc(90vw + 32px);
+  --app-page-padding: calc(5% - 16px);
+  --app-gutter: 16px;
+}
+
+.gb {
+  display: block;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
+  height: 250px;
+  width: 100%;
+  margin-top: -240px;
+  margin-bottom: 10px;
+}
+
+.hr--block {
+  position: absolute;
+  width: 100%;
+  opacity: 1;
+}

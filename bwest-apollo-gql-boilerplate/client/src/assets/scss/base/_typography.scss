@@ -1,0 +1,48 @@
+/* 
+Typography 
+*/
+:root {
+  --app-font-size-0: 9.989px;
+  --app-font-size-1: 11.237px;
+  --app-font-size-2: 12.642px;
+  --app-font-size-3: 14.222px;
+  --app-font-size-4: 16px;
+  --app-font-size-5: 18px;
+  --app-font-size-6: 20.25px;
+  --app-font-size-7: 22.781px;
+  --app-font-size-8: 25.629px;
+  --app-font-size-9: 28.833px;
+  --app-font-size-10: 32.437px;
+  --app-font-size-11: 36.491px;
+  --app-font-size-12: 41.053px;
+  --app-font-size-13: 46.184px;
+  --app-font-size-14: 51.957px;
+  --app-font-size-15: 58.452px;
+  --app-font-size-16: 65.758px;
+  --app-font-size-17: 73.978px;
+  --app-font-size-18: 83.225px;
+  --app-font-size-19: 93.628px;
+  --app-font-size-20: 105.332px;
+  --app-font-weight-200: 200;
+  --app-font-weight-300: 300;
+  --app-font-weight-400: 400;
+  --app-font-weight-500: 500;
+  --app-font-weight-600: 600;
+  --app-font-weight-700: 700;
+  --app-letter-spacing-large-1: 0.05em;
+  --app-letter-spacing-large-2: 0.1em;
+  --app-letter-spacing-large-3: 0.15em;
+  --app-letter-spacing-large-4: 0.2em;
+  --app-letter-spacing-large-5: 0.25em;
+  --app-letter-spacing-tight-1: -0.005em;
+  --app-letter-spacing-tight-2: -0.01em;
+  --app-letter-spacing-tight-3: -0.025em;
+  --app-letter-spacing-tight-4: -0.035em;
+  --app-letter-spacing-tight-5: -0.055em;
+  // Font Family
+  --app-font-roboto: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --app-font-lato: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --app-font-calibre: Calibre, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --app-font-sans: 'Inter Var', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}

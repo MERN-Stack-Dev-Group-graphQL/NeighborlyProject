@@ -1,0 +1,22 @@
+// @charset 'utf-8';
+// Override default variables before the import
+
+$theme-colors: (
+  'primary': rgb(23, 162, 184),
+  'danger': #ff4136,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+//Abstracts
+@import 'abstracts/__abstracts-dir';
+
+//Base Styles
+@import 'base/__base-dir';
+
+//Components
+@import 'components/__components-dir';
+
+//Layout
+@import 'layouts/__layouts-dir';

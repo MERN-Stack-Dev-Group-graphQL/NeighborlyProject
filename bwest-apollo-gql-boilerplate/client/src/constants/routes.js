@@ -1,0 +1,11 @@
+export const LOGIN = '/login';
+export const REGISTER = '/register';
+export const FORGOT_PASSWORD = '/forgot-password';
+export const ADMIN = '/admin';
+export const ACCOUNT = '/account';
+export const HOME = '/';
+export const LANDING = '/landing';
+export const ABOUT = '/about';
+export const CONTACT_US = '/contact-us';
+export const TOOLS = '/tools';
+export const ADD_TOOL = '/add-tool';

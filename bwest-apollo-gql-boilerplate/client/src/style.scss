@@ -1,0 +1,52 @@
+@import './assets/scss/styles.scss';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-link {
+  color: #1d1d1d;
+}
+
+.App-cta {
+  background-color: #da354c;
+  color: #ffffff;
+  height: 80px;
+  line-height: 80px;
+  min-width: 220px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  border-radius: 40px;
+}
+
+.tagline {
+  color: #8b9199;
+}
+
+.page-title {
+  display: block !important;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.form-container {
+  width: 400px;
+  margin: auto;
+}

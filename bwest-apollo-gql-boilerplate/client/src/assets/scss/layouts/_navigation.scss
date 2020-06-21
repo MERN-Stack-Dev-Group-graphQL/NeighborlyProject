@@ -1,0 +1,9 @@
+.ui.secondary.pointing.menu {
+  background-color: var(--color-primary);
+  margin-left: 0;
+  margin-right: 0;
+
+  .item {
+    color: var(--color-light);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@lib/graphql-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "esm": "^3.2.25",
+    "graphql": "^14.6.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-tag": "^2.10.1",
+    "graphql-type-json": "^0.3.0",
+    "mongodb": "^3.3.4",
+    "prettier": "^1.19.1",
+    "ramda": "^0.26.1"
+  }
+}
