@@ -12,22 +12,61 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 function UserNavigationBar({ user, logout, isMenuOpen, activeItem, menuHandler, overlayHandler }) {
-  const primaryNav = {
-    tools: 'Tools',
-    addTool: 'Add Tool',
-    diy: 'DIY Content',
-    neighbors: 'Neighbors',
-    about: 'About Us',
-    cart: 'Cart',
-  };
+  const primaryMenuItems = [
+    {
+      name: 'Tools',
+      link: '/',
+      Icon: '',
+    },
+    {
+      name: 'Add A Tool',
+      link: '/add-tool',
+      Icon: '',
+    },
+    {
+      name: 'DIY Content',
+      link: '/diy',
+      Icon: '',
+    },
+    {
+      name: 'Neighbors',
+      link: '/neighbors',
+      Icon: '',
+    },
+    {
+      name: 'Cart',
+      link: '/cart',
+      Icon: '',
+    },
+  ];
 
-  const secondaryNav = {
-    account: 'Account',
-    faqs: 'FAQs',
-    privacyPolicy: 'Privacy Policy',
-    termsConditions: 'Terms and Conditions',
-    contact: 'Contact Us',
-  };
+  const secondaryMenuItems = [
+    {
+      name: 'Account',
+      link: '/account',
+      Icon: '',
+    },
+    {
+      name: 'FAQs',
+      link: '/faqs',
+      Icon: '',
+    },
+    {
+      name: 'Privacy Policy',
+      link: '/privacy-policy',
+      Icon: '',
+    },
+    {
+      name: 'Terms and Conditions',
+      link: '/terms-and-conditions',
+      Icon: '',
+    },
+    {
+      name: 'Contact Us',
+      link: '/contact-us',
+      Icon: '',
+    },
+  ];
 
   return (
     <NavigationWrapper>
@@ -78,16 +117,17 @@ function UserNavigationBar({ user, logout, isMenuOpen, activeItem, menuHandler, 
         <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
         <div className='menu-list'>
           <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-            {Object.entries(primaryNav).map(([key, value]) => (
-              <li className='menu-item' key={key}>
-                <Nav.Link>{value}</Nav.Link>
+            {primaryMenuItems.map((item, index) => (
+              <li className='menu-item' key={index}>
+                <Nav.Link href={item.link}>{item.name}</Nav.Link>
               </li>
             ))}
           </ul>
+
           <ul id='menu-secondary-navigation'>
-            {Object.entries(secondaryNav).map(([key, value]) => (
-              <li key={key}>
-                <Nav.Link>{value}</Nav.Link>
+            {secondaryMenuItems.map((item, index) => (
+              <li key={index}>
+                <Nav.Link href={item.link}>{item.name}</Nav.Link>
               </li>
             ))}
           </ul>
