@@ -11,21 +11,51 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick, menuHandler, overlayHandler }) {
-  const primaryNav = {
-    tools: 'Tools',
-    diy: 'DIY Content',
-    neighbors: 'Neighbors',
-    about: 'About Us',
-    cart: 'Cart',
-  };
+  const primaryMenuItems = [
+    {
+      name: 'Tools',
+      link: '/',
+      Icon: '',
+    },
+    {
+      name: 'Neighbors',
+      link: '/neighbors',
+      Icon: '',
+    },
+    {
+      name: 'Cart',
+      link: '/cart',
+      Icon: '',
+    },
+  ];
 
-  const secondaryNav = {
-    account: 'Account',
-    faqs: 'FAQs',
-    privacyPolicy: 'Privacy Policy',
-    termsConditions: 'Terms and Conditions',
-    contact: 'Contact Us',
-  };
+  const secondaryMenuItems = [
+    {
+      name: 'Account',
+      link: '/account',
+      Icon: '',
+    },
+    {
+      name: 'FAQs',
+      link: '/faqs',
+      Icon: '',
+    },
+    {
+      name: 'Privacy Policy',
+      link: '/privacy-policy',
+      Icon: '',
+    },
+    {
+      name: 'Terms and Conditions',
+      link: '/terms-and-conditions',
+      Icon: '',
+    },
+    {
+      name: 'Contact Us',
+      link: '/contact-us',
+      Icon: '',
+    },
+  ];
 
   return (
     <NavigationWrapper>
@@ -79,16 +109,16 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
         <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
         <div className='menu-list'>
           <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-            {Object.entries(primaryNav).map(([key, value]) => (
-              <li className='menu-item' key={key}>
-                <Nav.Link>{value}</Nav.Link>
+            {primaryMenuItems.map((item, index) => (
+              <li className='menu-item' key={index}>
+                <Nav.Link href={item.link}>{item.name}</Nav.Link>
               </li>
             ))}
           </ul>
           <ul id='menu-secondary-navigation'>
-            {Object.entries(secondaryNav).map(([key, value]) => (
-              <li key={key}>
-                <Nav.Link>{value}</Nav.Link>
+            {secondaryMenuItems.map((item, index) => (
+              <li key={index}>
+                <Nav.Link href={item.link}>{item.name}</Nav.Link>
               </li>
             ))}
           </ul>
