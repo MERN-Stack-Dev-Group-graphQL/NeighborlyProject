@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth';
 import UserNavigationBar from './UserNavigationBar';
 import GuestNavigationBar from './GuestNavigationBar';
-// Navigation
+// Assets
 import brandLogo from '../../../assets/img/brand/brand-logo.svg';
 
 function NavigationBar() {

@@ -31,6 +31,31 @@ export const FETCH_TOOLS_QUERY = gql`
   }
 `;
 
+export const FETCH_TOOLS_BY_ID_QUERY = gql`
+  query getToolById($toolId: ID!) {
+    getToolById(toolId: $toolId) {
+      _id
+      title
+      make
+      model
+      color
+      dimensions
+      weight
+      description
+      electricalRatings
+      category
+      url
+      photo {
+        _id
+        path
+        filename
+        mimetype
+      }
+      createdAt
+    }
+  }
+`;
+
 export const ADD_TOOL_MUTATION = gql`
   mutation addTool($input: ToolInput!, $file: Upload!) {
     addTool(input: $input, file: $file) {
@@ -51,6 +76,23 @@ export const ADD_TOOL_MUTATION = gql`
       }
       createdAt
       userId
+    }
+  }
+`;
+
+export const SEARCH_TOOLS_QUERY = gql`
+  query searchTools($search: String) {
+    searchTools(search: $search) {
+      _id
+      title
+      make
+      model
+      color
+      dimensions
+      weight
+      description
+      electricalRatings
+      category
     }
   }
 `;

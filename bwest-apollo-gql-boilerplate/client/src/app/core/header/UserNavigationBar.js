@@ -1,49 +1,60 @@
-import React from 'react';
-// Icons
+import React, { Fragment } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { SEARCH_TOOLS_QUERY } from '../../../util/graphql';
+import { useForm } from '../../../util/hooks';
 import { FiSearch } from 'react-icons/fi';
-// Navigation
-import brandLogo from '../../../assets/img/brand/brand-logo.svg';
-import avatarDefault from '../../../assets/img/avatars/avatar-default.png';
-import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
+import brandLogo from '../../../assets/img/brand/brand-logo.svg';
+import avatarDefault from '../../../assets/img/avatars/avatar-default.png';
+import * as routes from '../../../constants/routes';
 
 function UserNavigationBar({ user, logout, isMenuOpen, activeItem, menuHandler, overlayHandler }) {
+  const findTools = () => {
+    console.log('find tools ran', values.search ? values.search : 'nothing to see here');
+  };
+  const initialState = { search: '' };
+  const { handleChange, handleSubmit, values } = useForm(findTools, initialState);
+  const { data } = useQuery(SEARCH_TOOLS_QUERY, {
+    variables: { search: values.search },
+  });
+
+  if (data) {
+    var tools = data;
+  }
+
   const primaryMenuItems = [
     {
       name: 'Tools',
-      link: '/',
-      Icon: '',
-    },
-    {
-      name: 'Add A Tool',
-      link: '/add-tool',
+      link: '/tools',
       Icon: '',
     },
     {
       name: 'DIY Content',
-      link: '/diy',
+      link: '/do-it-yourself',
       Icon: '',
     },
     {
       name: 'Neighbors',
-      link: '/neighbors',
+      link: '/admin' + routes.NEIGHBORS,
       Icon: '',
     },
     {
       name: 'Cart',
-      link: '/cart',
+      link: routes.CART,
       Icon: '',
     },
   ];
 
   const secondaryMenuItems = [
     {
-      name: 'Account',
-      link: '/account',
+      name: 'Dashboard',
+      link: '/admin' + routes.DASHBOARD,
       Icon: '',
     },
     {
@@ -63,83 +74,148 @@ function UserNavigationBar({ user, logout, isMenuOpen, activeItem, menuHandler, 
     },
     {
       name: 'Contact Us',
-      link: '/contact-us',
+      link: '/contact',
       Icon: '',
     },
   ];
 
   return (
-    <NavigationWrapper>
-      <Navbar bg='primary' variant='primary' className='nav-container'>
-        <Navbar.Brand href='/'>
-          <img src={brandLogo} className='brand-logo p-2' alt='Neighborly' />
-        </Navbar.Brand>
-        <Form inline className='p-2 flex-grow-1 nav-search-wrapper'>
-          <FormControl
-            type='text'
-            name='search'
-            autoComplete='off'
-            placeholder='Find a tool...'
-            className='mr-sm-2 nav-search-input'
-            required
-          />
-          <Button type='submit' variant='info' className='nav-search-btn'>
-            <FiSearch />
-          </Button>
-        </Form>
-        <Nav className='ml-auto p-2 nav-menubar-wrapper'>
-          <Nav.Link>
-            <div className='item welcome-user'>
-              <div className='avatar'>
-                <img src={user.avatar ? user.avatar : avatarDefault} alt={user.username} />
+    <Fragment>
+      <NavigationWrapper>
+        <Navbar bg='primary' variant='primary' className='nav-container'>
+          <Navbar.Brand href='/'>
+            <img src={brandLogo} className='brand-logo p-2' alt='Neighborly' />
+          </Navbar.Brand>
+          <Form inline onSubmit={handleSubmit} className='p-2 flex-grow-1 nav-search-wrapper'>
+            <FormControl
+              type='text'
+              name='search'
+              onChange={handleChange}
+              value={values.search}
+              autoComplete='off'
+              placeholder='Find a tool...'
+              className='mr-sm-2 nav-search-input'
+              required
+            />
+            <Button type='submit' variant='info' className='nav-search-btn'>
+              <FiSearch />
+            </Button>
+          </Form>
+          <Nav className='ml-auto p-2 nav-menubar-wrapper'>
+            <Nav.Link>
+              <div className='item welcome-user'>
+                <div className='avatar'>
+                  <img src={user.avatar ? user.avatar : avatarDefault} alt={user.username} />
+                </div>
+                <div className='name'>
+                  {user.firstName} {user.lastName}
+                </div>
               </div>
-              <div className='name'>
-                {user.firstName} {user.lastName}
-              </div>
+            </Nav.Link>
+            <Nav.Link active={activeItem === 'logout'} onClick={logout} className='btn btn-outline-light btn-login mr-2'>
+              Logout
+            </Nav.Link>
+            <div className={`hamburger hamburger--criss-cross ${isMenuOpen ? 'active' : ''}`} onClick={menuHandler}>
+              <button className='hamburger hamburger--criss-cross' type='button' aria-label='Menu'>
+                <div className='inner'>
+                  <span className='bar'></span>
+                  <span className='bar'></span>
+                  <span className='bar'></span>
+                </div>
+              </button>
             </div>
-          </Nav.Link>
-          <Nav.Link active={activeItem === 'logout'} onClick={logout} className='btn btn-outline-light btn-login mr-2'>
-            Logout
-          </Nav.Link>
-          <div className={`hamburger hamburger--criss-cross ${isMenuOpen ? 'active' : ''}`} onClick={menuHandler}>
-            <button className='hamburger hamburger--criss-cross' type='button' aria-label='Menu'>
-              <div className='inner'>
-                <span className='bar'></span>
-                <span className='bar'></span>
-                <span className='bar'></span>
-              </div>
-            </button>
+          </Nav>
+        </Navbar>
+
+        <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
+          <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
+          <div className='menu-list'>
+            <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
+              {primaryMenuItems.map((item, index) => (
+                <li className='menu-item' key={index}>
+                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
+                </li>
+              ))}
+            </ul>
+
+            <ul id='menu-secondary-navigation'>
+              {secondaryMenuItems.map((item, index) => (
+                <li key={index}>
+                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </Nav>
-      </Navbar>
-
-      <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
-        <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
-        <div className='menu-list'>
-          <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-            {primaryMenuItems.map((item, index) => (
-              <li className='menu-item' key={index}>
-                <Nav.Link href={item.link}>{item.name}</Nav.Link>
-              </li>
-            ))}
-          </ul>
-
-          <ul id='menu-secondary-navigation'>
-            {secondaryMenuItems.map((item, index) => (
-              <li key={index}>
-                <Nav.Link href={item.link}>{item.name}</Nav.Link>
-              </li>
-            ))}
-          </ul>
         </div>
-      </div>
-    </NavigationWrapper>
+      </NavigationWrapper>
+      {tools ? (
+        <AutoCompleteWrapper>
+          <div className='container'>
+            <div className='row'>
+              <ul className='search-results-dropdown'>
+                {tools &&
+                  tools.searchTools.map((tool, index) => (
+                    <li className='form-option' key={index}>
+                      <Link className='btn-search-link' to={`/tool-detail/${tool._id}`}>
+                        <span>{tool.make}:</span> {tool.title}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </AutoCompleteWrapper>
+      ) : (
+        ''
+      )}
+    </Fragment>
   );
 }
 
 export default UserNavigationBar;
 
+const AutoCompleteWrapper = styled.div`
+  position: relative;
+
+  .search-results-dropdown {
+    position: absolute;
+    width: 100%;
+    max-width: 920px;
+    text-align: left;
+    margin-top: -20px;
+    background: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    list-style: none;
+    z-index: 999;
+
+    li {
+      padding: 6px 1rem;
+
+      .btn-search-link {
+        display: block;
+        text-decoration: none;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      &:hover {
+        background: #f2f2f2;
+        cursor: pointer;
+      }
+    }
+  }
+`;
+
 const NavigationWrapper = styled.div`
+  .nav-search-wrapper {
+    position: relative;
+  }
+
   .welcome-user {
     display: flex;
     flex-direction: row;

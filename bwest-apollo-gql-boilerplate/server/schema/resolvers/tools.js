@@ -34,19 +34,46 @@ const toolsResolver = {
         },
       };
     },
-    tool: async (_, args, { toolLoader }, info) => {
+    getToolById: async (_, { toolId }, { toolLoader }) => {
       console.log('ran tool');
-      const tool = await mongoDao.getOneDoc(database, 'tools', '_id', ObjectID(args._id));
+      const tool = await mongoDao.getOneDoc(database, 'tools', '_id', ObjectID(toolId));
 
       return tool;
     },
     searchTools: async (_, { search }, context) => {
+      const where = {};
+
+      if (search) {
+        where.search = search;
+      }
+
       var pipeline = [
         {
-          $search: {
-            search: {
-              query: search,
-              path: ['title', 'make', 'model', 'description', 'color', 'dimensions'],
+          $searchBeta: {
+            compound: {
+              should: [
+                {
+                  text: {
+                    query: where.search,
+                    path: 'title',
+                    fuzzy: {
+                      maxEdits: 2,
+                      prefixLength: 1,
+                    },
+                    score: {
+                      boost: {
+                        value: 5,
+                      },
+                    },
+                  },
+                },
+                {
+                  text: {
+                    query: where.search,
+                    path: ['title', 'make', 'model', 'description', 'color', 'dimensions'],
+                  },
+                },
+              ],
             },
             highlight: {
               path: ['title', 'make', 'model', 'description', 'color', 'dimensions'],
@@ -55,13 +82,14 @@ const toolsResolver = {
         },
         {
           $project: {
+            _id: 1,
             title: 1,
             make: 1,
             model: 1,
             color: 1,
             dimensions: 1,
+            weight: 1,
             description: 1,
-            _id: 0,
             score: {
               $meta: 'searchScore',
             },
@@ -71,7 +99,7 @@ const toolsResolver = {
           },
         },
         {
-          $limit: 5,
+          $limit: 10,
         },
       ];
 

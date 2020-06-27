@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server';
 
 const toolsSchema = gql`
+  scalar Coordinates
+
   type File {
     _id: ID!
     filename: String!
@@ -21,6 +23,23 @@ const toolsSchema = gql`
     CORDLESS
     APPLIANCE
     SAFETY
+  }
+
+  type PointGeometry {
+    type: String!
+    coordinates: Coordinates!
+  }
+
+  type PointProps {
+    _id: Int!
+    lat: Float
+    lon: Float
+  }
+
+  type PointObject {
+    type: String!
+    geometry: PointGeometry
+    properties: PointProps
   }
 
   input ToolInput {
@@ -46,6 +65,7 @@ const toolsSchema = gql`
     description: String!
     electricalRatings: String
     category: ToolCategory
+    location: PointObject
     url: String
     photo: File
     userId: ID
@@ -65,7 +85,7 @@ const toolsSchema = gql`
 
   extend type Query {
     getTools(cursor: String, limit: Int): ToolConnection!
-    tool(_id: ID!): Tool
+    getToolById(toolId: ID!): Tool
     searchTools(search: String): [Tool!]!
     comment(_id: String): Comment
   }

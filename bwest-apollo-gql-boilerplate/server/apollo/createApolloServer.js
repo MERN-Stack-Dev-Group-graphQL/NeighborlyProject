@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import { toolLoader } from '../loaders/toolLoader';
+// const buildDataloaders = require('../loaders/dataloaders');
 
 import typeDefs from '../schema/types';
 import resolvers from '../schema/resolvers';

@@ -56,6 +56,16 @@
   }
 }
 
+.btn-primary,
+.btn-secondary {
+  display: block;
+  height: 50px;
+  text-align: center;
+  border-radius: 25px;
+  border: none;
+  padding: 0 30px;
+}
+
 .return-home-btn {
   display: flex;
   position: absolute;
