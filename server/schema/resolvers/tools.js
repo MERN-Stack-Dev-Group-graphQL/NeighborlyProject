@@ -40,7 +40,7 @@ const toolsResolver = {
 
       return tool;
     },
-    searchTools: async (_, { search }, context) => {
+    searchTools: async (_, { search }) => {
       var pipeline = [
         {
           $search: {
