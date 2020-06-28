@@ -6,6 +6,16 @@ This project was generated with the [MongoDB](https://www.mongodb.com/), [Expres
 
 Please clone the bwest-apollo-gql-boilerplate and then navigate to the `/server` folder. Create a `.env` file then add the following environment variables with your own credentials for MongoDB URI, Database Name which can be obtained from your MongoDB Atlas project.
 
+copy and paste the following into your local `.env` in the root of your project. 
+```
+PORT=4000
+MONGODB_URI=mongodb+srv://sysadmin:Bwsxdcftest123@graphql-boilerplate-xpwiy.mongodb.net/graphql-boilerplate?retryWrites=true&w=majority
+MONGODB_DB=graphql-boilerplate
+JWT_SECRET=51778657246321226641fsdklafjasdkljfsklfjd7148924065
+JWT_LIFE_TIME=60m
+```
+
+If you use nodemon, use the following json object
 ```
 {
   "env": {
