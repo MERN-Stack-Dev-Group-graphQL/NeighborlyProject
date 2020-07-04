@@ -1,0 +1,206 @@
+.App {
+  text-align: center;
+  /* margin-top: 0px; */
+}
+
+.App-logo {
+  color: white;
+  filter: drop-shadow(1px 1px 1px black);
+}
+.App-headline {
+  font-weight: bolder;
+  color: white;
+  /* text-shadow: 2px 2px black; */
+  text-shadow: 1px 1px black, -1px -1px black;
+  /* text-shadow: -2px -2px black; */
+}
+
+.App button, .DiyA button, .DiyB button {
+  /* border-style: none; */
+  /* border-style: hidden; */
+  display: flex;
+  border-radius: 1rem;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+  height: 25px;
+  font-size: 17px;
+  display: inline-block;  
+  /* border-color: black; */
+  /* margin-top: 5%; */
+}
+
+.App-search-buttons {
+  display: flex;
+  width: 290px;
+  margin: auto;
+  justify-content: space-evenly;
+}
+
+.DiyB-buttons {
+  display: flex;
+  width: 170px;
+  justify-content: space-between;
+}
+
+
+img.App-logo {
+  height: 50%;
+  margin-top: 10%;
+  width: 600px;
+  /* pointer-events: none; */
+  margin-bottom: -0px;
+}
+
+.DiyA-images img {
+  margin-bottom: 10px;
+}
+
+img.App-printer {
+  height: 500px;
+}
+
+img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, img.App-arduino, img.App-carpenter, img.App-carpetcleaner, .DiyB-imagesB img {
+  height: 300px;
+  /* margin-top: 10%; */
+  width: 300px;
+  /* pointer-events: none; */
+  /* margin-bottom: -0px; */
+}
+
+.App-landing, .DiyA, .Featured-categories, .DiyB {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.App-landing {
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.App-first-section {
+  /* display: flex; */
+  width: 100%;
+  /* margin-bottom: 1px; */
+  /* justify-content: space-between; */
+}
+/* .App-first-section-contents {
+
+} */
+/* .App-landing p { */
+  /* margin-bottom: 10px; */
+  /* margin-top: 10px */
+  /* } */
+  
+  .Body {
+    margin-bottom: 10%;
+    /* height: 100; */
+  }
+  
+  .App-landing input, .DiyB input {
+    /* border-style: none; */
+    /* border-style: hidden; */
+    border-radius: 2rem;
+    text-align: left;
+  padding-left: 30px;
+  width: 500px;
+  height: 25px;
+  font-size: 20px;
+  border-color: black;
+  padding-bottom: 20px;
+  padding-top: 15px;
+}
+
+.DiyB input {
+  width: 250px;
+}
+
+.App-link {
+  color: orange;
+  font-size: 20px;
+  /* align-items: flex-start; */
+}
+
+.Featured-content {
+  display: flex;
+  width: 290px;
+  /* margin: auto; */
+  justify-content: space-around;
+}
+
+.Featured-categories-list {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  /* align-items: stretch; */
+  width: 75%;
+  /* flex-wrap: nowrap; */
+}
+
+.Featured-categories {
+  margin-bottom: 5%;
+  /* margin-top: 0px; */
+}
+/* .Featured-categories button{
+  background-color: #00000000;
+  border-width: 0;
+} */
+
+.Featured-list {
+  display: flex;
+  flex-direction: column;
+  /* height: 300px;
+  width: 250px; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.DiyB-imagesA {
+  /* width: 30%; */
+  height: 500px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+.DiyB-images-right img{
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: space-between;
+  
+}
+
+.DiyB-summary {
+  /* display: flex; */
+  width: 500px;
+  height: 550px;
+  margin-top: 5%;
+  margin-left: 2%;
+  /* margin-right: 2%; */
+}
+
+/* .DiyB-summary {
+  width: 30%;
+} */
+
+.DiyA h1 {
+  color: orange;
+}
+
+.DiyA-headline {
+  /* display: flex; */
+  position: absolute;
+  /* flex-direction: column; */
+  left: 20%;
+  /* bottom: 1%; */
+  /* margin-top: 1%; */
+  /* width: 100px;
+  padding: 10px; */
+}
