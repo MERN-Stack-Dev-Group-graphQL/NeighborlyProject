@@ -11,8 +11,24 @@ import { useForm } from '../../../util/hooks';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { MdShoppingCart } from 'react-icons/md';
+// import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import MenuBar from './MenuBar';
 
 function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick, menuHandler, overlayHandler }) {
+  // const {
+  //   ready,
+  //   value,
+  //   suggestions: { status, data },
+  //   setValue,
+  //   clearSuggestions,
+  // } = usePlacesAutoComplete({
+  //   requestOptions: {
+  //     location: { lat: () => 40.11045312448596, lng: () => -75.3861729415272 },
+  //     radius: 200 * 1000,
+  //   },
+  // });
+
   const findTools = () => {
     console.log('find tools ran', values.search ? values.search : 'nothing to see here');
   };
@@ -112,6 +128,10 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
             >
               Register
             </Nav.Link>
+            <Nav.Link className='nav-cart-icon'>
+              <span className='cart-pill'>3</span>
+              <MdShoppingCart size={24} className='cart-icon' />
+            </Nav.Link>
             <div className='hamburger-wrapper' onClick={menuHandler}>
               <button className={`hamburger hamburger--criss-cross ${isMenuOpen ? 'active' : ''}`} type='button' aria-label='Menu'>
                 <div className='inner'>
@@ -124,25 +144,12 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
           </Nav>
         </Navbar>
 
-        <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
-          <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
-          <div className='menu-list'>
-            <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-              {primaryMenuItems.map((item, index) => (
-                <li className='menu-item' key={index}>
-                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
-                </li>
-              ))}
-            </ul>
-            <ul id='menu-secondary-navigation'>
-              {secondaryMenuItems.map((item, index) => (
-                <li key={index}>
-                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <MenuBar
+          primaryMenuItems={primaryMenuItems}
+          secondaryMenuItems={secondaryMenuItems}
+          isMenuOpen={isMenuOpen}
+          overlayHandler={overlayHandler}
+        />
       </NavigationWrapper>
       {tools ? (
         <AutoCompleteWrapper>
@@ -244,14 +251,19 @@ const NavigationWrapper = styled.div`
       height: 50px;
       width: 80%;
       padding: 0.375rem 1.75rem;
+      border-radius: 25px 0 0 25px;
       border: none;
     }
 
     .nav-search-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 50px;
       line-height: 50px;
       min-width: 50px;
-      padding: 0;
+      padding: 0 5px 0 0;
+      border-radius: 0 25px 25px 0;
     }
 
     a {
@@ -268,9 +280,34 @@ const NavigationWrapper = styled.div`
     .btn-register {
       font-size: 14px;
       font-size: var(--app-font-size-3);
+      background: #dcdfe3;
+      color: #1d2329;
 
       &:hover {
-        color: var(--color-dark);
+        background: #ffffff;
+        color: #1d2329;
+      }
+    }
+
+    .nav-cart-icon {
+      position: relative;
+
+      .cart-pill {
+        position: absolute;
+        display: block;
+        background-color: var(--color-primary);
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #fff;
+        padding: 0px 6px;
+        top: 0;
+        right: 0;
+        border-radius: 10px;
+      }
+
+      .cart-icon {
+        margin-bottom: 3px;
       }
     }
 

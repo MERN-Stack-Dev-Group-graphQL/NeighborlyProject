@@ -1,7 +1,8 @@
 import { gql } from 'apollo-server';
 
 const toolsSchema = gql`
-  scalar Coordinates
+  # # scalar Coordinates
+  # scalar Float
 
   type File {
     _id: ID!
@@ -25,23 +26,6 @@ const toolsSchema = gql`
     SAFETY
   }
 
-  type PointGeometry {
-    type: String!
-    coordinates: Coordinates!
-  }
-
-  type PointProps {
-    _id: Int!
-    lat: Float
-    lon: Float
-  }
-
-  type PointObject {
-    type: String!
-    geometry: PointGeometry
-    properties: PointProps
-  }
-
   input ToolInput {
     title: String
     make: String
@@ -52,6 +36,30 @@ const toolsSchema = gql`
     description: String
     electricalRatings: String
     category: ToolCategory = GENERAL
+  }
+
+  input ToolLocation {
+    address1: String
+    address2: String
+    city: String
+    country: String
+    countryCode: String
+    latitude: Float
+    longitude: Float
+    provinceCode: String
+    zip: String
+  }
+
+  type Location {
+    address1: String
+    address2: String
+    city: String
+    country: String
+    countryCode: String
+    latitude: Float
+    longitude: Float
+    provinceCode: String
+    zip: String
   }
 
   type Tool {
@@ -65,20 +73,30 @@ const toolsSchema = gql`
     description: String!
     electricalRatings: String
     category: ToolCategory
-    location: PointObject
+    location: Location
     url: String
     photo: File
     userId: ID
+    user: User
+    # reviews: [Review!]
     createdAt: Date!
     updatedAt: Date!
-    # comments: [Comment!]
   }
 
-  type Comment {
+  type Review {
     _id: ID!
     toolId: String
     content: String
     tool: Tool
+    createdAt: Date
+    updatedAt: Date
+  }
+
+  type Comment {
+    _id: ID!
+    targetId: String
+    author: [User]
+    content: String
     createdAt: Date
     updatedAt: Date
   }
@@ -91,7 +109,7 @@ const toolsSchema = gql`
   }
 
   extend type Mutation {
-    addTool(input: ToolInput!, file: Upload!): Tool!
+    addTool(input: ToolInput!, location: ToolLocation!, file: Upload!): Tool!
     updateTool(_id: ID!, input: ToolInput!): Boolean!
     deleteTool(_id: ID!): Boolean!
     createComment(toolId: String, content: String): Comment

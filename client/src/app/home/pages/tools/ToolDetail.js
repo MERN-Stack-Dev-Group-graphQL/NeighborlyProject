@@ -1,13 +1,93 @@
-import React from 'react';
-import { TiShoppingCart } from 'react-icons/ti';
+import React, { useState, useCallback, useRef } from 'react';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+// import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+// import { AuthContext } from '../../../../context/auth';
+
+// ICONS
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import styled from 'styled-components';
+// COMPONENTS
 import ControlledTabs from '../../../shared/components/ControlledTabs';
+import StarCount from '../../../shared/components/reviews/StarCount';
+// STYLES
+import { SectionWrapper } from './styles';
+import mapStyles from '../../../shared/components/MapStyles';
+import pinIcon from '../../../../assets/img/icons/pin.svg';
+
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100%',
+  height: '240px',
+  border: '1px solid #f8f8f8',
+};
+
+// const mapCenter = {
+//   lat: 39.931911,
+//   lng: -75.340184,
+//   // lat: props.location.latitude ? props.location.latitude : 39.931911,
+//   // lng: props.location.longitude ? props.location.longitude : -75.340184,
+// };
+
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
 const ToolDetail = (props) => {
+  console.log('location:', props.location.latitude);
+  const mapCenter = {
+    lat: props.location.latitude ? props.location.latitude : 39.931911,
+    lng: props.location.longitude ? props.location.longitude : -75.340184,
+  };
+
+  const MARKER_POSITION = {
+    lat: props.location.latitude ? props.location.latitude : 39.931911,
+    lng: props.location.longitude ? props.location.longitude : -75.340184,
+  };
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  const onMapClick = useCallback((event) => {
+    setMarkers((current) => [
+      ...current,
+      {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+  }, []);
+
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  // const panTo = useCallback(({ lat, lng }) => {
+  //   mapRef.current.panTo({ lat, lng });
+  //   mapRef.current.setZoom(14);
+  // }, []);
+
+  // const { user, logout } = useContext(AuthContext);
+
+  if (loadError) return 'Error loading maps';
+  if (!isLoaded) return 'Loading maps';
+
   function ToolImage(path) {
     if (path.url.length > 1) {
-      return <div style={{ backgroundImage: `url(http://localhost:4000${path.url})` }} className={`card-img-top ${path.className}`}></div>;
+      return (
+        <div>
+          <div className='recommended'>Recommended</div>
+          <div style={{ backgroundImage: `url(http://localhost:4000${path.url})` }} className={`card-img-top ${path.className}`}></div>
+        </div>
+      );
     }
     return (
       <div
@@ -18,7 +98,7 @@ const ToolDetail = (props) => {
   }
 
   return (
-    <SectionWrapper className='container'>
+    <SectionWrapper className='container-fluid'>
       <div className='row'>
         <div className='col-md-12'>
           <div className='page-header'>Tool Detail</div>
@@ -29,46 +109,107 @@ const ToolDetail = (props) => {
                 <ToolImage url={props.url} className='tool-thumb' />
               </div>
             </div>
-            <div id='centerCol' className='px-3'>
+            <div id='centerCol'>
               <h3 className='tool-header'>{props.title}</h3>
-              <div className='tool-sub-header'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, consequuntur.</div>
+              <div className='review-wrapper'>
+                <StarCount starCount={props.starCount} rateCount={props.rateCount} />
+                <Link to='/review' className='review-btn'>
+                  Write a review
+                </Link>
+              </div>
+
+              <div className='tool-sub-header d-none'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, consequuntur.</div>
               <div className='tool-description'>{props.description}</div>
               <div className='tool-footer mt-auto'>
-                <div className='owner mr-4'>
+                <div className='owner'>
                   <span className='owner-avatar'>
                     <img src='http://localhost:4000/assets/img/avatar-default.png' alt='Owner Avatar' />
                   </span>
-                  <span className='owner-name'>John Doe</span>
+                  <span className='owner-name'>
+                    {props.user.firstName} {props.user.lastName}
+                  </span>
                 </div>
                 <div className='location'>
                   <FaMapMarkerAlt className='mr-1' /> <span>Pine Street, Center City</span>
                 </div>
               </div>
+
+              <div className='location-map-container'>
+                <div className='map-header'>
+                  Neighborly <span role='img' aria-label='rocket'></span>
+                </div>
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  zoom={10}
+                  center={mapCenter}
+                  options={options}
+                  onClick={onMapClick}
+                  onLoad={onMapLoad}
+                >
+                  <Marker position={MARKER_POSITION} icon={pinIcon} />
+
+                  {markers.map((marker) => (
+                    <Marker
+                      key={marker.time.toISOString()}
+                      position={{ lat: marker.lat, lng: marker.lng }}
+                      icon={{
+                        url: 'http://localhost:4000/assets/img/avatar-default.png',
+                        scaledSize: new window.google.maps.Size(30, 30),
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                      }}
+                      onClick={() => {
+                        setSelected(marker);
+                      }}
+                    />
+                  ))}
+
+                  {selected ? (
+                    <InfoWindow
+                      position={{ lat: selected.lat, lng: selected.lng }}
+                      onCloseClick={() => {
+                        setSelected(null);
+                      }}
+                    >
+                      <div>
+                        <h5>Tool Found!</h5>
+                        <p>{moment(selected.time).calendar()}</p>
+                      </div>
+                    </InfoWindow>
+                  ) : null}
+                </GoogleMap>
+              </div>
             </div>
             <div id='rightCol'>
               <div className='price-wrapper'>
                 <h2 className='price'>$40.00</h2>
+                <div className='per-unit'>Per day</div>
               </div>
-              <ul className='other-details'>
-                <li className='make'>
-                  <span>Make: </span>
-                  {props.make}
-                </li>
-                <li className='model'>
-                  <span>Model: </span>
-                  {props.model}
-                </li>
-                <li className='weight'>
-                  <span>Weight: </span>
-                  {props.weight}
-                </li>
-              </ul>
-              <button className='btn btn-primary'>
-                <TiShoppingCart className='mb-1 mr-1' /> Add to Cart
-              </button>
+              <div className='other-recommendations'>
+                <p className='title'>You might also need</p>
+                <p className='content'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                  aliqua.
+                </p>
+              </div>
+
+              <button className='btn btn-primary'>Add to Cart</button>
+            </div>
+            <div id='bottomCol'>
+              <ControlledTabs {...props} />
             </div>
           </div>
-          <ControlledTabs />
+          <div className='page-header'>Recommended for you</div>
+          <hr />
+          <div id='recommendation-container'>
+            <div className='recommendation-wrapper'>
+              <div className='recommended-item'>Item1</div>
+              <div className='recommended-item'>Item1</div>
+              <div className='recommended-item'>Item1</div>
+              <div className='recommended-item'>Item1</div>
+            </div>
+            <div className='advertisment'>Place Ads Here</div>
+          </div>
         </div>
       </div>
     </SectionWrapper>
@@ -76,155 +217,3 @@ const ToolDetail = (props) => {
 };
 
 export default ToolDetail;
-
-const SectionWrapper = styled.section`
-  padding: 4rem 1rem;
-
-  #tool-detail {
-    display: flex;
-
-    #leftCol {
-      .feature-image {
-        position: relative;
-        display: block;
-        height: 440px;
-        width: 100%;
-        min-width: 400px;
-        max-width: 480px;
-
-        &::before {
-          display: block;
-          background: #000;
-          content: '';
-          width: 100%;
-          padding-top: 69.75764%;
-        }
-
-        .tool-thumb {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-position: 50%;
-          background-size: cover;
-          transition: opacity 0.5s ease;
-          opacity: 1;
-        }
-      }
-    }
-
-    #centerCol {
-      display: flex;
-      flex-direction: column;
-
-      .tool-header {
-        position: relative;
-        border-bottom: 1px solid #f2f2f2;
-        padding-bottom: 1rem;
-
-        &::after {
-          content: '';
-          height: 3px;
-          background: var(--color-primary);
-          width: 100px;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          z-index: 1;
-        }
-      }
-
-      .tool-sub-header {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-      }
-
-      .tool-description {
-      }
-
-      .tool-footer {
-        display: flex;
-
-        .owner,
-        .location {
-          display: flex;
-          align-items: center;
-        }
-
-        .owner {
-          .owner-avatar {
-            display: block;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            border-radius: 15px;
-            overflow: hidden;
-
-            img {
-              height: 100%;
-              width: 100%;
-            }
-          }
-
-          .owner-name {
-          }
-        }
-
-        .location {
-        }
-      }
-    }
-
-    #rightCol {
-      min-width: 220px;
-
-      .price-wrapper {
-        .price {
-          font-weight: 700;
-          position: relative;
-          overflow: hidden;
-
-          &::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 80%;
-            z-index: 1;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 0 300vw 400vw;
-            border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
-          }
-        }
-      }
-
-      .other-details {
-        span {
-          display: inline-block;
-          font-weight: bold;
-          min-width: 80px;
-        }
-      }
-
-      ul {
-        padding-left: 1rem;
-        list-style: none;
-
-        .make,
-        .model,
-        .weight {
-        }
-      }
-
-      .btn-primary {
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  .tab-pane {
-    padding: 1rem;
-  }
-`;

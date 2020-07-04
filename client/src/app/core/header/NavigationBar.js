@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth';
+
 import UserNavigationBar from './UserNavigationBar';
 import GuestNavigationBar from './GuestNavigationBar';
 // Assets

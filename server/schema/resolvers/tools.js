@@ -16,12 +16,11 @@ const fromCursorHash = (string) => {
 
 const toolsResolver = {
   Query: {
-    getTools: async (_, { cursor, limit = 9 }, context, info) => {
+    getTools: async (parent, { cursor, limit = 9 }, context, info) => {
       // console.log('ran tools');
       // console.log(cursor, 'test cursor');
       const cursorOptions = cursor ? { createdAt: { $lt: fromCursorHash(cursor) } } : {};
       // console.log(cursorOptions, 'test option');
-
       const allTools = await mongoDao.getAllDocs(database, 'tools', cursorOptions, limit);
 
       const hasNextPage = allTools.length > limit;
@@ -34,13 +33,13 @@ const toolsResolver = {
         },
       };
     },
-    getToolById: async (_, { toolId }, { toolLoader }) => {
+    getToolById: async (_, { toolId }) => {
       console.log('ran tool');
       const tool = await mongoDao.getOneDoc(database, 'tools', '_id', ObjectID(toolId));
 
       return tool;
     },
-    searchTools: async (_, { search }, context) => {
+    searchTools: async (_, { search }) => {
       const where = {};
 
       if (search) {
@@ -108,7 +107,7 @@ const toolsResolver = {
     },
   },
   Mutation: {
-    addTool: async (_, { input, file }, { me }, info) => {
+    addTool: async (_, { input, location, file }, { me }, info) => {
       const dbTools = await mongoDao.pool.db(database).collection('tools');
       // If there is not a user in the context, throw an error
       console.log(me);
@@ -132,6 +131,9 @@ const toolsResolver = {
 
         const newTool = {
           ...input,
+          location: {
+            ...location,
+          },
           photo: upload,
           userId: ObjectID(me._id),
           createdAt: new Date(),
@@ -188,6 +190,20 @@ const toolsResolver = {
   },
   Tool: {
     url: (parent) => `/${parent.photo.path || parent.photo.path.toString()}`,
+    user: async (parent, _, { userLoader }) => {
+      // console.log('Tool Owner ID', parent.userId);
+      // const user = await mongoDao.pool
+      //   .db(database)
+      //   .collection('users')
+      //   .find({ _id: parent.userId })
+      //   .toArray()
+      //   .then((data) => {
+      //     return data;
+      //   });
+      const user = await userLoader.load(parent.userId);
+      // console.log('Tool Owner', user);
+      return user;
+    },
   },
 };
 

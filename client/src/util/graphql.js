@@ -13,7 +13,19 @@ export const FETCH_TOOLS_QUERY = gql`
         weight
         description
         electricalRatings
+        location {
+          address1
+          address2
+          city
+          country
+          countryCode
+          latitude
+          longitude
+          provinceCode
+          zip
+        }
         category
+        userId
         url
         photo {
           _id
@@ -44,7 +56,25 @@ export const FETCH_TOOLS_BY_ID_QUERY = gql`
       description
       electricalRatings
       category
+      location {
+        address1
+        address2
+        city
+        country
+        countryCode
+        latitude
+        longitude
+        provinceCode
+        zip
+      }
       url
+      userId
+      user {
+        _id
+        username
+        firstName
+        lastName
+      }
       photo {
         _id
         path
@@ -93,6 +123,7 @@ export const SEARCH_TOOLS_QUERY = gql`
       description
       electricalRatings
       category
+      userId
     }
   }
 `;

@@ -28,3 +28,28 @@
     cursor: pointer;
   }
 }
+
+.form-control {
+  position: relative;
+  display: block;
+  padding-right: 30px;
+  color: #999;
+  height: 60px;
+  width: 100%;
+  line-height: 42px;
+  padding: 10px 20px;
+  font-size: 0.875em;
+  text-transform: none;
+  text-align: left;
+  letter-spacing: 0;
+  overflow: hidden;
+  box-shadow: none;
+  text-shadow: none;
+  background: 0 0;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  cursor: default;
+  z-index: 2;
+}

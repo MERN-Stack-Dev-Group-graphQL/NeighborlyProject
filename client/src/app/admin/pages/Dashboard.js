@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, /* useContext, */ useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Form, Select } from 'semantic-ui-react';
 import Modal from 'react-bootstrap/Modal';
@@ -11,14 +11,14 @@ import { useForm } from '../../../util/hooks';
 import { FETCH_TOOLS_QUERY } from '../../../util/graphql';
 import { ADD_TOOL_MUTATION } from '../../../util/graphql';
 // import { useFormFile } from '../../../util/hooks';
-import { AuthContext } from '../../../context/auth';
+// import { AuthContext } from '../../../context/auth';
 
 import styled from 'styled-components';
 
 function Dashboard() {
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -66,6 +66,7 @@ function Dashboard() {
   });
 
   const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
+  // console.log(data);
 
   const categoryOptions = [
     { key: 'gen', name: 'category', text: 'GENERAL', value: 'GENERAL' },
@@ -208,50 +209,35 @@ function Dashboard() {
               </div>
               <div className='tool-right-col'>
                 <ul className='tool-list'>
-                  <li className='tool-item'>
-                    <div className='icon'>
-                      <RiMenu2Line />
-                    </div>
-                    <div className='title'>Electrical Power Saw</div>
-                    <div className='controls'>
-                      <div className='btn-group btn-group-toggle' datatoggle='buttons'>
-                        <label className='btn btn-outline-primary active'>
-                          <input type='radio' name='options' id='option1' autoComplete='off' checked onChange={handleOnChange} /> Edit
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option2' autoComplete='off' /> <FaArrowUp />
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option3' autoComplete='off' /> <FaArrowDown />
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option4' autoComplete='off' /> <FaTrash />
-                        </label>
-                      </div>
-                    </div>
-                  </li>
-                  <li className='tool-item'>
-                    <div className='icon'>
-                      <RiMenu2Line />
-                    </div>
-                    <div className='title'>GreenCraft Lawnmower</div>
-                    <div className='controls'>
-                      <div className='btn-group btn-group-toggle' datatoggle='buttons'>
-                        <label className='btn btn-outline-primary active'>
-                          <input type='radio' name='options' id='option1' autoComplete='off' checked onChange={handleOnChange} /> Edit
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option2' autoComplete='off' /> <FaArrowUp />
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option3' autoComplete='off' /> <FaArrowDown />
-                        </label>
-                        <label className='btn btn-outline-primary'>
-                          <input type='radio' name='options' id='option4' autoComplete='off' /> <FaTrash />
-                        </label>
-                      </div>
-                    </div>
-                  </li>
+                  {loading ? (
+                    <h3>Loading tools...</h3>
+                  ) : (
+                    data.getTools.edges &&
+                    data.getTools.edges.map((tool) => (
+                      <li className='tool-item' key={tool._id}>
+                        <div className='icon'>
+                          <RiMenu2Line />
+                        </div>
+                        <div className='title'>{tool.title}</div>
+                        <div className='controls'>
+                          <div className='btn-group btn-group-toggle' datatoggle='buttons'>
+                            <label className='btn btn-outline-primary active'>
+                              <input type='radio' name='options' id='option1' autoComplete='off' checked onChange={handleOnChange} /> Edit
+                            </label>
+                            <label className='btn btn-outline-primary'>
+                              <input type='radio' name='options' id='option2' autoComplete='off' /> <FaArrowUp />
+                            </label>
+                            <label className='btn btn-outline-primary'>
+                              <input type='radio' name='options' id='option3' autoComplete='off' /> <FaArrowDown />
+                            </label>
+                            <label className='btn btn-outline-primary'>
+                              <input type='radio' name='options' id='option4' autoComplete='off' /> <FaTrash />
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                    ))
+                  )}
                   <li className='tool-item-add-tool'>
                     <Button variant='add-tool' onClick={handleShow}>
                       <div className='icon'>

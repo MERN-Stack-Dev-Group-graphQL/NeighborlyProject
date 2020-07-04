@@ -21,12 +21,12 @@ const init = async (secret) => {
     appname: 'mongodao',
   });
 
-  let logCount = 0;
-  Logger.setCurrentLogger((msg, state) => {
-    console.log(`MONGO DB REQUEST ${++logCount}: ${msg}`);
-  });
-  Logger.setLevel('debug');
-  Logger.filter('class', ['Cursor']);
+  // let logCount = 0;
+  // Logger.setCurrentLogger((msg, state) => {
+  //   console.log(`MONGO DB REQUEST ${++logCount}: ${msg}`);
+  // });
+  // Logger.setLevel('debug');
+  // Logger.filter('class', ['Cursor']);
 
   exitHook(() => {
     pool && pool.close(true);

@@ -6,6 +6,7 @@ import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import MenuBar from './MenuBar';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
@@ -127,26 +128,12 @@ function UserNavigationBar({ user, logout, isMenuOpen, activeItem, menuHandler, 
           </Nav>
         </Navbar>
 
-        <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
-          <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
-          <div className='menu-list'>
-            <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-              {primaryMenuItems.map((item, index) => (
-                <li className='menu-item' key={index}>
-                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
-                </li>
-              ))}
-            </ul>
-
-            <ul id='menu-secondary-navigation'>
-              {secondaryMenuItems.map((item, index) => (
-                <li key={index}>
-                  <Nav.Link href={item.link}>{item.name}</Nav.Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <MenuBar
+          primaryMenuItems={primaryMenuItems}
+          secondaryMenuItems={secondaryMenuItems}
+          isMenuOpen={isMenuOpen}
+          overlayHandler={overlayHandler}
+        />
       </NavigationWrapper>
       {tools ? (
         <AutoCompleteWrapper>

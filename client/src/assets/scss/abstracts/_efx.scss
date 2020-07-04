@@ -7,3 +7,23 @@
   height: 100%;
   z-index: 998;
 }
+
+.recommended {
+  padding: 6px 35px;
+  background: #ef4b46 none repeat scroll 0 0;
+  color: #eee;
+  position: absolute;
+  text-align: center;
+  left: -40px;
+  right: auto;
+  top: 35px;
+  transform: rotate(-45deg);
+  margin: -0.5em -0.5em 0 0;
+  border-radius: 0;
+  min-height: 0;
+  min-width: 0;
+  line-height: 20px;
+  font-weight: 500;
+  font-size: 0.857em;
+  z-index: 1;
+}

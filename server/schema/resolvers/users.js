@@ -162,14 +162,14 @@ const usersResolver = {
     }),
   },
   User: {
-    messages: async (user, args, context) => {
-      return await mongoDao.pool.db(database).collection('messsges').find({
-        userId: user._id,
-      });
-    },
-    neighbors: async (user, args, { userLoader }) => {
-      return userLoader.loadMany(user.neighbors);
-    },
+    // messages: async (user, args, context) => {
+    //   return await mongoDao.pool.db(database).collection('messsges').find({
+    //     userId: user._id,
+    //   });
+    // },
+    // neighbors: async (user, args, { userLoader }) => {
+    //   return userLoader.loadMany(user.neighbors);
+    // },
   },
 };
 

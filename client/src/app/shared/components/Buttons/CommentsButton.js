@@ -63,13 +63,16 @@ function CommentsButton() {
 
 const CommentButton = styled.div`
   display: flex;
+  align-items: center;
+  margin-right: 6px;
 
   .btn {
     font-weight: 400;
     border-radius: 0.28571429rem 0 0 0.28571429rem;
     box-shadow: 0 0 0 1px var(--color-primary) inset !important;
-    background: #f2f2f2;
+
     color: var(--color-primary) !important;
+    height: 36px;
     width: 50px;
     line-height: 1;
 
@@ -88,7 +91,7 @@ const CommentButton = styled.div`
     align-items: center;
     padding: 0.5833em 0.833em;
     margin: 0 0 0 -2px;
-    background: #f2f2f2;
+    font-size: 0.875rem;
     color: var(--color-primary);
     border-color: var(--color-primary);
     border: 1px solid var(--color-primary);
@@ -101,7 +104,7 @@ const CommentButton = styled.div`
       z-index: 2;
       width: 0.6666em;
       height: 0.6666em;
-      background: #f2f2f2;
+      background: #ffffff;
       transition: background 0.1s ease;
       border-width: 0 0 1px 1px;
       border-style: solid;

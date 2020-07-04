@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
-  console.log('Home', data);
+  // console.log('Home', data);
 
   const onClickHandler = (event) => event.preventDefault();
 
