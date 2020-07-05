@@ -14,14 +14,19 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
-import {AppButton} from '_core/button';
+// import {AppButton} from '_core/button';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
+// import ToolDetails from '_scenes/tools/details';
+// import navigations from '_navigations';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 Icon.loadFont();
 
-const Card = ({tool: {_id, title, description, createdAt, url, photo}}) => {
+const Card = ({
+  tool: {_id, title, description, createdAt, url, photo},
+  navigation,
+}) => {
   // http://localhost:4000${path.url
   const ImageBlock = path => {
     if (path.url.length > 1) {
@@ -43,11 +48,14 @@ const Card = ({tool: {_id, title, description, createdAt, url, photo}}) => {
   };
 
   // const toolId = _id;
-
   // const avatar = 'https://localhost:4000/assets/img/avatar-default.png';
 
   const onPress = () => {
-    Alert.alert('Details button clicked!');
+    // Alert.alert('Details button clicked!');
+    navigation.navigate('Tool Details', {
+      itemId: _id,
+      otherParam: 'anything you want here',
+    });
   };
 
   return (

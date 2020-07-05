@@ -1,12 +1,34 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {Fragment, useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  Image,
+  Button,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
 
-const Header = ({title}) => {
+Icon.loadFont();
+
+const Header = ({title, navigation}) => {
+  const [search, setSearch] = useState('');
+  //navigation.toggleDrawer();
   return (
-    <HeaderWrapper>
-      <TextWrapper>{title}</TextWrapper>
-    </HeaderWrapper>
+    <Fragment>
+      <SearchWrapper>
+        <FormControlTextInput
+          label="Search"
+          placeholder="Search"
+          name="search"
+          style={styles.formControl}
+          onChangeText={() => {}}
+          defaultValue={search}
+        />
+      </SearchWrapper>
+    </Fragment>
   );
 };
 
@@ -14,16 +36,43 @@ Header.defaultProps = {
   title: 'Neighborly',
 };
 
-export default Header;
+const styles = StyleSheet.create({
+  heading: {
+    width: 200,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    fontSize: 30,
+    marginBottom: 8,
+    fontWeight: '400',
+  },
+  label: {
+    width: 200,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    fontSize: 14,
+    marginBottom: 16,
+  },
+});
 
-const HeaderWrapper = styled.View`
-  height: 60px;
-  padding: 15px;
+const SearchWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
   background-color: rgba(16, 43, 70, 1);
 `;
 
-const TextWrapper = styled.Text`
-  color: rgba(255, 255, 255, 1);
-  font-size: 24px;
-  text-align: center;
+const FormControlTextInput = styled.TextInput`
+  width: 100%;
+  max-width: 380px;
+  height: 50px;
+  padding: 10px 25px;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 1);
+  margin: 16px;
 `;
+
+export default Header;
