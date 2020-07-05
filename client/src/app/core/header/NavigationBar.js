@@ -9,6 +9,7 @@ function NavigationBar() {
   const { user, logout } = useContext(AuthContext);
   const pathName = window.location.pathname;
   const path = pathName === '/' ? 'home' : pathName.substr(1);
+  console.log(`pathName: ${pathName} |||| pathName substring: ${pathName.substr(1)}`)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(path);
