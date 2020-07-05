@@ -26,17 +26,6 @@ const LoginScreen = ({navigation}) => {
   const [errortext, setErrortext] = useState('');
 
   const handleSubmit = () => {
-    // setErrortext('');
-    // if (!login) {
-    //   Alert.alert('Please enter your username or email');
-    //   return;
-    // }
-    // if (!password) {
-    //   Alert.alert('Please enter your password');
-    //   return;
-    // }
-    // setLoading(true);
-
     Alert.alert('Login Button Clicked!');
     navigation.navigate('Home');
   };

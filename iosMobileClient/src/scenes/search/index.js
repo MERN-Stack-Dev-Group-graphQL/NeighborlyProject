@@ -1,7 +1,6 @@
 import React from 'react';
 import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import styled from 'styled-components';
 
 const Search = ({navigation}) => {
   return (
