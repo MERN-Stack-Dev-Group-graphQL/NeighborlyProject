@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  /* margin-top: 0px; */
 }
 
 .App-logo {
@@ -10,14 +9,10 @@
 .App-headline {
   font-weight: bolder;
   color: white;
-  /* text-shadow: 2px 2px black; */
   text-shadow: 1px 1px black, -1px -1px black;
-  /* text-shadow: -2px -2px black; */
 }
 
 .App button, .DiyA button, .DiyB button {
-  /* border-style: none; */
-  /* border-style: hidden; */
   display: flex;
   border-radius: 1rem;
   padding-bottom: 30px;
@@ -27,15 +22,7 @@
   height: 25px;
   font-size: 17px;
   display: inline-block;  
-  /* border-color: black; */
-  /* margin-top: 5%; */
 }
-
-/* .DiyB button {
-  height: 39px;
-  width: 2px;
-  border-radius: 0 2rem 2rem 0;
-} */
 
 .App-search-buttons {
   display: flex;
@@ -47,21 +34,17 @@
 .DiyB-buttons {
   display: flex;
   width: 170px;
-  /* justify-content: space-between; */
 }
 .DiyB-mailing-list button {
   width: 215px;
   height: 39px;
   border-radius: 0 2rem 2rem 0;
-  margin-left: 10px;
 }
-
 
 img.App-logo {
   height: 50%;
   margin-top: 10%;
   width: 600px;
-  /* pointer-events: none; */
   margin-bottom: -0px;
 }
 
@@ -88,8 +71,6 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   height: 300px;
   margin-top: 30px;
   width: 300px;
-  /* pointer-events: none; */
-  /* margin-bottom: -0px; */
 }
 
 .DiyB-imagesB {
@@ -103,8 +84,7 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  
+  justify-content: center;  
 }
 
 .App-landing {
@@ -113,27 +93,14 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   color: black;
 }
 .App-first-section {
-  /* display: flex; */
   width: 100%;
-  /* margin-bottom: 1px; */
-  /* justify-content: space-between; */
 }
-/* .App-first-section-contents {
-
-} */
-/* .App-landing p { */
-  /* margin-bottom: 10px; */
-  /* margin-top: 10px */
-  /* } */
   
-  .Body {
-    margin-bottom: 10%;
-    /* height: 100; */
+  .App-Body {
+    margin-bottom: 65px;
   }
   
   .App-landing input, .DiyB-mailing-list input {
-    /* border-style: none; */
-    /* border-style: hidden; */
     border-radius: 2rem;
     text-align: left;
     padding-left: 30px;
@@ -152,17 +119,14 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   border-radius: 2rem 0 0 2rem;
   margin-top: 10px;
 }
-
 .App-link {
   color: orange;
   font-size: 20px;
-  /* align-items: flex-start; */
 }
 
 .Featured-content {
   display: flex;
   width: 90vw;
-  /* margin: auto; */
   justify-content: space-evenly;
 }
 
@@ -170,41 +134,40 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   justify-content: space-around;
   display: flex;
   flex-direction: row;
-  /* align-items: stretch; */
   width: 75%;
   margin-bottom: 20px;
   margin-top: 33px;
-  width: 65vw;
-  /* flex-wrap: nowrap; */
 }
 
 .Featured-categories {
-  margin-bottom: 15%;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: space-evenly; */
-  /* height: 550; */
-  /* margin-top: 0px; */
+  margin-bottom: 70px;
 }
-/* .Featured-categories button{
-  background-color: #00000000;
-  border-width: 0;
-} */
 
 .Featured-list {
   display: flex;
-  /* flex-direction: column; */
-  /* width: 200px; */
-  margin-left: 30px;
-  margin-top: 30px;
-  /* height: 300px;
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
+  width: 200px;
+  /* margin-left: 30px;
+  margin-top: 30px; */
+  margin: 50px 10px 50px 10px;
+}
+
+.Featured-list h5 {
+  margin-bottom: 20px;
+}
+
+.Featured-list label {
+  margin: 0 0px 15px 15px;
+}
+
+.Featured-radioButtons {
+  /* height: 10vh; */
+  margin-top: 55px;
+  display: flex;
+  width: 150px;
+  justify-content: space-evenly;
 }
 
 .DiyB-imagesA {
-  /* width: 30%; */
   height: 500px;
   display: flex;
   justify-content: space-evenly;
@@ -220,18 +183,12 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
 }
 
 .DiyB-summary {
-  /* display: flex; */
   width: 500px;
   height: 550px;
   margin-top: 100px;
   margin-left: 2%;
   margin-right: 2%
-  /* margin-right: 2%; */
 }
-
-/* .DiyB-summary {
-  width: 30%;
-} */
 
 .DiyA h1 {
   color: orange;
@@ -260,8 +217,8 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   margin-bottom: 160px;
 }
 
-/* .DiyB-email-buttons {
+.DiyB-email-buttons {
   display: flex;
   justify-content: space-evenly;
-  width: 35vw;
-} */
+  width: 60vw;
+}

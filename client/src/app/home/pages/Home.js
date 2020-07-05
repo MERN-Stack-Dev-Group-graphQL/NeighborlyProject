@@ -47,7 +47,7 @@ function Home() {
       {/* <Navbar></Navbar> */}
       <header className="App-landing">
         <div className="App-first-section">
-          <div className="Body"
+          <div className="App-Body"
             style={{
               backgroundImage: 'url('+background+')',
               backgroundSize: "cover",

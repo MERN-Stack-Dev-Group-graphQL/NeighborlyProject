@@ -37,7 +37,7 @@ function Featured() {
 
                     <div className="Featured-list" style={{display: "inline-block"}}>
                         <h5>Filter Results</h5>
-                            <form action="/action_page.php">
+                            <form action="/action_page">
                                 <input type="radio" id="filter1" name="filter1" value="Bike"></input>
                                 <label for="filter1"> Owner</label><br></br>
                                 <input type="radio" id="filter2" name="filter2" value="Bike"></input>
@@ -52,15 +52,15 @@ function Featured() {
                                 <label for="filter6"> Category</label><br></br>
                             </form>
                     <div>
-                    <div className = "radioButtons">
+                    </div>
+                </div>
+            </div>
+                    <div className = "Featured-radioButtons">
                         <input type="radio" />
                         <input type="radio" />
                         <input type="radio" />
                         <input type="radio" /> 
                     </div>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }
