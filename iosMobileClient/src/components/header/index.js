@@ -15,7 +15,7 @@ Icon.loadFont();
 
 const Header = ({title, navigation}) => {
   const [search, setSearch] = useState('');
-  //navigation.toggleDrawer();
+
   return (
     <Fragment>
       <SearchWrapper>

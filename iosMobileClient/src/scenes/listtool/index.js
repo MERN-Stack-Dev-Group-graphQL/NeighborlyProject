@@ -3,7 +3,7 @@ import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import styled from 'styled-components';
 
-const ListTool = ({navigation}) => {
+const ListTool = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
