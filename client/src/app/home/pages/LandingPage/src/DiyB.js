@@ -31,7 +31,7 @@ function DiyB() {
                     <img src={printer} className="App-printer" alt="printer" />
                 </div>
                 <div className="DiyB-summary">
-                    <h4>Ad sunt do ea cillum eu Lorem quis.</h4>
+                    <h4>Ad sunt do ea cillum eu Lorem.</h4>
                     <p>Cupidatat nulla incididunt aliquip occaecat. Enim cillum tempor aliqua duis qui cupidatat veniam cupidatat velit nisi. Culpa voluptate occaecat consectetur sunt ipsum incididunt culpa. Lorem do aliquip dolore ut veniam. Ut anim consectetur anim veniam velit culpa culpa dolor minim consequat laboris nulla. Cupidatat deserunt ad duis magna consectetur et.</p>
                     <p className="DiyB-buttons"><b>More details</b><button>{'>'}</button></p>
                 </div>

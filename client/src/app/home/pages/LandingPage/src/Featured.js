@@ -3,7 +3,6 @@ import { Slide } from 'react-slideshow-image';
 import canoe from './canoe.jpg';
 import ARGlasses from './AR1.jpg';
 import carpetcleaner from './carpetcleaner.jpg';
-import carpenter from './carpenter.jpg';
 
 const slideImages = [
 ];
@@ -23,10 +22,18 @@ function Featured() {
             </div>
             <div className="Featured-content" style={{margin: 0, padding: 0}}>
                     {/* music, sports, kitchen, modern tech,  */}
-                    <img src={canoe} className="App-canoe" alt="canoe"></img>
-                    <img src={ARGlasses} className="App-AR1" alt="AR1" />
-                    <img src={carpetcleaner} className="App-carpetcleaner" alt="carpetcleaner" />
-                    <img src={carpenter} className="App-carpenter" alt="carpenter" />
+                    <div>
+                        <img src={canoe} className="App-canoe" alt="canoe"></img>
+                        <h3>SPORTS</h3>
+                    </div>
+                    <div>
+                        <img src={ARGlasses} className="App-AR1" alt="AR1" />
+                        <h3>SENSORY TECHNOLOGY</h3>
+                    </div>
+                    <div>
+                        <img src={carpetcleaner} className="App-carpetcleaner" alt="carpetcleaner" />
+                        <h3>HOUSEHOLD</h3>
+                    </div>
 
                     <div className="Featured-list" style={{display: "inline-block"}}>
                         <h5>Filter Results</h5>
