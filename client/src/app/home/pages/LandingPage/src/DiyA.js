@@ -36,19 +36,15 @@ function DiyA() {
             <img src={bench2} className="bench2" alt="bench"/> */}
             <div className="DiyA-headline">
                 <h1>DIY Garden Bench</h1>
-                <button>LEARN HOW</button>
+                <button><h2>LEARN HOW</h2></button>
             </div>
-            <div className="DiyA-videos">
+            <div className="DiyA-images">
                 <p><b>TOOLS USED IN THIS PROJECT</b></p>
                 <img src={glasses} className="App-glasses" alt="glasses" />
                 <img src={drill} className="App-drill" alt="drill" />
                 <img src={carpenterSquare} className="App-carpenterSquare" alt="carpenterSquare" />
-                {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
-                <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
-                <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
-                <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
-                <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a> */}
                 {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a> */}
+
             </div>
         </div>
     )

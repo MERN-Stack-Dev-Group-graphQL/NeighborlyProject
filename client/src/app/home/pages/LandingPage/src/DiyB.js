@@ -40,6 +40,14 @@ function DiyB() {
                     <img src={camera} className="App-camera" alt="camera" />
                 </div>
             </div>
+            <div className="DiyB-slideshow-buttons">
+                <input type="radio" />
+                <input type="radio" />
+                <input type="radio" />
+                <input type="radio" />
+                <input type="radio" />
+                <input type="radio" />
+            </div>
             <div>
                 <h1>DIY Videos</h1>
             </div>

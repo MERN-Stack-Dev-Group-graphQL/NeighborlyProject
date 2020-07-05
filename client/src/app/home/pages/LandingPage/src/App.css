@@ -53,23 +53,23 @@ img.App-logo {
   margin-bottom: -0px;
 }
 
-.DiyA-videos p {
+.DiyA-images p {
   color: blue;
 }
-.DiyA-videos img {
+.DiyA-images img {
   margin-bottom: 10px;
   border-radius: 50%;
   height: 130px;
   width: 130px;
 }
-.DiyA-videos {
+.DiyA-images {
   width: 450;
   display: flex;
   justify-content: space-around;
 }
 
 img.App-printer {
-  height: 500px;
+  height: 550px;
 }
 
 img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, img.App-AR1, img.App-carpenter, img.App-carpetcleaner, .DiyB-imagesB img {
@@ -112,7 +112,7 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
     /* height: 100; */
   }
   
-  .App-landing input, .DiyB input {
+  .App-landing input, .DiyB-mailing-list input {
     /* border-style: none; */
     /* border-style: hidden; */
     border-radius: 2rem;
@@ -124,10 +124,6 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   border-color: black;
   padding-bottom: 20px;
   padding-top: 15px;
-}
-
-.DiyB input {
-  width: 250px;
 }
 
 .App-link {
@@ -188,20 +184,20 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   margin-top: 5%;
 }
 
-.DiyB-images-right img{
+.DiyB-images-right img {
   display: flex;
   flex-direction: column;
-  height: 250px;
+  height: 225px;
   justify-content: space-between;
-  
 }
 
 .DiyB-summary {
   /* display: flex; */
   width: 500px;
   height: 550px;
-  margin-top: 5%;
+  margin-top: 100px;
   margin-left: 2%;
+  margin-right: 2%
   /* margin-right: 2%; */
 }
 
@@ -211,17 +207,24 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
 
 .DiyA h1 {
   color: orange;
+  font-size: 80px;
+}
+
+.DiyA button {
+  width: 220px;
+  height: 60px;
+  border-radius: 5rem;
+}
+.DiyA h2 {
+  display: flex;
+  justify-self: center;
 }
 
 .DiyA-headline {
-  /* display: flex; */
-  position: absolute;
-  /* flex-direction: column; */
-  left: 20%;
-  /* bottom: 1%; */
-  /* margin-top: 1%; */
-  /* width: 100px;
-  padding: 10px; */
+  margin-block-end: auto;
+  width: inherit;
+  margin-top: 170px;
+  margin-left: 317px;
 }
 
 .DiyB-mailing-list {
