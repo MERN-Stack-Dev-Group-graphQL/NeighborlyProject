@@ -53,17 +53,28 @@ img.App-logo {
   margin-bottom: -0px;
 }
 
-.DiyA-images img {
+.DiyA-videos p {
+  color: blue;
+}
+.DiyA-videos img {
   margin-bottom: 10px;
+  border-radius: 50%;
+  height: 130px;
+  width: 130px;
+}
+.DiyA-videos {
+  width: 450;
+  display: flex;
+  justify-content: space-around;
 }
 
 img.App-printer {
   height: 500px;
 }
 
-img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, img.App-arduino, img.App-carpenter, img.App-carpetcleaner, .DiyB-imagesB img {
+img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, img.App-AR1, img.App-carpenter, img.App-carpetcleaner, .DiyB-imagesB img {
   height: 300px;
-  /* margin-top: 10%; */
+  margin-top: 30px;
   width: 300px;
   /* pointer-events: none; */
   /* margin-bottom: -0px; */
@@ -127,7 +138,7 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, 
 
 .Featured-content {
   display: flex;
-  width: 290px;
+  /* width: 290px; */
   /* margin: auto; */
   justify-content: space-around;
 }
@@ -138,11 +149,17 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, 
   flex-direction: row;
   /* align-items: stretch; */
   width: 75%;
+  margin-bottom: 20px;
+  margin-top: 33px;
   /* flex-wrap: nowrap; */
 }
 
 .Featured-categories {
-  margin-bottom: 5%;
+  margin-bottom: 15%;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-evenly; */
+  /* height: 550; */
   /* margin-top: 0px; */
 }
 /* .Featured-categories button{
@@ -152,9 +169,11 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, 
 
 .Featured-list {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  width: 200px;
+  margin-left: 30px;
+  margin-top: 30px;
   /* height: 300px;
-  width: 250px; */
   /* flex-direction: column; */
   /* align-items: center; */
   /* justify-content: center; */
@@ -203,4 +222,9 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-glasses, 
   /* margin-top: 1%; */
   /* width: 100px;
   padding: 10px; */
+}
+
+.DiyB-mailing-list {
+  margin-top: 97px;
+  margin-bottom: 160px;
 }

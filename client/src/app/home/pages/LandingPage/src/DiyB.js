@@ -49,17 +49,19 @@ function DiyB() {
                 <img src={treehouse} className="treehouse" alt="birdfeeder" />
                 <img src={pumpkin} className="pumpkin" alt="pumpkin" />
             </div>
-            <p>Join our mailing list to get the latest updates.</p>
-            <div>
-            <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={handleChange}
-            />
-                  <button onClick={() => setCount(count + 1)}>
-                    Submit
-                </button>
+            <div className="DiyB-mailing-list">
+                <h5><b>Join our mailing list to get the latest updates.</b></h5>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handleChange}
+                    />
+                        <button onClick={() => setCount(count + 1)}>
+                            Submit
+                        </button>
+                </div>
             </div>
         </div>
     )

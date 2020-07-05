@@ -3,8 +3,9 @@ import './LandingPage/src/App.css';
 import brandLogo from '../../../assets/img/brand/brand-logo.svg';
 
 // import logo from './LandingPage/src/Neighborly.png';
-import background from './LandingPage/src/lawnmower.jpg';
-// import background from './LandingPage/src/house-image.jpg';
+// import background from './LandingPage/src/lawnmower.jpg';
+// import background from './';
+import background from './LandingPage/src/miterSaw.jpg';
 import Featured from './LandingPage/src/Featured.js';
 import DiyA from './LandingPage/src/DiyA.js';
 import DiyB from './LandingPage/src/DiyB.js';

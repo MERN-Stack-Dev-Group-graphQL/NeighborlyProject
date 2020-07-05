@@ -1,11 +1,10 @@
 import React from 'react';
 import bench from './bench.jpg';
 import bench2 from './bench2.jpg';
-import miterSaw from './miterSaw.jpg';
+// import miterSaw from './miterSaw.jpg';
 import drill from './drill.jpg';
-// import glasses from './glasses';
+import glasses from './glasses.jpg';
 import carpenterSquare from './carpentersSquare.jpg';
-
 
 {/* <div className="Body"
 style={{
@@ -38,11 +37,10 @@ function DiyA() {
             <div className="DiyA-headline">
                 <h1>DIY Garden Bench</h1>
                 <button>LEARN HOW</button>
-                <p>TOOLS USED IN THIS PROJECT</p>
             </div>
-            <div className="DiyA-images">
-                <img src={miterSaw} className="App-saw" alt="saw" />
-                {/* <img src={glasses} className="App-glasses" alt="glasses" /> */}
+            <div className="DiyA-videos">
+                <p><b>TOOLS USED IN THIS PROJECT</b></p>
+                <img src={glasses} className="App-glasses" alt="glasses" />
                 <img src={drill} className="App-drill" alt="drill" />
                 <img src={carpenterSquare} className="App-carpenterSquare" alt="carpenterSquare" />
                 {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
@@ -51,7 +49,6 @@ function DiyA() {
                 <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a>
                 <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a> */}
                 {/* <a href="https://placeholder.com"><img src="https://via.placeholder.com/140x140" className="App-videoA" alt="videoA" ></img></a> */}
-
             </div>
         </div>
     )
