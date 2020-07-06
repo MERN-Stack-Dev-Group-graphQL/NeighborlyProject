@@ -20,10 +20,7 @@ function DiyB() {
        setEmail(event.target.value);
     };
 
-    // <img src={drone} className="App-drone" alt="drone" />
-    // <img src={arduino} className="App-arduino" alt="arduino" />
-    // <img src={wheelchair} className="App-wheelchair" alt="wheelchair" />
-
+    
     return(
         <div className="DiyB">
             <div className="DiyB-imagesA">
@@ -48,6 +45,12 @@ function DiyB() {
                 <input type="radio" />
                 <input type="radio" />
             </div>
+            <div className="DiyB-imagesC">
+                <img src={drone} className="App-drone" alt="drone" />
+                <img src={arduino} className="App-arduino" alt="arduino" />
+                {/* <img src={wheelchair} className="App-wheelchair" alt="wheelchair" /> */}
+
+            </div>
             <div>
                 <h1>DIY Videos</h1>
             </div>
@@ -65,7 +68,7 @@ function DiyB() {
                         placeholder="Email"
                         value={email}
                         onChange={handleChange}
-                    />
+                        />
                         <button onClick={() => setCount(count + 1)}>
                             Submit
                         </button>

@@ -6,6 +6,7 @@
   color: white;
   filter: drop-shadow(1px 1px 1px black);
 }
+
 .App-headline {
   font-weight: bolder;
   color: white;
@@ -34,6 +35,17 @@
 .DiyB-buttons {
   display: flex;
   width: 170px;
+  padding-left: 5px;
+  justify-content: space-evenly;
+}
+.DiyB-buttons button {
+  display: flex;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 5px 5px 5px 5px;
+  /* padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 5px; */
 }
 .DiyB-mailing-list button {
   width: 215px;
@@ -57,20 +69,35 @@ img.App-logo {
   height: 130px;
   width: 130px;
 }
-.DiyA-images {
-  width: 60vw;
+.DiyA-images content {
+  width: 40vw;
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
+  height: 249px;
 }
+
+/* .DiyA-images content {
+  width: 40vw;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 249px;
+} */
 
 img.App-printer {
   height: 550px;
 }
 
-img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, img.App-AR1, img.App-carpetcleaner, .DiyB-imagesB img {
+img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-camera, .DiyB-imagesB img {
   height: 300px;
   margin-top: 30px;
   width: 300px;
+}
+.DiyB-imagesB img {
+  height: 225px;
+  margin-top: 30px;
+  width: 315px;
 }
 
 .DiyB-imagesB {
@@ -122,6 +149,7 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
 .App-link {
   color: orange;
   font-size: 20px;
+  filter: drop-shadow(1px 1px 1px black);
 }
 
 .Featured-content {
@@ -168,7 +196,7 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
 }
 
 .DiyB-imagesA {
-  height: 500px;
+  height: 400px;
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 10%;
@@ -192,17 +220,17 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
 
 .DiyA h1 {
   color: orange;
-  font-size: 80px;
+  font-weight: bolder;
+  text-shadow: 0px 0px black, -1px -1px black;
 }
 
 .DiyA button {
-  width: 220px;
+  width: 240px;
   height: 60px;
   border-radius: 5rem;
 }
 .DiyA h2 {
-  display: flex;
-  justify-self: center;
+  margin-top: 5px;
 }
 
 .DiyA-headline {
@@ -210,6 +238,33 @@ img.App-canoe, img.App-blender, img.App-camera, img.App-drone, img.App-arduino, 
   width: inherit;
   margin-top: 170px;
   margin-left: 317px;
+}
+
+.DiyB-slideshow-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 125px;
+}
+
+img.App-drone {
+  height: 550px;
+  width: 400px;
+  margin-top: 100px;
+}
+
+img.App-arduino {
+  height: 550px;
+  width: 400px;
+  margin-top: 200px;
+  margin-bottom: 75px;
+}
+
+
+.DiyB-imagesC {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
 }
 
 .DiyB-mailing-list {
