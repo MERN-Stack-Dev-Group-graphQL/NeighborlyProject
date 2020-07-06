@@ -115,7 +115,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-came
 }
 
 .App-landing {
-  min-height: 100vh;
+  min-height: 90vh;
   font-size: calc(10px + 2vmin);
   color: black;
 }
@@ -218,9 +218,10 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-came
   margin-right: 2%
 }
 
-.DiyA h1 {
+.DiyA-headline p {
   color: orange;
   font-weight: bolder;
+  font-size: 55px;
   text-shadow: 0px 0px black, -1px -1px black;
 }
 

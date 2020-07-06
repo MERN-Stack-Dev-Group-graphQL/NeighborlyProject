@@ -50,13 +50,15 @@ function Home() {
               backgroundImage: 'url('+background+')',
               backgroundSize: "cover",
               // backgroundAttachment: "fixed",
-              backgroundPosition: "center", 
-              height: "100vh",
+              backgroundPosition: "center",
+              // position: "absolute",
+              // top: "0",
+              height: "90vh",
               width: "100vw", 
-              color: "#f5f5f5"
+              color: "#f5f5f5",
             }}        
           >
-          <div className App-first-section-contents>
+          <div className="App-first-section-contents">
             <img src={brandLogo} className="App-logo" alt="logo" />
             <p className="App-headline">Save time, money, and space when you rent from <b>your local community</b>.</p>
             <div>

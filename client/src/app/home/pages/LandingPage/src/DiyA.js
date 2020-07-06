@@ -39,7 +39,7 @@ function DiyA() {
             {/* // <img src={bench} className="bench" alt="bench"/>
             <img src={bench2} className="bench2" alt="bench"/> */}
             <div className="DiyA-headline">
-                <h1>DIY Garden Bench</h1>
+                <p>DIY Garden Bench</p>
                 <button><h2>LEARN HOW</h2></button>
             </div>
             <div className="DiyA-images">
