@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 // import {Home} from './Home'
-import blender from './blender.jpg';
 import drone from './drone.jpg';
-import camera from './camera.jpg';
 import printer from './3DPrinter.jpg';
+import camera from './camera.jpg';
+import coffee2 from './coffee2.jpg';
+import coffee6 from './coffee6.jpg';
 import arduino from './arduino.jpg';
 import wheelchair from './wheelchair.jpg';
+import blender from './blender.jpg';
 import birdfeeder from './birdfeeder.jpg';
 import bicycle from './bicycle.jpg';
 import treehouse from './treehouse.jpg';
@@ -33,8 +35,8 @@ function DiyB() {
                     <p className="DiyB-buttons"><b>More details</b><button>{'>'}</button></p>
                 </div>
                 <div className="DiyB-images-right">            
-                    <img src={blender} className="App-blender" alt="blender" />
                     <img src={camera} className="App-camera" alt="camera" />
+                    <img src={coffee2} className="App-coffee" alt="coffee" />
                 </div>
             </div>
             <div className="DiyB-slideshow-buttons">
@@ -46,7 +48,7 @@ function DiyB() {
                 <input type="radio" />
             </div>
             <div className="DiyB-imagesC">
-                <img src={drone} className="App-drone" alt="drone" />
+                <img src={blender} className="App-blender" alt="blender" />
                 <img src={arduino} className="App-arduino" alt="arduino" />
                 {/* <img src={wheelchair} className="App-wheelchair" alt="wheelchair" /> */}
 

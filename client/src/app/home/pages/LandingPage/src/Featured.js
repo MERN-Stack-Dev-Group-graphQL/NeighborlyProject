@@ -8,7 +8,7 @@ const slideImages = [
 ];
 
 function Featured() {
-    return(
+    return (
         <div className="Featured-categories">
             <h1>Featured Categories</h1>
             <div className="Featured-categories-list">

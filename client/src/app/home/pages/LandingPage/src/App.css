@@ -89,7 +89,7 @@ img.App-printer {
   height: 550px;
 }
 
-img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-camera, .DiyB-imagesB img {
+img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, .DiyB-imagesB img {
   height: 300px;
   margin-top: 30px;
   width: 300px;
@@ -207,7 +207,9 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-came
   display: flex;
   flex-direction: column;
   height: 225px;
+  width: 300px;
   justify-content: space-between;
+  margin-top: 30px;
 }
 
 .DiyB-summary {
@@ -229,15 +231,17 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-came
   width: 240px;
   height: 60px;
   border-radius: 5rem;
+  background-color: #318fe6;
 }
 .DiyA h2 {
   margin-top: 5px;
+  color: white;
 }
 
 .DiyA-headline {
   margin-block-end: auto;
   width: inherit;
-  margin-top: 170px;
+  margin-top: 100px;
   margin-left: 317px;
 }
 
@@ -248,7 +252,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-blender, img.App-came
   width: 125px;
 }
 
-img.App-drone {
+img.App-blender {
   height: 550px;
   width: 400px;
   margin-top: 100px;
