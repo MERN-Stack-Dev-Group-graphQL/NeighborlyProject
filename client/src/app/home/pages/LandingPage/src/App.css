@@ -44,8 +44,11 @@ img.App-logo {
   width: auto;
   height: 25px;
   font-size: 17px;
-  display: inline-block;  
+  display: inline-block;
+  border-width: thin;
+  border-style: solid;
 }
+/* onHover and onClick, apply filter: drop-shadow(1px 1px 1px black); */
 
 .DiyB button {
   padding-bottom: 3px;
@@ -75,6 +78,9 @@ img.App-logo {
   width: 215px;
   height: 39px;
   border-radius: 0 2rem 2rem 0;
+  border-style: solid;
+  border-width: thin;
+  background: #96cb44;
 }
 
 /* ====================================== E N D == O F == B U T T O N ====================================================== */
@@ -90,6 +96,9 @@ img.App-logo {
   border-radius: 50%;
   height: 130px;
   width: 130px;
+  border-style: solid;
+  border-color: #dae3f4;
+  border-width: thick;
 }
 .DiyA-images-container {
   /* width: 40vw; */
@@ -134,6 +143,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   flex-direction: row;
   justify-content: space-evenly;
   width: 87vw;
+  margin-top: 20px;
 }
 
 .App-landing, .DiyA, .Featured-categories, .DiyB {
@@ -145,6 +155,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 
 .App-landing input, .DiyB-mailing-list input {
   border-radius: 2rem;
+  border-width: thin;
   text-align: left;
   padding-left: 30px;
   height: 25px;
@@ -152,6 +163,8 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   border-color: black;
   padding-bottom: 20px;
   padding-top: 15px;
+  border-color: #96cb44;
+  border-style: solid;
 }
   
 .App-landing input {
@@ -161,6 +174,8 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   width: 300px;
   border-radius: 2rem 0 0 2rem;
   margin-top: 10px;
+  margin-right: 10px;
+  height: 39px;
 }
 .App-link {
   color: orange;
@@ -172,6 +187,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   display: flex;
   width: 90vw;
   justify-content: space-evenly;
+  text-shadow: 0px 0px black, 0px 0px black;
   /* color: #731963 */
   /* color: #4a154b; */
 }
@@ -230,7 +246,8 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   color: orange;
   font-weight: bolder;
   font-size: 55px;
-  text-shadow: 0px 0px black, -1px -1px black;
+  /* text-shadow: 0px 0px black, -1px -1px black; */
+  text-shadow: 0px 0px black, 0px 0px #dae3f4;
 }
 
 .DiyA button {
@@ -244,6 +261,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 .DiyA h2 {
   margin-top: 5px;
   color: white;
+  text-shadow: 0px 0px black, 0px 0px black;
 }
 
 .DiyA-headline {
@@ -278,6 +296,10 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   margin-right: 2%
 }
 
+.DiyB-summary p {
+  width: 400px;
+}
+
 .DiyB-slideshow-buttons {
   display: flex;
   flex-direction: row;
@@ -307,6 +329,7 @@ img.App-microphone {
 .DiyB-mailing-list {
   margin-top: 97px;
   margin-bottom: 160px;
+  text-align: center;
 }
 
 .DiyB-email-buttons {
