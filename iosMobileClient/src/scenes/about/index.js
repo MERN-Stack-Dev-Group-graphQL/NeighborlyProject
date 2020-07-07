@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 
 const styles = StyleSheet.create({
   alignContent: {
@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const About = () => {
+const About = ({navigation}) => {
   return (
     <View style={styles.alignContent}>
-      <Text>About Page</Text>
+      <Text>About Us Page</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };

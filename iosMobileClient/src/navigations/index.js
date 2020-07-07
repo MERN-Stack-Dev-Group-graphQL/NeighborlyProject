@@ -1,17 +1,16 @@
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import AuthNavigator from './auth-navigator';
+import React from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import AppNavigator from './app-navigator';
+import DrawerNavigator from './draw-navigator';
 
-const RootNavigator = createSwitchNavigator(
-  {
-    // For Authentication
-    Auth: AuthNavigator,
-    // Main App
-    App: AppNavigator,
-  },
-  {
-    initialRouteName: 'App',
-  },
-);
+const Drawer = createDrawerNavigator();
 
-export default createAppContainer(RootNavigator);
+const RootNavigator = () => {
+  return (
+    <Drawer.Navigator drawerContent={() => <DrawerNavigator />}>
+      <Drawer.Screen name="Home" component={AppNavigator} />
+    </Drawer.Navigator>
+  );
+};
+
+export default RootNavigator;

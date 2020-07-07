@@ -1,81 +1,127 @@
 import React from 'react';
-import {Image, TouchableHighlight, Alert} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
+// Navigation
 import {createStackNavigator} from '@react-navigation/stack';
-// import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
+// Screens
 import HomeScreen from '_scenes/home';
 import SearchScreen from '_scenes/search';
 import ListScreen from '_scenes/listtool';
 import ChatScreen from '_scenes/chat';
 import ToolsScreen from '_scenes/tools';
 import ToolDetailsScreen from '_scenes/tools/details';
-
+// Icons
 import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// Styles
 import styled from 'styled-components';
-
-Ionicons.loadFont();
+// Load Icons
 Feather.loadFont();
-MaterialIcons.loadFont();
 MaterialCommunityIcons.loadFont();
 
+// Initialize Navigation
 const Stack = createStackNavigator();
-// const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-const Root = () => {
-  const MenuIcon = ({navigation}) => {
-    return (
-      <TouchableHighlight
-        onPress={() => {
-          navigation.toggleDrawer();
-        }}>
-        <Image
-          style={{width: 30, height: 20, marginLeft: 10}}
-          source={require('../assets/images/hamburger.png')}
-        />
-      </TouchableHighlight>
-    );
-  };
-
-  const LogoTitle = () => {
-    return (
-      <Image
-        style={{width: 168, height: 30}}
-        source={require('../assets/images/brand-logo-navbar.png')}
-      />
-    );
-  };
-
-  const handleOnPress = () => {
-    Alert.alert('Menu clicked');
-  };
+const BrandLogo = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={({navigation, route}) => ({
-        headerTitle: props => <LogoTitle {...props} />,
-        headerStyle: {
-          backgroundColor: 'rgba(16, 43, 70, 1)',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerLeft: () => <MenuIcon onPress={handleOnPress} />,
-        headerRight: () => (
-          <LogOutWrapper>
-            <Feather name="log-out" size={20} color="white" />
-          </LogOutWrapper>
-        ),
-      })}>
+    <BrandLogoImage
+      source={require('../assets/images/brand-logo-navbar.png')}
+    />
+  );
+};
+
+const screenOptions = ({navigation, route}) => ({
+  headerTitle: props => <BrandLogo {...props} />,
+  headerRight: () => (
+    <HeaderRightNav>
+      <Avatar
+        source={{
+          uri: 'https://randomuser.me/api/portraits/men/1.jpg',
+        }}
+      />
+      <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+        <HamburgerMenu source={require('../assets/images/hamburger.png')} />
+      </TouchableOpacity>
+    </HeaderRightNav>
+  ),
+  headerStyle: {
+    backgroundColor: 'rgba(16, 43, 70, 1)',
+    shadowOffset: {height: 0, width: 0},
+  },
+  headerTintColor: 'rgba(255,255,255, 1)',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+});
+
+const Home = () => {
+  return (
+    <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="List" component={ListScreen} />
-      <Stack.Screen name="Tools" component={ToolsScreen} />
-      <Stack.Screen name="Tool Details" component={ToolDetailsScreen} />
+      <Stack.Screen
+        name="Tool Details"
+        component={ToolDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ToolsStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Tools" screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Tools"
+        component={ToolsScreen}
+        options={{headerTitle: 'Tools'}}
+      />
+      <Stack.Screen
+        name="Tool Details"
+        component={ToolDetailsScreen}
+        options={({route}) => ({headerTitle: route.params.name})}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const SearchStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Search" screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{headerTitle: 'Search'}}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ListToolStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Tools" screenOptions={screenOptions}>
+      <Stack.Screen
+        name="List Tool"
+        component={ListScreen}
+        options={{headerTitle: 'List Your Tool'}}
+      />
+      <Stack.Screen
+        name="Tool Details"
+        component={ToolDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ChatStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Chat" screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{headerTitle: 'Chatroom'}}
+      />
     </Stack.Navigator>
   );
 };
@@ -109,17 +155,39 @@ const AppNavigator = () => {
         activeTintColor: 'rgba(16, 43, 70, 1)',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="List Tool" component={ListScreen} />
-      <Tab.Screen name="Home" component={Root} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
-      <Tab.Screen name="Tools" component={ToolsScreen} />
+      <Tab.Screen name="Search" component={SearchStack} />
+      <Tab.Screen name="List Tool" component={ListToolStack} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Chat" component={ChatStack} />
+      <Tab.Screen name="Tools" component={ToolsStack} />
     </Tab.Navigator>
   );
 };
 
-const LogOutWrapper = styled.View`
-  margin-right: 10px;
+const HeaderRightNav = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 16px;
+`;
+
+const Avatar = styled.Image`
+  height: 36px;
+  width: 36px;
+  border-radius: 18px;
+  border-width: 2px;
+  border-color: #ffffff;
+`;
+
+const HamburgerMenu = styled.Image`
+  width: 30px;
+  height: 20px;
+  margin-left: 10px;
+`;
+
+const BrandLogoImage = styled.Image`
+  width: 168px;
+  height: 30px;
 `;
 
 export default AppNavigator;

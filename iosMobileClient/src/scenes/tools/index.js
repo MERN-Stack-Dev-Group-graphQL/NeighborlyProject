@@ -12,16 +12,7 @@ const Tools = ({navigation}) => {
       />
 
       <View style={styles.alignContent}>
-        <Text style={{color: 'white'}}>Tools Page</Text>
-        <Button
-          title="Go to Home"
-          onPress={() => navigation.navigate('Home')}
-        />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Button
-          title="Go back to first screen in stack"
-          onPress={() => navigation.popToTop()}
-        />
+        <Text>Tools Page</Text>
       </View>
     </SafeAreaView>
   );
@@ -32,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(16, 43, 70, 1)',
   },
   alignContent: {
     display: 'flex',

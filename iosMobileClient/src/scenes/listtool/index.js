@@ -12,7 +12,7 @@ const ListTool = () => {
       />
 
       <View style={styles.alignContent}>
-        <Text style={{color: 'white'}}>List Tool Page</Text>
+        <Text>List Tool Page</Text>
       </View>
     </SafeAreaView>
   );
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(16, 43, 70, 1)',
   },
   alignContent: {
     display: 'flex',

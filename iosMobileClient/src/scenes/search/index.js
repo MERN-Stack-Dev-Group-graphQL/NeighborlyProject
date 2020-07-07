@@ -11,20 +11,7 @@ const Search = ({navigation}) => {
       />
 
       <View style={styles.alignContent}>
-        <Text style={{color: 'white'}}>Search Page</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() =>
-            navigation.push('Details', {
-              itemId: Math.floor(Math.random() * 100),
-            })
-          }
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => navigation.navigate('Home')}
-        />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
+        <Text>Search Page</Text>
       </View>
     </SafeAreaView>
   );
@@ -35,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(16, 43, 70, 1)',
   },
   alignContent: {
     display: 'flex',

@@ -1,22 +1,14 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
+import {Provider as PaperProvider} from 'react-native-paper';
 import makeApolloClient from './apollo';
 import {ApolloProvider} from 'react-apollo';
-import Loader from '_core/loader';
-
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
+// Navigation
 import RootNavigator from '_navigations';
-
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-Ionicons.loadFont();
-Feather.loadFont();
-MaterialIcons.loadFont();
-MaterialCommunityIcons.loadFont();
+// Components
+import Loader from '_core/loader';
 
 const App = () => {
   const [client, setClient] = useState(null);
@@ -35,11 +27,13 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </PaperProvider>
     </ApolloProvider>
   );
 };

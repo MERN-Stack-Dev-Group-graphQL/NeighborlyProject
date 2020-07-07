@@ -1,34 +1,25 @@
 import React, {Fragment, useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  Image,
-  Button,
-} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
 
 Icon.loadFont();
 
-const Header = ({title, navigation}) => {
+const Header = ({title}) => {
   const [search, setSearch] = useState('');
 
   return (
-    <Fragment>
-      <SearchWrapper>
+    <SearchContainer>
+      <SearchFormWrapper>
         <FormControlTextInput
           label="Search"
           placeholder="Search"
           name="search"
-          style={styles.formControl}
           onChangeText={() => {}}
           defaultValue={search}
         />
-      </SearchWrapper>
-    </Fragment>
+      </SearchFormWrapper>
+    </SearchContainer>
   );
 };
 
@@ -36,33 +27,18 @@ Header.defaultProps = {
   title: 'Neighborly',
 };
 
-const styles = StyleSheet.create({
-  heading: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 30,
-    marginBottom: 8,
-    fontWeight: '400',
-  },
-  label: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 14,
-    marginBottom: 16,
-  },
-});
+const SearchContainer = styled.View`
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: rgba(16, 43, 70, 1);
+`;
 
-const SearchWrapper = styled.View`
+const SearchFormWrapper = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 90px;
-  background-color: rgba(16, 43, 70, 1);
 `;
 
 const FormControlTextInput = styled.TextInput`
