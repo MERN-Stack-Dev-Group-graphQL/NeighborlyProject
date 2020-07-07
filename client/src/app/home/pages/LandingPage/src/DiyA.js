@@ -42,9 +42,9 @@ function DiyA() {
                 <p>DIY Garden Bench</p>
                 <button><h2>LEARN HOW</h2></button>
             </div>
-            <div className="DiyA-images">
+            <div className="DiyA-images-container">
                 <p><b>TOOLS USED IN THIS PROJECT</b></p>
-                <div>
+                <div className="DiyA-images">
                     <img src={glasses} className="App-glasses" alt="glasses" />
                     <img src={drill} className="App-drill" alt="drill" />
                     <img src={carpenterSquare} className="App-carpenterSquare" alt="carpenterSquare" />

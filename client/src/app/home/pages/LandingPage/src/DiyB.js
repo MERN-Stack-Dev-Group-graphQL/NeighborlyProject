@@ -5,13 +5,14 @@ import printer from './3DPrinter.jpg';
 import camera from './camera.jpg';
 import coffee2 from './coffee2.jpg';
 import coffee6 from './coffee6.jpg';
-import arduino from './arduino.jpg';
+// import microphone from './microphone.png';
 import wheelchair from './wheelchair.jpg';
-import blender from './blender.jpg';
+import mochaPot from './mochaPot.jpg';
 import birdfeeder from './birdfeeder.jpg';
 import bicycle from './bicycle.jpg';
 import treehouse from './treehouse.jpg';
 import pumpkin from './pumpkin.jpg';
+import microphone from './microphone.jpg';
 
 function DiyB() {
 
@@ -48,8 +49,8 @@ function DiyB() {
                 <input type="radio" />
             </div>
             <div className="DiyB-imagesC">
-                <img src={blender} className="App-blender" alt="blender" />
-                <img src={arduino} className="App-arduino" alt="arduino" />
+                <img src={microphone} className="App-microphone" alt="microphone" />
+                <img src={mochaPot} className="App-mochaPot" alt="mochaPot" />
                 {/* <img src={wheelchair} className="App-wheelchair" alt="wheelchair" /> */}
 
             </div>
@@ -57,10 +58,16 @@ function DiyB() {
                 <h1>DIY Videos</h1>
             </div>
             <div className="DiyB-imagesB">
-                <img src={bicycle} className="bicycle" alt="bicycle" />
-                <img src={birdfeeder} className="birdfeeder" alt="birdfeeder" />
+                <iframe width="315" height="225" src="https://www.youtube.com/embed/YtnArAl617k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {/* <iframe width="315" height="225" src="https://www.youtube.com/embed/9dWzupkBcNU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+                <iframe width="315" height="225" src="https://www.youtube.com/embed/jSPgAV-gbfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {/* <iframe width="315" height="225" src="https://www.youtube.com/embed/-enbDTnYv_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+                <iframe width="315" height="225" src="https://www.youtube.com/embed/VDxGukSd56E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="315" height="225" src="https://www.youtube.com/embed/PQ0J7MoLQW0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {/* <img src={bicycle} className="bicycle" alt="bicycle" /> */}
+                {/* <img src={birdfeeder} className="birdfeeder" alt="birdfeeder" />
                 <img src={treehouse} className="treehouse" alt="birdfeeder" />
-                <img src={pumpkin} className="pumpkin" alt="pumpkin" />
+                <img src={pumpkin} className="pumpkin" alt="pumpkin" /> */}
             </div>
             <div className="DiyB-mailing-list">
                 <h5><b>Join our mailing list to get the latest updates.</b></h5>
@@ -78,6 +85,9 @@ function DiyB() {
             </div>
         </div>
     )
+
+
 }
 
 export default DiyB
+
