@@ -14,15 +14,20 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
+import moment from 'moment';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import {AppButton} from '_core/button';
-import Icon from 'react-native-vector-icons/dist/Feather';
+import Feather from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
 // import ToolDetails from '_scenes/tools/details';
 // import navigations from '_navigations';
 import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
+import StarCount from '_core/review/starcount';
+import StarRating from '_core/review/starrating';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
-Icon.loadFont();
+Feather.loadFont();
+MaterialCommunityIcons.loadFont();
 
 const Card = ({
   tool: {_id, title, description, createdAt, url, photo},
@@ -47,6 +52,9 @@ const Card = ({
       />
     );
   };
+
+  const starCount = 4;
+  const rateCount = 252;
 
   const onPress = () => {
     navigation.push('Tool Details', {
@@ -78,11 +86,24 @@ const Card = ({
             }}
           />
           <CardTitle>{title}</CardTitle>
+          <StarCountWrapper>
+            <StarCount starCount={starCount} rateCount={rateCount} />
+          </StarCountWrapper>
           <CardText>{description}</CardText>
-          <ActionText>
-            <Icon name="clock" size={16} color="gray" />
-            <Text> Posted 6 days ago</Text>
-          </ActionText>
+          <ActionWrapper>
+            <Feather name="clock" size={16} color="gray" />
+            <ActionText>
+              {' '}
+              Posted {moment(createdAt).fromNow(true)} ago
+            </ActionText>
+            <SaveToolIcon>
+              <MaterialCommunityIcons
+                name="bookmark-outline"
+                color={'rgba(0,0,0,0.25)'}
+                size={24}
+              />
+            </SaveToolIcon>
+          </ActionWrapper>
         </CardBody>
         <CardFooter>
           <ButtonContainer onPress={onPress}>
@@ -119,6 +140,10 @@ const CardBody = styled.View`
   padding: 10px;
 `;
 
+const StarCountWrapper = styled.View`
+  margin-bottom: 16px;
+`;
+
 const Avatar = styled.Image`
   position: absolute;
   height: 50px;
@@ -133,12 +158,20 @@ const CardTitle = styled.Text`
   font-size: 24px;
   font-weight: bold;
   padding-right: 55px;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 `;
 
 const CardText = styled.Text`
   padding-bottom: 10px;
 `;
+
+const ActionWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ActionText = styled.Text`
   color: gray;
 `;
@@ -150,6 +183,10 @@ const CardFooter = styled.View`
   justify-content: center;
   padding: 10px;
   margin-top: auto;
+`;
+
+const SaveToolIcon = styled.View`
+  margin-left: auto;
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
