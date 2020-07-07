@@ -1,7 +1,4 @@
 import React from 'react';
-import {Image, View, StyleSheet, Alert} from 'react-native';
-// Navigation
-import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
 import {
   useTheme,
   Title,
@@ -13,6 +10,9 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
+import {Image, View, StyleSheet, Alert} from 'react-native';
+// Navigation
+import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const DrawNavigator = props => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   ActivityIndicator,
@@ -19,21 +19,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // import {AppButton} from '_core/button';
 import Feather from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
-// import ToolDetails from '_scenes/tools/details';
-// import navigations from '_navigations';
 import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
 import StarCount from '_core/review/starcount';
-import StarRating from '_core/review/starrating';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();
 
-const Card = ({
-  tool: {_id, title, description, createdAt, url, photo},
-  navigation,
-}) => {
-  // http://localhost:4000${path.url
+const Card = ({tool, navigation, handleCart, cartCount}) => {
+  const [buttonState, setButtonState] = useState(true);
   const ImageBlock = path => {
     if (path.url.length > 1) {
       return (
@@ -58,43 +52,46 @@ const Card = ({
 
   const onPress = () => {
     navigation.push('Tool Details', {
-      itemId: _id,
+      itemId: tool._id,
+      tool: tool,
+      starCount,
+      rateCount,
       otherParam: 'anything you want here',
     });
   };
 
+  const handleAddToCart = () => {
+    if (buttonState) {
+      setButtonState(false);
+      handleCart();
+    }
+  };
+
   return (
-    <CardWrapper
-      style={{
-        shadowOffset: {
-          width: 0,
-          height: 5,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 12,
-      }}>
-      <CardBlock>
-        <CardImageWrapper>
-          <ImageBlock url={url} />
-        </CardImageWrapper>
+    <View style={styles.cardWrapper}>
+      <View>
+        <View style={styles.cardImage}>
+          <ImageBlock url={tool.url} />
+        </View>
 
         <CardBody>
-          <Avatar
-            source={{
-              uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-            }}
-          />
-          <CardTitle>{title}</CardTitle>
+          <AvatarWrapper>
+            <Avatar
+              source={{
+                uri: 'https://randomuser.me/api/portraits/men/1.jpg',
+              }}
+            />
+          </AvatarWrapper>
+          <CardTitle>{tool.title}</CardTitle>
           <StarCountWrapper>
             <StarCount starCount={starCount} rateCount={rateCount} />
           </StarCountWrapper>
-          <CardText>{description}</CardText>
+          <CardText>{tool.description}</CardText>
           <ActionWrapper>
             <Feather name="clock" size={16} color="gray" />
             <ActionText>
               {' '}
-              Posted {moment(createdAt).fromNow(true)} ago
+              Posted {moment(tool.createdAt).fromNow(true)} ago
             </ActionText>
             <SaveToolIcon>
               <MaterialCommunityIcons
@@ -103,30 +100,51 @@ const Card = ({
                 size={24}
               />
             </SaveToolIcon>
+            <AddToCartIcon onPress={handleAddToCart}>
+              <MaterialCommunityIcons
+                name="cart-plus"
+                color={'rgba(0,0,0,0.25)'}
+                size={30}
+              />
+            </AddToCartIcon>
           </ActionWrapper>
         </CardBody>
         <CardFooter>
+          <PriceUnitWrapper>
+            <Price>$49.99</Price>
+            <Unit>/ per day</Unit>
+          </PriceUnitWrapper>
           <ButtonContainer onPress={onPress}>
             <ButtonText>Details</ButtonText>
           </ButtonContainer>
         </CardFooter>
-      </CardBlock>
-    </CardWrapper>
+      </View>
+    </View>
   );
 };
 
-const CardWrapper = styled.View`
-  background: #ffffff;
-  margin: 10px;
-  border-radius: 5px;
-`;
+const styles = StyleSheet.create({
+  cardWrapper: {
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 12,
+  },
+  cardImage: {
+    height: 260,
+    width: '100%',
+    backgroundColor: 'gray',
+  },
+});
 
-const CardBlock = styled.View``;
-
-const CardImageWrapper = styled.View`
-  height: 260px;
-  width: 100%;
-  background: gray;
+const AvatarWrapper = styled.View`
+  position: relative;
 `;
 
 const CardImage = styled.Image`
@@ -185,8 +203,28 @@ const CardFooter = styled.View`
   margin-top: auto;
 `;
 
+const PriceUnitWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Price = styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const Unit = styled.Text`
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  padding-left: 6px;
+`;
+
 const SaveToolIcon = styled.View`
   margin-left: auto;
+`;
+
+const AddToCartIcon = styled.TouchableOpacity`
+  margin-left: 8px;
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
