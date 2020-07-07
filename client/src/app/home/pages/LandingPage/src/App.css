@@ -89,7 +89,7 @@ img.App-logo {
   color: #0296f5;
   text-align: center;
   margin-bottom: 30px;
-
+  font-size: 23px;
 }
 .DiyA-images img {
   margin-bottom: 40px;
@@ -298,6 +298,11 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 
 .DiyB-summary p {
   width: 400px;
+}
+
+.DiyB-buttons svg {
+  color: #96cb44;
+  margin: 8px 0px 0px 15px;
 }
 
 .DiyB-slideshow-buttons {

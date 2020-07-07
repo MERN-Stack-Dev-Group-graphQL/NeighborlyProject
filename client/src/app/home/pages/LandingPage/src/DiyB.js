@@ -13,6 +13,8 @@ import bicycle from './bicycle.jpg';
 import treehouse from './treehouse.jpg';
 import pumpkin from './pumpkin.jpg';
 import microphone from './microphone.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 function DiyB() {
 
@@ -33,7 +35,7 @@ function DiyB() {
                 <div className="DiyB-summary">
                     <h4>Ad sunt do ea cillum eu Lorem.</h4>
                     <p>Cupidatat nulla incididunt aliquip occaecat. Enim cillum tempor aliqua duis qui cupidatat veniam cupidatat velit nisi. Culpa voluptate occaecat consectetur sunt ipsum incididunt culpa. Lorem do aliquip dolore ut veniam. Ut anim consectetur anim veniam velit culpa culpa dolor minim consequat laboris nulla. Cupidatat deserunt ad duis magna consectetur et.</p>
-                    <p className="DiyB-buttons"><b>More details</b><button>{'>'}</button></p>
+                    <p className="DiyB-buttons"><b>More details</b><FontAwesomeIcon icon={faArrowCircleRight} /></p>
                 </div>
                 <div className="DiyB-images-right">            
                     <img src={camera} className="App-camera" alt="camera" />
