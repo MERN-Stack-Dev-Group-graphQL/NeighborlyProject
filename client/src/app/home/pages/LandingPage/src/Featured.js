@@ -24,15 +24,15 @@ function Featured() {
                     {/* music, sports, kitchen, modern tech,  */}
                     <div>
                         <img src={canoe} className="App-canoe" alt="canoe"></img>
-                        <h3>SPORTS</h3>
+                        <h3 className="Featured-content-1">SPORTS</h3>
                     </div>
                     <div>
                         <img src={ARGlasses} className="App-AR1" alt="AR1" />
-                        <h3>SENSORY TECHNOLOGY</h3>
+                        <h3 className="Featured-content-2">TECHNOLOGY</h3>
                     </div>
                     <div>
                         <img src={carpetcleaner} className="App-carpetcleaner" alt="carpetcleaner" />
-                        <h3>HOUSEHOLD</h3>
+                        <h3 className="Featured-content-3">HOUSEHOLD</h3>
                     </div>
 
                     <div className="Featured-list" style={{display: "inline-block"}}>

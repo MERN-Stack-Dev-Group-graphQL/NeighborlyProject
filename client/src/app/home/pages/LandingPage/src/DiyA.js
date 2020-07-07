@@ -23,19 +23,19 @@ style={{
 > */}
 
 function DiyA() {
-    return(
+    return (
         <div className="DiyA"
             style={{
-                backgroundImage: 'url('+bench4+')',
+                backgroundImage: 'url(' + bench4 + ')',
                 backgroundSize: "cover",
                 // backgroundAttachment: "fixed",
-                backgroundPosition: "center", 
+                backgroundPosition: "center",
                 height: "100vh",
-                width: "100vw", 
+                width: "100vw",
                 color: "#f5f5f5"
             }}
-            >
-        {/* background image */}
+        >
+            {/* background image */}
             {/* // <img src={bench} className="bench" alt="bench"/>
             <img src={bench2} className="bench2" alt="bench"/> */}
             <div className="DiyA-headline">
