@@ -17,6 +17,30 @@ import styled from 'styled-components';
 
 MaterialCommunityIcons.loadFont();
 
+const styles = StyleSheet.create({
+  imageBlock: {
+    width: '100%',
+    aspectRatio: 1,
+  },
+  cardWrapper: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 12,
+  },
+  cartText: {
+    color: '#fff',
+    textTransform: 'uppercase',
+  },
+});
+
 const ToolDetails = ({route, navigation}) => {
   const {itemId, tool, starCount, rateCount} = route.params;
 
@@ -27,10 +51,7 @@ const ToolDetails = ({route, navigation}) => {
           source={{
             uri: `${LOCAL_HOST_SERVER}${path.url}`,
           }}
-          style={{
-            width: '100%',
-            aspectRatio: 1,
-          }}
+          style={styles.imageBlock}
         />
       );
     }
@@ -39,25 +60,13 @@ const ToolDetails = ({route, navigation}) => {
         source={{
           uri: `${LOCAL_HOST_SERVER}/assets/img/default.jpg`,
         }}
-        style={{
-          width: '100%',
-          aspectRatio: 1,
-        }}
+        style={styles.imageBlock}
       />
     );
   };
 
   return (
-    <CardWrapper
-      style={{
-        shadowOffset: {
-          width: 0,
-          height: 5,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 12,
-      }}>
+    <ScrollView style={styles.cardWrapper}>
       <CardBlock>
         <CardImageWrapper>
           <ImageBlock url={tool.url} />
@@ -125,9 +134,7 @@ const ToolDetails = ({route, navigation}) => {
             onPress={() => {
               Alert.alert(`${tool.title} added to cart.`);
             }}>
-            <Text style={{color: '#fff', textTransform: 'uppercase'}}>
-              Add to Cart
-            </Text>
+            <Text style={styles.cartText}>Add to Cart</Text>
           </AddToCart>
 
           <Button
@@ -136,7 +143,7 @@ const ToolDetails = ({route, navigation}) => {
           />
         </CardBody>
       </CardBlock>
-    </CardWrapper>
+    </ScrollView>
   );
 };
 
@@ -155,24 +162,12 @@ const HColLeftText = styled.Text`
   font-weight: bold;
 `;
 
-const CardWrapper = styled.ScrollView`
-  flex: 1;
-  background: #ffffff;
-  margin: 10px;
-  border-radius: 5px;
-`;
-
 const CardBlock = styled.View``;
 
 const CardImageWrapper = styled.View`
   width: 100%;
   background: gray;
   overflow: hidden;
-`;
-
-const CardImage = styled.Image`
-  height: 100%;
-  width: 100%;
 `;
 
 const CardBody = styled.View`
@@ -221,30 +216,6 @@ const CardTitle = styled.Text`
 
 const CardText = styled.Text`
   padding-bottom: 20px;
-`;
-
-const ActionWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ActionText = styled.Text`
-  color: gray;
-`;
-
-const CardFooter = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  margin-top: auto;
-`;
-
-const SaveToolIcon = styled.View`
-  margin-left: auto;
 `;
 
 export default ToolDetails;

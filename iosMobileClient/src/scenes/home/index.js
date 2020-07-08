@@ -5,16 +5,18 @@ import {
   Alert,
   StatusBar,
   StyleSheet,
+  Dimensions,
   Text,
   View,
   ScrollView,
 } from 'react-native';
-import Header from '_components/header';
-import Loader from '_core/loader';
-import Card from '_core/card';
-import styled from 'styled-components';
+import {TabView, SceneMap} from 'react-native-tab-view';
 
+import Header from '_components/header';
+import styled from 'styled-components';
 import SafeAreaView from 'react-native-safe-area-view';
+import TabViewMenuBar from '_components/tabviewmenubar';
+import HomeScrollView from '_scenes/home/cardview';
 
 const Home = ({navigation}) => {
   const [addedToCart, setAddedToCart] = useState(false);
@@ -46,27 +48,18 @@ const Home = ({navigation}) => {
       />
       <HomeContainer>
         <Header navigation={navigation} />
-
-        <HomeScrollView>
-          {loading ? (
-            <Loader />
-          ) : (
-            data.getTools.edges &&
-            data.getTools.edges.map(tool => (
-              <Card
-                tool={tool}
-                handleCart={handleAddedToCart}
-                cartCount={cartCount}
-                navigation={navigation}
-                key={tool._id}
-              />
-            ))
-          )}
-        </HomeScrollView>
+        <TabViewMenuBar />
+        <HomeScrollView
+          navigation={navigation}
+          loading={loading}
+          data={data}
+          handleAddedToCart={handleAddedToCart}
+          cartCount={cartCount}
+        />
         {cartCount > 0 && (
           <CartBubbleWrapper>
             <CartBubble>
-              <Text style={{color: '#ffffff'}}>{cartCount}</Text>
+              <Text style={styles.cartCount}>{cartCount}</Text>
             </CartBubble>
             <Text>Item(s) added to cart.</Text>
           </CartBubbleWrapper>
@@ -83,18 +76,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(16, 43, 70, 1)',
   },
+  cartCount: {
+    color: '#ffffff',
+  },
 });
 
 const HomeContainer = styled.View`
   flex: 1;
   color: red;
   background: #f8f8f8;
-`;
-
-const HomeScrollView = styled.ScrollView`
-  position: relative;
-  padding-left: 16px;
-  padding-right: 16px;
 `;
 
 const CartBubbleWrapper = styled.View`

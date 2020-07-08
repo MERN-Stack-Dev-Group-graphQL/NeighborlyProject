@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   useTheme,
   Title,
@@ -10,15 +10,20 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import {Image, View, StyleSheet, Alert} from 'react-native';
+import {Image, View, StyleSheet, Alert, Button} from 'react-native';
 // Navigation
 import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const DrawNavigator = props => {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.drawerContent}>
+    <View style={styles.drawerContent}>
+      <DrawerContentScrollView {...props}>
         <View style={styles.userInfoSection}>
           <Avatar.Image
             source={{
@@ -40,8 +45,7 @@ const DrawNavigator = props => {
             )}
             label="Profile"
             onPress={() => {
-              Alert.alert('Profile Menu Clicked!');
-              // props.navigation.navigate('Profile');
+              props.navigation.navigate('Profile');
             }}
           />
           <DrawerItem
@@ -54,7 +58,7 @@ const DrawNavigator = props => {
             )}
             label="Account Activity"
             onPress={() => {
-              Alert.alert('Account Activity Menu Clicked!');
+              props.navigation.navigate('Account Activity');
             }}
           />
           <DrawerItem
@@ -67,7 +71,7 @@ const DrawNavigator = props => {
             )}
             label="Notifications"
             onPress={() => {
-              Alert.alert('Notifications Menu Clicked!');
+              props.navigation.navigate('Notifications');
             }}
           />
           <DrawerItem
@@ -76,7 +80,7 @@ const DrawNavigator = props => {
             )}
             label="Filters"
             onPress={() => {
-              Alert.alert('Filters Menu Clicked!');
+              props.navigation.navigate('Filters');
             }}
           />
           <DrawerItem
@@ -89,7 +93,7 @@ const DrawNavigator = props => {
             )}
             label="Saved Tools"
             onPress={() => {
-              Alert.alert('Saved Tools Menu Clicked!');
+              props.navigation.navigate('Saved Tools');
             }}
           />
           <DrawerItem
@@ -102,22 +106,34 @@ const DrawNavigator = props => {
             )}
             label="Track Tool(s)"
             onPress={() => {
-              Alert.alert('Track Tool(s) Menu Clicked!');
+              props.navigation.navigate('Track Tools');
             }}
           />
         </Drawer.Section>
         <Drawer.Section title="Preferences">
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple
+            onPress={() => {
+              toggleTheme();
+            }}>
             <View style={styles.preference}>
               <Text>Dark Theme</Text>
               <View pointerEvents="none">
-                <Switch value={false} />
+                <Switch value={isDarkTheme} />
               </View>
             </View>
           </TouchableRipple>
         </Drawer.Section>
-      </View>
-    </DrawerContentScrollView>
+      </DrawerContentScrollView>
+      <Drawer.Section>
+        <DrawerItem
+          style={styles.bottomDrawerSection}
+          icon={({color, size}) => (
+            <MaterialCommunityIcons name="logout" color={color} size={size} />
+          )}
+          label="Sign Out"
+        />
+      </Drawer.Section>
+    </View>
   );
 };
 
@@ -158,6 +174,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
   },
 });
 

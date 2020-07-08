@@ -2,11 +2,9 @@ import React, {useState} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Text, TextInput, View} from 'react-native';
 import {SEARCH_TOOLS_QUERY} from '_utils/graphql';
-// import {useForm} from '_utils/hooks';
-import Icon from 'react-native-vector-icons/dist/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
-
-Icon.loadFont();
 
 const Header = ({title, navigation}) => {
   const [search, setSearch] = useState('');
@@ -35,6 +33,13 @@ const Header = ({title, navigation}) => {
   return (
     <SearchContainer>
       <SearchFormWrapper>
+        <View style={{position: 'absolute', zIndex: 999, left: 16}}>
+          <MaterialCommunityIcons
+            name="search-web"
+            color={'rgba(0,0,0,0.25)'}
+            size={24}
+          />
+        </View>
         <FormControlTextInput
           label="Search"
           placeholder="Search"
@@ -99,18 +104,18 @@ const SearchContainer = styled.View`
 `;
 
 const SearchFormWrapper = styled.View`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 90px;
+  height: 70px;
 `;
 
 const FormControlTextInput = styled.TextInput`
   width: 100%;
-  max-width: 380px;
   height: 50px;
-  padding: 10px 25px;
+  padding: 10px 25px 10px 40px;
   border-radius: 25px;
   background-color: rgba(255, 255, 255, 1);
   margin: 16px;
