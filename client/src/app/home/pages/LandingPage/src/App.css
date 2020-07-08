@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .App {
   text-align: center;
 }
@@ -16,8 +20,8 @@ img.App-logo {
 
 .App-headline {
   font-weight: bolder;
+  /* color: white; */
   color: white;
-  /* color: #0296f5; */
   text-shadow: 1px 1px black, -1px -1px black;
 }
 .App-landing {
@@ -143,7 +147,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   flex-direction: row;
   justify-content: space-evenly;
   width: 87vw;
-  margin-top: 20px;
+  margin-top: 35px;
 }
 
 .App-landing, .DiyA, .Featured-categories, .DiyB {
@@ -232,6 +236,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 
 .Featured-list label {
   margin: 0 0px 15px 15px;
+  font-weight: unset;
 }
 
 .Featured-radioButtons {
@@ -256,6 +261,15 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   border-radius: 5rem;
   /* background-color: #318fe6; */
   background-color: #96cb44;
+}
+
+.DiyB-imagesC button {
+  width: 240px;
+  height: 55px;
+  border-radius: 5rem;
+  /* background-color: #318fe6; */
+  background-color: #96cb44;
+  margin-top: 15px;
 }
 
 .DiyA h2 {
@@ -312,23 +326,75 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   width: 125px;
 }
 
-img.App-mochaPot {
-  height: 550px;
+.DiyB-imagesC-2 h1, .DiyB-imagesC-2 p, .DiyB-imagesC-1 h1, .DiyB-imagesC-1 p {
+  margin-bottom: 0px;
+}
+
+.DiyB-imagesC-1-background {
+  height: 500px;
   width: 400px;
   margin-top: 100px;
 }
 
-img.App-microphone {
-  height: 550px;
+/* .imagesC-1-background {
+  height: 600px;
+  width: 400px;
+  margin-top: 100px;
+  padding-bottom: 100px;
+  background: black;
+} */
+
+.DiyB-imagesC-2-background {
+  height: 500px;
   width: 400px;
   margin-top: 200px;
   margin-bottom: 75px;
 }
 
+/* .imagesC-2-background {
+  height: 700px;
+  width: 400px;
+  margin-top: 200px;
+  margin-bottom: 75px;
+  background: black;
+} */
+
 .DiyB-imagesC {
   display: flex;
   justify-content: space-between;
   width: 1000px;
+  margin-bottom: 10px;
+}
+
+.DiyB-imagesC-1, .DiyB-imagesC-2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60%;
+  padding-left: 6%;
+  align-items: center;
+}
+
+.DiyB-imagesC-1 h5, .DiyB-imagesC-2 h5 {
+  text-transform: lowercase;
+}
+
+.userCircle {
+  font-size: 75px;
+  color: #96cb44;
+  margin: -45px 0px 0px -35px;
+}
+
+.thumbsUp {
+  font-size: 25px;
+  color: white;
+  margin-left: 360px;
+  margin-top: 0px;
+}
+
+.stars {
+  color: orange;
+  font-weight: 800;
+  filter: drop-shadow(1px 1px 1px black);
 }
 
 .DiyB-mailing-list {

@@ -11,6 +11,7 @@ import DiyB from './LandingPage/src/DiyB.js';
 import gql from "graphql-tag";
 import {useQuery} from "@apollo/react-hooks";
 import Test from "./Test";
+// import background from './LandingPage/src/drill.jpg';
 
 const QueryTest = gql`
     query SearchFunction($search: String!) {

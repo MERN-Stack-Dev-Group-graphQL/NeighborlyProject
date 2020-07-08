@@ -8,13 +8,20 @@ import coffee6 from './coffee6.jpg';
 // import microphone from './microphone.png';
 import wheelchair from './wheelchair.jpg';
 import mochaPot from './mochaPot.jpg';
+import grinder from './grinder.jpg';
 import birdfeeder from './birdfeeder.jpg';
 import bicycle from './bicycle.jpg';
 import treehouse from './treehouse.jpg';
 import pumpkin from './pumpkin.jpg';
+// import background from './LandingPage/src/miterSaw.jpg';
 import microphone from './microphone.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleRight, faStar, faWeight } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+// import { far faStar } from '@fortawesome/free-solid-svg-icons';
+// import { fas faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 function DiyB() {
 
@@ -51,8 +58,60 @@ function DiyB() {
                 <input type="radio" />
             </div>
             <div className="DiyB-imagesC">
-                <img src={microphone} className="App-microphone" alt="microphone" />
-                <img src={mochaPot} className="App-mochaPot" alt="mochaPot" />
+                {/* <div className="imagesC-1-background"></div> */}
+                    <div className="DiyB-imagesC-1-background"
+                        style={{
+                            backgroundImage: 'url('+microphone+')',
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            height: "500px",
+                            width: "400px", 
+                            color: "white",
+                            // opacity: "0.8",
+                            textShadow: "0.4px 0.4px black, 0.4px 0.4px black"
+                        }}>
+                            <FontAwesomeIcon icon={faUserCircle} className="userCircle"/>
+                            <FontAwesomeIcon icon={faThumbsUp} className="thumbsUp"/>
+                        <div className="DiyB-imagesC-1">
+                            <h1>$35.00</h1>
+                            <h5><b>per day</b></h5>
+                            <div className="stars">
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                            </div>
+                                <button><h2>RENT NOW</h2></button>
+                        </div>
+                    </div>
+                {/* <div className="imagesC-2-background"></div> */}
+                    <div className="DiyB-imagesC-2-background"
+                        style={{
+                            backgroundImage: 'url('+grinder+')',
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            height: "500px",
+                            width: "400px", 
+                            color: "white",
+                            textShadow: "2px 2px black, 2px 2px black"
+                        }}>
+                            <FontAwesomeIcon icon={faUserCircle} className="userCircle"/>
+                            <FontAwesomeIcon icon={faThumbsUp} className="thumbsUp"/>
+                        <div className="DiyB-imagesC-2">
+                            <h1>$35.00</h1>
+                            <h5><b>per day</b></h5>
+                            <div className="stars">
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                                <FontAwesomeIcon icon={faStar}/>
+                            </div>
+                            <button><h2>RENT NOW</h2></button>
+                        </div>
+                </div>   
+
                 {/* <img src={wheelchair} className="App-wheelchair" alt="wheelchair" /> */}
 
             </div>
