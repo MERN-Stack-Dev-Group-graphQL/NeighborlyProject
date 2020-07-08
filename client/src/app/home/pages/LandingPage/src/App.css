@@ -20,7 +20,6 @@ img.App-logo {
 
 .App-headline {
   font-weight: bolder;
-  /* color: white; */
   color: white;
   text-shadow: 1px 1px black, -1px -1px black;
 }
@@ -74,9 +73,6 @@ img.App-logo {
   margin-left: 10px;
   margin-top: 5px;
   padding: 5px 5px 5px 5px;
-  /* padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 5px; */
 }
 .DiyB-mailing-list button {
   width: 215px;
@@ -105,7 +101,6 @@ img.App-logo {
   border-width: thick;
 }
 .DiyA-images-container {
-  /* width: 40vw; */
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
@@ -119,14 +114,6 @@ img.App-logo {
   height: 249px;
 }
 
-/* .DiyA-images content {
-  width: 40vw;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  height: 249px;
-} */
-
 img.App-printer {
   height: 550px;
 }
@@ -137,9 +124,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   width: 300px;
 }
 .DiyB-imagesB img {
-  /* height: 225px; */
   margin-top: 30px;
-  /* width: 315px; */
 }
 
 .DiyB-imagesB {
@@ -207,7 +192,6 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 }
 
 .Featured-categories-list {
-  /* color: #731963; */
   justify-content: space-around;
   display: flex;
   flex-direction: row;
@@ -218,15 +202,12 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 
 .Featured-categories {
   margin-bottom: 70px;
-  /* color: #731963; */
   filter: drop-shadow(-1px -1px -1px black);
 }
 
 .Featured-list {
   display: flex;
   width: 200px;
-  /* margin-left: 30px;
-  margin-top: 30px; */
   margin: 50px 10px 50px 10px;
 }
 
@@ -240,7 +221,6 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
 }
 
 .Featured-radioButtons {
-  /* height: 10vh; */
   margin-top: 55px;
   display: flex;
   width: 150px;
@@ -336,28 +316,12 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   margin-top: 100px;
 }
 
-/* .imagesC-1-background {
-  height: 600px;
-  width: 400px;
-  margin-top: 100px;
-  padding-bottom: 100px;
-  background: black;
-} */
-
 .DiyB-imagesC-2-background {
   height: 500px;
   width: 400px;
   margin-top: 200px;
   margin-bottom: 75px;
 }
-
-/* .imagesC-2-background {
-  height: 700px;
-  width: 400px;
-  margin-top: 200px;
-  margin-bottom: 75px;
-  background: black;
-} */
 
 .DiyB-imagesC {
   display: flex;

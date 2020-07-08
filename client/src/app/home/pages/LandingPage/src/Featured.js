@@ -21,7 +21,6 @@ function Featured() {
                 <a>Electrical</a>
             </div>
             <div className="Featured-content" style={{margin: 0, padding: 0}}>
-                    {/* music, sports, kitchen, modern tech,  */}
                     <div>
                         <img src={canoe} className="App-canoe" alt="canoe"></img>
                         <h3 className="Featured-content-1">SPORTS</h3>

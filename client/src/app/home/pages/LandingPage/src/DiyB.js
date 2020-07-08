@@ -1,20 +1,10 @@
 import React, {useState} from 'react'
-// import {Home} from './Home'
-import drone from './drone.jpg';
 import printer from './3DPrinter.jpg';
 import camera from './camera.jpg';
 import coffee2 from './coffee2.jpg';
-import coffee6 from './coffee6.jpg';
-// import microphone from './microphone.png';
-import wheelchair from './wheelchair.jpg';
-import mochaPot from './mochaPot.jpg';
 import grinder from './grinder.jpg';
-import birdfeeder from './birdfeeder.jpg';
-import bicycle from './bicycle.jpg';
-import treehouse from './treehouse.jpg';
-import pumpkin from './pumpkin.jpg';
-// import background from './LandingPage/src/miterSaw.jpg';
 import microphone from './microphone.jpg';
+// import mochaPot from './mochaPot.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faStar, faWeight } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +48,6 @@ function DiyB() {
                 <input type="radio" />
             </div>
             <div className="DiyB-imagesC">
-                {/* <div className="imagesC-1-background"></div> */}
                     <div className="DiyB-imagesC-1-background"
                         style={{
                             backgroundImage: 'url('+microphone+')',
@@ -67,7 +56,6 @@ function DiyB() {
                             height: "500px",
                             width: "400px", 
                             color: "white",
-                            // opacity: "0.8",
                             textShadow: "0.4px 0.4px black, 0.4px 0.4px black"
                         }}>
                             <FontAwesomeIcon icon={faUserCircle} className="userCircle"/>
@@ -85,7 +73,6 @@ function DiyB() {
                                 <button><h2>RENT NOW</h2></button>
                         </div>
                     </div>
-                {/* <div className="imagesC-2-background"></div> */}
                     <div className="DiyB-imagesC-2-background"
                         style={{
                             backgroundImage: 'url('+grinder+')',
@@ -111,24 +98,15 @@ function DiyB() {
                             <button><h2>RENT NOW</h2></button>
                         </div>
                 </div>   
-
-                {/* <img src={wheelchair} className="App-wheelchair" alt="wheelchair" /> */}
-
             </div>
             <div>
                 <h1>DIY Videos</h1>
             </div>
             <div className="DiyB-imagesB">
                 <iframe width="315" height="225" src="https://www.youtube.com/embed/YtnArAl617k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                {/* <iframe width="315" height="225" src="https://www.youtube.com/embed/9dWzupkBcNU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                 <iframe width="315" height="225" src="https://www.youtube.com/embed/jSPgAV-gbfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                {/* <iframe width="315" height="225" src="https://www.youtube.com/embed/-enbDTnYv_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                 <iframe width="315" height="225" src="https://www.youtube.com/embed/VDxGukSd56E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <iframe width="315" height="225" src="https://www.youtube.com/embed/PQ0J7MoLQW0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                {/* <img src={bicycle} className="bicycle" alt="bicycle" /> */}
-                {/* <img src={birdfeeder} className="birdfeeder" alt="birdfeeder" />
-                <img src={treehouse} className="treehouse" alt="birdfeeder" />
-                <img src={pumpkin} className="pumpkin" alt="pumpkin" /> */}
             </div>
             <div className="DiyB-mailing-list">
                 <h5><b>Join our mailing list to get the latest updates.</b></h5>
@@ -146,8 +124,6 @@ function DiyB() {
             </div>
         </div>
     )
-
-
 }
 
 export default DiyB
