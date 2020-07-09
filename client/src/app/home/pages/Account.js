@@ -7,11 +7,11 @@ import md5 from 'js-md5';
 import LoadingDots from '../../shared/components/LoadingDots';
 
 /*
-* Need to figure out how to turn picture into a binary data to store via gql.
+--https://www.reddit.com/r/mongodb/comments/6t4wfn/is_storing_images_in_a_mongodb_database_really/
+--Cloudinary or s3 from Amazon?  Research options and discuss with David
+
 ? Or use cloudinary? or some other third-party service to convert to link free service to store images.  
- Need to make a related db with user-related image
-! Set-up library to generate a gravitar?  Auto generate
- https://stackoverflow.com/questions/4796914/store-images-in-a-mongodb-database#:~:text=MongoDB%20BSON%20documents%20are%20capped,are%20all%20treated%20the%20same.
+* Need to figure out how to turn picture into a binary data to store via gql.
 ? use GridFS for images?  https://docs.mongodb.com/manual/core/gridfs/#when-to-use-gridfs
 
 mutation register($UInput: UserInput!){
@@ -64,7 +64,7 @@ const queryUser = gql`
 //##################################################################################
 //********************************************************************************** */
 
-// Or default populate user page info from local storage, until query returns with more detailed results.  
+// Or default populate user page info from local storage, until query returns with more detailed results.
 
 //********************************************************************************** */
 //##################################################################################
@@ -76,11 +76,11 @@ const queryUser = gql`
 function Account(){
   const userContextID = useContext(AuthContext).user._id;
   const userContextEmail = useContext(AuthContext).user.email.toLowerCase();
-  // const md5Email = md5(userContextEmail);
-  const md5Email = md5('gceipper@gmail.com');
+  const md5Email = md5(userContextEmail);
+  // const md5Email = md5('gceipper@gmail.com');
 
   const gravatarURL = `https://www.gravatar.com/avatar/`;
-
+//Need to add conditional logic to only use if status === 200
   useEffect( ()=>{
     fetch(`${gravatarURL}${md5Email}?s=400&d=404`)
       // .then(response=> response.json())

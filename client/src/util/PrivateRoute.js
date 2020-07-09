@@ -5,7 +5,7 @@ import Footer from '../app/core/Footer';
 import { AuthContext } from '../context/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const component = (props) => (
     <Fragment>
@@ -15,7 +15,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     </Fragment>
   );
 
-  return <Route {...rest} render={(props)=> (!user ? <Redirect to='/login' /> : component(props) )} />;
+  return (
+  <Route 
+    {...rest} 
+    render={(props)=> (!user ? <Redirect to='/login' /> : component(props) )} />);
 };
 
 export default PrivateRoute;
