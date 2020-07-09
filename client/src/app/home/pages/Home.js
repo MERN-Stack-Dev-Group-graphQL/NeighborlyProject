@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './LandingPage/src/App.css';
 import brandLogo from '../../../assets/img/brand/brand-logo.svg';
-import background from './LandingPage/src/miterSaw.jpg';
+import background from './LandingPage/src/images/miterSaw.jpg';
 import Featured from './LandingPage/src/Featured.js';
 import DiyA from './LandingPage/src/DiyA.js';
 import DiyB from './LandingPage/src/DiyB.js';

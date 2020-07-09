@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import printer from './3DPrinter.jpg';
-import camera from './camera.jpg';
-import coffee2 from './coffee2.jpg';
-import grinder from './grinder.jpg';
-import microphone from './microphone.jpg';
-// import mochaPot from './mochaPot.jpg';
+import printer from './images/3DPrinter.jpg';
+import camera from './images/camera.jpg';
+import coffee2 from './images/coffee2.jpg';
+import grinder from './images/grinder.jpg';
+import microphone from './images/microphone.jpg';
+// import mochaPot from './images/mochaPot.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faStar, faWeight } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';

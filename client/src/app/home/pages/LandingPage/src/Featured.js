@@ -1,8 +1,8 @@
 import React from 'react';
 import { Slide } from 'react-slideshow-image';
-import canoe from './canoe.jpg';
-import ARGlasses from './AR1.jpg';
-import carpetcleaner from './carpetcleaner.jpg';
+import canoe from './images/canoe.jpg';
+import ARGlasses from './images/AR1.jpg';
+import carpetcleaner from './images/carpetcleaner.jpg';
 
 const slideImages = [
 ];

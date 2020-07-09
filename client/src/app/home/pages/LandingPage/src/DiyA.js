@@ -1,13 +1,13 @@
 import React from 'react';
-import bench from './bench.jpg';
-import bench1 from './bench1.jpg';
-import bench2 from './bench2.jpg';
-import bench3 from './bench3.jpg';
-import bench4 from './bench4.jpg';
-import drill from './drill.jpg';
-import glasses from './glasses.jpg';
-import carpenterSquare from './carpentersSquare.jpg';
-import carpenter from './carpenter.jpg';
+import bench from './images/bench.jpg';
+import bench1 from './images/bench1.jpg';
+import bench2 from './images/bench2.jpg';
+import bench3 from './images/bench3.jpg';
+import bench4 from './images/bench4.jpg';
+import drill from './images/drill.jpg';
+import glasses from './images/glasses.jpg';
+import carpenterSquare from './images/carpentersSquare.jpg';
+import carpenter from './images/carpenter.jpg';
 
 function DiyA() {
     return (
