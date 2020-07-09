@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { AuthContext } from '../../../context/auth';
@@ -100,7 +100,7 @@ function Account(){
     if(data){
         userData = (
           <>
-            <img src={`https://www.gravatar.com/avatar/${md5Email}?d=404`} />
+            <img src={`https://www.gravatar.com/avatar/${md5Email}?d=404`} alt={`${data.user.firstName} ${data.user.lastName} avatar`} />
             <p>First Name: {data.user.firstName}</p>
             <p>Last Name: {data.user.lastName}</p>
             <p>User Name: {data.user.username}</p>
