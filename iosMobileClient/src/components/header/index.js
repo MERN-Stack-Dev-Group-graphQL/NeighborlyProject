@@ -37,7 +37,7 @@ const Header = ({title, navigation}) => {
           <MaterialCommunityIcons
             name="search-web"
             color={'rgba(0,0,0,0.25)'}
-            size={24}
+            size={30}
           />
         </View>
         <FormControlTextInput
@@ -115,7 +115,7 @@ const SearchFormWrapper = styled.View`
 const FormControlTextInput = styled.TextInput`
   width: 100%;
   height: 50px;
-  padding: 10px 25px 10px 40px;
+  padding: 10px 25px 10px 48px;
   border-radius: 25px;
   background-color: rgba(255, 255, 255, 1);
   margin: 16px;

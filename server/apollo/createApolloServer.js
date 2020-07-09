@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import { toolLoader } from '../loaders/toolLoader';
+import { userLoader } from '../loaders/userLoader';
 
 import typeDefs from '../schema/types';
 import resolvers from '../schema/resolvers';
@@ -33,6 +34,7 @@ export default () => {
           secret: process.env.JWT_SECRET,
           request: req,
           toolLoader: toolLoader(),
+          userLoader: userLoader(),
         };
       }
     },

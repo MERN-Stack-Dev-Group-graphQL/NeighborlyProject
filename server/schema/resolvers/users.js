@@ -37,7 +37,7 @@ const usersResolver = {
         .find()
         .toArray()
         .then((data) => {
-          console.log(data, 'users test data returned');
+          // console.log(data, 'users test data returned');
           return data;
         });
 
@@ -50,7 +50,7 @@ const usersResolver = {
         .collection('users')
         .findOne({ _id: ObjectID(args._id) })
         .then((data) => {
-          console.log(data, 'user test data returned');
+          // console.log(data, 'user test data returned');
           return data;
         });
       return user;
@@ -162,14 +162,14 @@ const usersResolver = {
     }),
   },
   User: {
-    messages: async (user, args, context) => {
-      return await mongoDao.pool.db(database).collection('messsges').find({
-        userId: user._id,
-      });
-    },
-    neighbors: async (user, args, { userLoader }) => {
-      return userLoader.loadMany(user.neighbors);
-    },
+    // messages: async (user, args, context) => {
+    //   return await mongoDao.pool.db(database).collection('messsges').find({
+    //     userId: user._id,
+    //   });
+    // },
+    // neighbors: async (user, args, { userLoader }) => {
+    //   return userLoader.loadMany(user.neighbors);
+    // },
   },
 };
 

@@ -1,20 +1,51 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import * as routes from '../../../constants/routes';
-// Icons
-import { FiSearch } from 'react-icons/fi';
-// Navigation
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import { SEARCH_TOOLS_QUERY } from '../../../util/graphql';
+import { useForm } from '../../../util/hooks';
+import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { MdShoppingCart } from 'react-icons/md';
+// import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import MenuBar from './MenuBar';
 
 function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick, menuHandler, overlayHandler }) {
+  // const {
+  //   ready,
+  //   value,
+  //   suggestions: { status, data },
+  //   setValue,
+  //   clearSuggestions,
+  // } = usePlacesAutoComplete({
+  //   requestOptions: {
+  //     location: { lat: () => 40.11045312448596, lng: () => -75.3861729415272 },
+  //     radius: 200 * 1000,
+  //   },
+  // });
+
+  const findTools = () => {
+    console.log('find tools ran', values.search ? values.search : 'nothing to see here');
+  };
+  const initialState = { search: '' };
+  const { handleChange, handleSubmit, values } = useForm(findTools, initialState);
+  const { data } = useQuery(SEARCH_TOOLS_QUERY, {
+    variables: { search: values.search },
+  });
+
+  if (data) {
+    var tools = data;
+  }
+
   const primaryMenuItems = [
     {
       name: 'Tools',
-      link: '/',
+      link: '/tools',
       Icon: '',
     },
     {
@@ -31,8 +62,8 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
 
   const secondaryMenuItems = [
     {
-      name: 'Account',
-      link: '/account',
+      name: 'Dashboard',
+      link: '/login',
       Icon: '',
     },
     {
@@ -52,85 +83,142 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
     },
     {
       name: 'Contact Us',
-      link: '/contact-us',
+      link: '/contact',
       Icon: '',
     },
   ];
 
   return (
-    <NavigationWrapper>
-      <Navbar bg='primary' variant='primary' className='nav-container'>
-        <Navbar.Brand href='/'>
-          <img src={brandLogo} className='brand-logo' alt='Neighborly' />
-        </Navbar.Brand>
-        <Form inline className='p-2 flex-grow-1 nav-search-wrapper'>
-          <FormControl
-            type='text'
-            name='search'
-            autoComplete='off'
-            placeholder='Find a tool...'
-            className='mr-sm-2 nav-search-input'
-            required
-          />
-          <Button type='submit' variant='info' className='nav-search-btn'>
-            <FiSearch />
-          </Button>
-        </Form>
-        <Nav className='ml-auto nav-menubar-wrapper'>
-          <Nav.Link
-            href={routes.LOGIN}
-            active={activeItem === 'login'}
-            onClick={handleItemClick}
-            className='btn btn-outline-light btn-login mr-2'
-          >
-            Login
-          </Nav.Link>
-          <Nav.Link
-            href={routes.REGISTER}
-            active={activeItem === 'register'}
-            onClick={handleItemClick}
-            className='btn btn-outline-light btn-register mr-4'
-          >
-            Register
-          </Nav.Link>
-          <div className='hamburger-wrapper' onClick={menuHandler}>
-            <button className={`hamburger hamburger--criss-cross ${isMenuOpen ? 'active' : ''}`} type='button' aria-label='Menu'>
-              <div className='inner'>
-                <span className='bar'></span>
-                <span className='bar'></span>
-                <span className='bar'></span>
-              </div>
-            </button>
-          </div>
-        </Nav>
-      </Navbar>
+    <Fragment>
+      <NavigationWrapper>
+        <Navbar bg='primary' variant='primary' className='nav-container'>
+          <Navbar.Brand href='/'>
+            <img src={brandLogo} className='brand-logo' alt='Neighborly' />
+          </Navbar.Brand>
+          <Form inline onSubmit={handleSubmit} className='p-2 flex-grow-1 nav-search-wrapper'>
+            <FormControl
+              type='text'
+              name='search'
+              autoComplete='off'
+              onChange={handleChange}
+              value={values.search}
+              placeholder='Find a tool...'
+              className='mr-sm-2 nav-search-input'
+              id='search-input'
+              required
+            />
+            <Button type='submit' variant='info' className='nav-search-btn'>
+              <FiSearch />
+            </Button>
+          </Form>
+          <Nav className='ml-auto nav-menubar-wrapper'>
+            <Nav.Link
+              href={routes.LOGIN}
+              active={activeItem === 'login'}
+              onClick={handleItemClick}
+              className='btn btn-outline-light btn-login mr-2'
+            >
+              Login
+            </Nav.Link>
+            <Nav.Link
+              href={routes.REGISTER}
+              active={activeItem === 'register'}
+              onClick={handleItemClick}
+              className='btn btn-outline-light btn-register mr-4'
+            >
+              Register
+            </Nav.Link>
+            <Nav.Link className='nav-cart-icon'>
+              <span className='cart-pill'>3</span>
+              <MdShoppingCart size={24} className='cart-icon' />
+            </Nav.Link>
+            <div className='hamburger-wrapper' onClick={menuHandler}>
+              <button className={`hamburger hamburger--criss-cross ${isMenuOpen ? 'active' : ''}`} type='button' aria-label='Menu'>
+                <div className='inner'>
+                  <span className='bar'></span>
+                  <span className='bar'></span>
+                  <span className='bar'></span>
+                </div>
+              </button>
+            </div>
+          </Nav>
+        </Navbar>
 
-      <div className={isMenuOpen ? 'mobile-nav mobile-nav-show' : 'mobile-nav'}>
-        <div className={isMenuOpen ? 'overlay d-block' : 'overlay'} onClick={overlayHandler}></div>
-        <div className='menu-list'>
-          <ul id='menu-primary-navigation' className='menu-primary-navigation-container'>
-            {primaryMenuItems.map((item, index) => (
-              <li className='menu-item' key={index}>
-                <Nav.Link href={item.link}>{item.name}</Nav.Link>
-              </li>
-            ))}
-          </ul>
-          <ul id='menu-secondary-navigation'>
-            {secondaryMenuItems.map((item, index) => (
-              <li key={index}>
-                <Nav.Link href={item.link}>{item.name}</Nav.Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </NavigationWrapper>
+        <MenuBar
+          primaryMenuItems={primaryMenuItems}
+          secondaryMenuItems={secondaryMenuItems}
+          isMenuOpen={isMenuOpen}
+          overlayHandler={overlayHandler}
+        />
+      </NavigationWrapper>
+      {tools ? (
+        <AutoCompleteWrapper>
+          <div className='container'>
+            <div className='row'>
+              <ul className='search-results-dropdown'>
+                {tools &&
+                  tools.searchTools.map((tool, index) => (
+                    <li className='form-option' key={index}>
+                      <Link className='btn-search-link' to={`/tool-detail/${tool._id}`}>
+                        <span>{tool.make}:</span> {tool.title}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </AutoCompleteWrapper>
+      ) : (
+        ''
+      )}
+    </Fragment>
   );
 }
 
 export default GuestNavigationBar;
 
+const AutoCompleteWrapper = styled.div`
+  position: relative;
+
+  .search-results-dropdown {
+    position: absolute;
+    width: 100%;
+    max-width: 920px;
+    text-align: left;
+    margin-top: -20px;
+    background: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    list-style: none;
+    z-index: 999;
+
+    li {
+      padding: 6px 1rem;
+
+      .btn-search-link {
+        display: block;
+        text-decoration: none;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      &:hover {
+        background: #f2f2f2;
+        cursor: pointer;
+      }
+    }
+  }
+`;
+
 const NavigationWrapper = styled.div`
+  .nav-search-wrapper {
+    position: relative;
+  }
+
   .welcome-user {
     display: flex;
     flex-direction: row;
@@ -163,14 +251,19 @@ const NavigationWrapper = styled.div`
       height: 50px;
       width: 80%;
       padding: 0.375rem 1.75rem;
+      border-radius: 25px 0 0 25px;
       border: none;
     }
 
     .nav-search-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 50px;
       line-height: 50px;
       min-width: 50px;
-      padding: 0;
+      padding: 0 5px 0 0;
+      border-radius: 0 25px 25px 0;
     }
 
     a {
@@ -187,9 +280,34 @@ const NavigationWrapper = styled.div`
     .btn-register {
       font-size: 14px;
       font-size: var(--app-font-size-3);
+      background: #dcdfe3;
+      color: #1d2329;
 
       &:hover {
-        color: var(--color-dark);
+        background: #ffffff;
+        color: #1d2329;
+      }
+    }
+
+    .nav-cart-icon {
+      position: relative;
+
+      .cart-pill {
+        position: absolute;
+        display: block;
+        background-color: var(--color-primary);
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #fff;
+        padding: 0px 6px;
+        top: 0;
+        right: 0;
+        border-radius: 10px;
+      }
+
+      .cart-icon {
+        margin-bottom: 3px;
       }
     }
 

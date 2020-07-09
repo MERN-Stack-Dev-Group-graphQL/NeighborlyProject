@@ -13,19 +13,19 @@ const usersSchema = gql`
     locationId: Int
     locationDetails: String
     role: UserRole
-    tools: [Tool!]!
-    neighbors: [Neighborhood!]!
-    messages: [Message!]!
     postedTools: [Tool!]!
+    # neighbors: [Neighborhood!]!
+    # messages: [Message!]!
+    # comments: [Comment!]
     token: String
     createdAt: Date
     updatedAt: Date
   }
 
-  type Neighborhood {
-    neighbors: User!
-    howLong: Int!
-  }
+  # type Neighborhood {
+  #   neighbors: User!
+  #   howLong: Int!
+  # }
 
   enum UserRole {
     ADMIN

@@ -41,6 +41,8 @@ h1,
 
 h3,
 .h3 {
+  font-weight: var(--app-font-weight-600);
+
   @media (min-width: 375px) {
     font-size: var(--app-font-size-8);
   }
@@ -55,14 +57,9 @@ a {
 }
 
 p {
-  font-size: 18px;
-  font-size: var(--app-font-size-5);
-  font-weight: var(--app-font-weight-300);
-  line-height: 1.5;
+  font-size: 16px;
+  font-size: var(--app-font-size-4);
+  line-height: 1.6;
   color: var(--color-black);
-  font-weight: 300;
-  // -webkit-font-smoothing: antialiased;
-  font-size: 18px;
-  font-size: 1.2rem;
-  line-height: 1.66667;
+  -webkit-font-smoothing: antialiased;
 }

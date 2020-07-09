@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { MongoClient } from 'mongodb';
+import { Logger, MongoClient } from 'mongodb';
 import exitHook from 'exit-hook';
 import createLoader from '../dataloader';
 import { groupByKeys } from '../batchfns';
@@ -20,6 +20,13 @@ const init = async (secret) => {
     poolSize: 10,
     appname: 'mongodao',
   });
+
+  // let logCount = 0;
+  // Logger.setCurrentLogger((msg, state) => {
+  //   console.log(`MONGO DB REQUEST ${++logCount}: ${msg}`);
+  // });
+  // Logger.setLevel('debug');
+  // Logger.filter('class', ['Cursor']);
 
   exitHook(() => {
     pool && pool.close(true);
@@ -57,7 +64,7 @@ const getOneDoc = (database, collection, field, args) => {
     .collection(collection)
     .findOne({ [field]: args })
     .then((data) => {
-      console.log(data, 'test data return');
+      // console.log(data, 'test data return');
       return data;
     });
 };
