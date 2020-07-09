@@ -36,6 +36,34 @@ img.App-logo {
   margin-bottom: 65px;
 }
 
+/* .App-landing input, .DiyB-mailing-list input {
+} */
+
+.App-search-results {
+  width: 500px;
+  border-radius: 2rem;
+  border-width: thin;
+  text-align: left;
+  padding-left: 30px;
+  font-size: 20px;
+  padding-top: 15px;
+  border-color: #96cb44;
+  border-style: solid;
+  color: black;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 6px 0 rgba(32,33,36,0.28);
+  padding-bottom: 4px;
+  overflow: hidden;
+  
+}
+
 /* ============================================== B U T T O N S ====================================================== */
 
 .App button, .DiyA button, .DiyB button {
@@ -241,6 +269,7 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   border-radius: 5rem;
   /* background-color: #318fe6; */
   background-color: #96cb44;
+  box-shadow: black 0.4px 0.4px, black 0.4px 0.4px;
 }
 
 .DiyB-imagesC button {
@@ -263,6 +292,10 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   width: inherit;
   margin-top: 100px;
   margin-left: 317px;
+}
+
+.DiyA-headline h2 {
+  text-shadow: black 0.4px 0.4px, black 0.4px 0.4px;
 }
 
 .DiyB-imagesA {
@@ -330,12 +363,18 @@ img.App-canoe, img.App-AR1, img.App-carpetcleaner, img.App-mochaPot, .DiyB-image
   margin-bottom: 10px;
 }
 
+.DiyB-imagesC button {
+  color: white;
+  text-shadow: 0.4px 0.4px black, 0.4px 0.4px black;
+}
+
 .DiyB-imagesC-1, .DiyB-imagesC-2 {
   display: flex;
   flex-direction: column;
   margin-top: 60%;
   padding-left: 6%;
   align-items: center;
+  color: white;
 }
 
 .DiyB-imagesC-1 h5, .DiyB-imagesC-2 h5 {
