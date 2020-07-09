@@ -1,9 +1,10 @@
-import React, {useReducer, createContext} from 'react';
+import React, {useReducer, useState, createContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwtDecode from 'jwt-decode';
 
 const initialState = {
   user: null,
+  isLoading: true,
 };
 
 if (AsyncStorage.getItem('x-token')) {
@@ -20,6 +21,9 @@ const AuthContext = createContext({
   user: null,
   login: userData => {},
   logout: () => {},
+  toggleTheme: () => {
+    setIsDarkTheme(isDarkTheme => !isDarkTheme);
+  },
 });
 
 function authReducer(state, action) {
@@ -28,19 +32,38 @@ function authReducer(state, action) {
       return {
         ...state,
         user: action.payload,
+        isLoading: false,
       };
     case 'LOGOUT':
       return {
         ...state,
         user: null,
+        isLoading: false,
       };
     default:
       return state;
   }
 }
 
+const CustomDefaultTheme = {
+  colors: {
+    background: '#ffffff',
+    text: '#333333',
+  },
+};
+
+const CustomDarkTheme = {
+  colors: {
+    background: '#333333',
+    text: '#ffffff',
+  },
+};
+
 function AuthProvider(props) {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   function login(userData) {
     AsyncStorage.setItem('x-token', userData.token);

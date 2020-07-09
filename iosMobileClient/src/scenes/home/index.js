@@ -19,7 +19,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import TabViewMenuBar from '_components/tabviewmenubar';
 import HomeScrollView from '_scenes/home/cardview';
 import ListView from '_scenes/home/listview';
-import MapView from '_scenes/home/mapview';
+import HomeMapView from '_scenes/home/mapview';
 import styled from 'styled-components';
 
 const Home = ({navigation}) => {
@@ -45,6 +45,8 @@ const Home = ({navigation}) => {
     }
   };
 
+  console.log('Cart count', cartCount);
+
   const handleCardView = () => {
     setKey('cardview');
   };
@@ -68,31 +70,56 @@ const Home = ({navigation}) => {
         <View style={styles.tabContainer}>
           <TouchableOpacity activeKey={key} onPress={handleCardView}>
             <TabViewMenu>
-              <MaterialCommunityIcons
-                name="cards-variant"
-                color={'rgba(0,0,0,0.25)'}
-                size={24}
-              />
+              {key === 'cardview' ? (
+                <MaterialCommunityIcons
+                  name="cards-variant"
+                  color={'rgba(0,0,0,1)'}
+                  size={24}
+                />
+              ) : (
+                <MaterialCommunityIcons
+                  name="cards-variant"
+                  color={'rgba(0,0,0,0.25)'}
+                  size={24}
+                />
+              )}
               <Text>Card View</Text>
             </TabViewMenu>
           </TouchableOpacity>
           <TouchableOpacity activeKey={key} onPress={handleListView}>
             <TabViewMenu>
-              <MaterialCommunityIcons
-                name="format-list-bulleted-square"
-                color={'rgba(0,0,0,0.25)'}
-                size={24}
-              />
+              {key === 'listview' ? (
+                <MaterialCommunityIcons
+                  name="format-list-bulleted-square"
+                  color={'rgba(0,0,0,1)'}
+                  size={24}
+                />
+              ) : (
+                <MaterialCommunityIcons
+                  name="format-list-bulleted-square"
+                  color={'rgba(0,0,0,0.25)'}
+                  size={24}
+                />
+              )}
               <Text>List View</Text>
             </TabViewMenu>
           </TouchableOpacity>
           <TouchableOpacity activeKey={key} onPress={handleMapView}>
             <TabViewMenu>
-              <MaterialCommunityIcons
-                name="map-marker-outline"
-                color={'rgba(0,0,0,0.25)'}
-                size={24}
-              />
+              {key === 'mapview' ? (
+                <MaterialCommunityIcons
+                  name="map-marker-outline"
+                  color={'rgba(0,0,0,1)'}
+                  size={24}
+                />
+              ) : (
+                <MaterialCommunityIcons
+                  name="map-marker-outline"
+                  color={'rgba(0,0,0,0.25)'}
+                  size={24}
+                />
+              )}
+
               <Text>Map View</Text>
             </TabViewMenu>
           </TouchableOpacity>
@@ -118,7 +145,7 @@ const Home = ({navigation}) => {
         )}
 
         {key === 'mapview' && (
-          <MapView
+          <HomeMapView
             navigation={navigation}
             loading={loading}
             data={data}
@@ -155,6 +182,8 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     marginTop: 10,
+    borderBottomWidth: 4,
+    borderBottomColor: '#e6e6e6',
   },
   cartCount: {
     color: '#ffffff',

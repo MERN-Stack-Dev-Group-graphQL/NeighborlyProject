@@ -9,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from '_navigations';
 // Components
 import Loader from '_core/loader';
+// import {AuthProvider} from '_utils/context/auth';
 
 const App = () => {
   const [client, setClient] = useState(null);
