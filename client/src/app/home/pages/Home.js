@@ -64,9 +64,9 @@ function Home() {
                 value={searchTerm}
                 onChange={handleChange}
                 />
+            <div className ="App-search-results">
               <Test data={data}/>
-            {/* <div className ="App-search-results">
-            </div> */}
+            </div>
             </div>
 
             <div className="App-search-buttons">
