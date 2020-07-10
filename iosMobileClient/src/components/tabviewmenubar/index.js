@@ -36,6 +36,7 @@ const TabViewMenuBar = () => {
 
 const styles = StyleSheet.create({
   tabContainer: {
+    position: 'relative',
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     marginTop: 10,
+    zIndex: 1,
   },
 });
 

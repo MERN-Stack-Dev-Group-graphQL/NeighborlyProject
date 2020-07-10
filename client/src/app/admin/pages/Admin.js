@@ -1,9 +1,5 @@
 import React, { Fragment } from 'react';
 import { useRouteMatch, Route } from 'react-router-dom';
-
-import * as routes from '../../../constants/routes';
-// import PrivateRoute from '../../../util/PrivateRoute';
-import styled from 'styled-components';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import Dashboard from './Dashboard';
@@ -15,6 +11,8 @@ import Pickups from './Pickups';
 import Payouts from './Payouts';
 import Settings from './Settings';
 import Profile from './Profile';
+import styled from 'styled-components';
+import * as routes from '../../../constants/routes';
 
 function Admin() {
   const match = useRouteMatch();

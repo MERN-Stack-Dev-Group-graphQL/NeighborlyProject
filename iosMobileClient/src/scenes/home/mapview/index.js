@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import {StyleSheet, View, Text, Image, Platform, Alert} from 'react-native';
 import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 const HomeMapView = props => {
   const theme = useTheme();
+  const _map = useRef(null);
   const tools = props.data.getTools.edges;
 
   const ImageBlock = path => {
@@ -34,6 +35,7 @@ const HomeMapView = props => {
   return (
     <View style={styles.container}>
       <MapView
+        ref={_map}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         customMapStyle={theme.dark ? mapDarkStyle : mapStandardStyle}

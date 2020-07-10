@@ -124,6 +124,7 @@ export const SEARCH_TOOLS_QUERY = gql`
       electricalRatings
       category
       userId
+      url
     }
   }
 `;

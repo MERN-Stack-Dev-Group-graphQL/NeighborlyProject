@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { Logger, MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import exitHook from 'exit-hook';
 import createLoader from '../dataloader';
 import { groupByKeys } from '../batchfns';
@@ -10,7 +10,6 @@ const { ObjectID } = require('mongodb');
 let pool;
 
 const init = async (secret) => {
-  console.log('ran init and return pool');
   if (pool) return pool;
   const uri = process.env.MONGODB_URI;
 
@@ -21,18 +20,10 @@ const init = async (secret) => {
     appname: 'mongodao',
   });
 
-  // let logCount = 0;
-  // Logger.setCurrentLogger((msg, state) => {
-  //   console.log(`MONGO DB REQUEST ${++logCount}: ${msg}`);
-  // });
-  // Logger.setLevel('debug');
-  // Logger.filter('class', ['Cursor']);
-
   exitHook(() => {
     pool && pool.close(true);
   });
 
-  console.log('🚀 Connected to MongoDB Successfully');
   return pool;
 };
 
@@ -64,7 +55,6 @@ const getOneDoc = (database, collection, field, args) => {
     .collection(collection)
     .findOne({ [field]: args })
     .then((data) => {
-      // console.log(data, 'test data return');
       return data;
     });
 };

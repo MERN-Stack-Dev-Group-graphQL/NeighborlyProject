@@ -1,13 +1,40 @@
 import React, {useState} from 'react';
 import {useQuery} from '@apollo/react-hooks';
-import {Text, TextInput, View} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {SEARCH_TOOLS_QUERY} from '_utils/graphql';
+import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Feather from 'react-native-vector-icons/dist/Feather';
 import styled from 'styled-components';
 
 const Header = ({title, navigation}) => {
   const [search, setSearch] = useState('');
+
+  const ImageBlock = path => {
+    if (path.url.length > 1) {
+      return (
+        <CardImage
+          source={{
+            uri: `${LOCAL_HOST_SERVER}${path.url}`,
+          }}
+        />
+      );
+    }
+    return (
+      <CardImage
+        source={{
+          uri: `${LOCAL_HOST_SERVER}/assets/img/default.jpg`,
+        }}
+      />
+    );
+  };
 
   const {data} = useQuery(SEARCH_TOOLS_QUERY, {
     variables: {search: search},
@@ -19,16 +46,6 @@ const Header = ({title, navigation}) => {
 
   const starCount = 4;
   const rateCount = 252;
-
-  const handleOnPress = tool => {
-    navigation.push('Tool Details', {
-      itemId: tool._id,
-      tool: tool,
-      starCount,
-      rateCount,
-      otherParam: 'anything you want here',
-    });
-  };
 
   return (
     <SearchContainer>
@@ -48,37 +65,66 @@ const Header = ({title, navigation}) => {
         />
       </SearchFormWrapper>
 
-      {tools ? (
-        <AutoCompleteWrapper>
+      {tools && search !== '' && (
+        <ScrollView style={styles.searchWrapper}>
           <AutoComplete>
             {tools &&
               tools.searchTools.map((tool, index) => (
-                <View key={index}>
-                  <SearchResultsTap>
-                    <ResultsText>
-                      <Text>{tool.make}:</Text> <Text>{tool.title}</Text>
-                    </ResultsText>
+                <TouchableOpacity key={index}>
+                  <SearchResultsTap
+                    onPress={() => {
+                      navigation.push('Tool Details', {
+                        itemId: tool._id,
+                        tool: tool,
+                        starCount,
+                        rateCount,
+                        otherParam: 'anything you want here',
+                      });
+                    }}>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                      <ImageBlock url={tool.url} />
+                      <ResultsText>
+                        <Text>{tool.make}:</Text> <Text>{tool.title}</Text>
+                      </ResultsText>
+                    </View>
                   </SearchResultsTap>
-                </View>
+                </TouchableOpacity>
               ))}
           </AutoComplete>
-        </AutoCompleteWrapper>
-      ) : (
-        <Text />
+        </ScrollView>
       )}
     </SearchContainer>
   );
 };
 
-const AutoCompleteWrapper = styled.View`
-  position: relative;
-  z-index: 999;
-`;
+const styles = StyleSheet.create({
+  searchWrapper: {
+    position: 'absolute',
+    marginHorizontal: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 6,
+    borderColor: '#f6f6f6',
+    borderWidth: 0.5,
+    width: '100%',
+    top: Platform === 'ios' ? 80 : 65,
+    zIndex: 3,
+  },
+});
+
+Header.defaultProps = {
+  title: 'Neighborly',
+};
 
 const AutoComplete = styled.View`
   position: relative;
   border-radius: 5px;
-  background: #ffffff;
+`;
+
+const CardImage = styled.Image`
+  height: 50px;
+  width: 50px;
 `;
 
 const SearchResultsTap = styled.TouchableOpacity`
@@ -91,16 +137,15 @@ const SearchResultsTap = styled.TouchableOpacity`
 const ResultsText = styled.Text`
   font-size: 16px;
   letter-spacing: 1px;
+  padding-left: 10px;
 `;
 
-Header.defaultProps = {
-  title: 'Neighborly',
-};
-
 const SearchContainer = styled.View`
+  position: relative;
   padding-left: 16px;
   padding-right: 16px;
   background-color: rgba(16, 43, 70, 1);
+  z-index: 2;
 `;
 
 const SearchFormWrapper = styled.View`

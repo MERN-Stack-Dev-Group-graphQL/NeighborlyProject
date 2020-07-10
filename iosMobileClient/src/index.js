@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Provider as PaperProvider} from 'react-native-paper';
-// import 'react-native-gesture-handler';
 import makeApolloClient from './apollo';
 import {ApolloProvider} from 'react-apollo';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

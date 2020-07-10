@@ -1,21 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../context/auth';
-
 import Navbar from 'react-bootstrap/Navbar';
 import styled from 'styled-components';
 import brandLogo from '../../../assets/img/brand/brand-logo.svg';
-import { AiOutlineSetting } from 'react-icons/ai';
-import { BsTools } from 'react-icons/bs';
-import { FiPieChart } from 'react-icons/fi';
-import { FaRegUserCircle } from 'react-icons/fa';
-import { RiDashboardLine } from 'react-icons/ri';
-import { RiCommunityLine } from 'react-icons/ri';
-import { RiRoadMapLine } from 'react-icons/ri';
-import { RiMapPin2Line } from 'react-icons/ri';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import { RiCurrencyLine } from 'react-icons/ri';
-
 import { useHistory } from 'react-router-dom';
+import { menuOptions } from '../../../constants/menus';
 
 function AdminSidebar() {
   const history = useHistory();
@@ -27,62 +17,12 @@ function AdminSidebar() {
         <img src={brandLogo} className='brand-logo' alt='Neighborly' />
       </Navbar.Brand>
       <SidebarMenu>
-        <SidebarMenuItem onClick={() => history.push('/admin/dashboard')}>
-          <Icon>
-            <RiDashboardLine size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Dashboard</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/tools')}>
-          <Icon>
-            <BsTools size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Tools</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/account')}>
-          <Icon>
-            <FiPieChart size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Account</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/neighbors')}>
-          <Icon>
-            <RiCommunityLine size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Neighbors</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/deliveries')}>
-          <Icon>
-            <RiMapPin2Line size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Deliveries</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/pickups')}>
-          <Icon>
-            <RiRoadMapLine size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Pickups</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-      </SidebarMenu>
-      <SidebarMenu>
-        <SidebarMenuItem onClick={() => history.push('/admin/payouts')}>
-          <Icon>
-            <RiCurrencyLine size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Payouts</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/settings')}>
-          <Icon>
-            <AiOutlineSetting size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Settings</SidebarMenuItemLabel>
-        </SidebarMenuItem>
-        <SidebarMenuItem onClick={() => history.push('/admin/profile')}>
-          <Icon>
-            <FaRegUserCircle size='20' />
-          </Icon>
-          <SidebarMenuItemLabel>Profile</SidebarMenuItemLabel>
-        </SidebarMenuItem>
+        {menuOptions.map((item) => (
+          <SidebarMenuItem onClick={() => history.push(item.path)}>
+            <Icon>{item.icon}</Icon>
+            <SidebarMenuItemLabel>{item.label}</SidebarMenuItemLabel>
+          </SidebarMenuItem>
+        ))}
       </SidebarMenu>
       <MenuSignOut onClick={logout} className='admin-signout-btn'>
         <Icon>

@@ -89,6 +89,12 @@ const toolsResolver = {
             dimensions: 1,
             weight: 1,
             description: 1,
+            location: 1,
+            category: 1,
+            userId: 1,
+            url: 1,
+            photo: 1,
+            createdAt: 1,
             score: {
               $meta: 'searchScore',
             },

@@ -72,6 +72,9 @@ const toolsSchema = gql`
     weight: String
     description: String!
     electricalRatings: String
+    price: Float
+    unit: String
+    quantity: Int
     category: ToolCategory
     location: Location
     url: String

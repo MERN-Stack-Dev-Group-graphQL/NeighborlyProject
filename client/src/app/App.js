@@ -1,19 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { AuthProvider } from '../context/auth';
-
 import PageContainer from './shared/components/PageContainer';
-// Routes
 import AuthRoute from '../util/AuthRoute';
 import PublicRoute from '../util/PublicRoute';
 import PrivateRoute from '../util/PrivateRoute';
-import * as routes from '../constants/routes';
-// Auth
 import Login from './home/pages/Login';
 import Register from './home/pages/Register';
-// Admin
 import Admin from './admin/pages/Admin';
-// Home
 import Home from './home/pages/Home';
 import Tools from './home/pages/tools/Tools';
 import ToolDetailPage from './home/pages/tools/ToolDetailPage';
@@ -24,6 +18,7 @@ import TermsAndConditions from './home/pages/TermsAndConditions';
 import Contact from './home/pages/Contact';
 import SearchResults from './shared/components/SearchResults';
 import PageNotFound from './shared/components/PageNotFound';
+import * as routes from '../constants/routes';
 
 const App = () => (
   <AuthProvider>
@@ -50,10 +45,3 @@ const App = () => (
 );
 
 export default App;
-
-// const Admin = ({ match }) => (
-//   <div>
-//     <Route path={match.url + routes.NEIGHBORS} component={Neighbors} />
-//     <Route path={match.url + routes.DASHBOARD} component={Dashboard} />
-//   </div>
-// );
