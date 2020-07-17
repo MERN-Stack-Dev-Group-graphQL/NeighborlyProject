@@ -10,7 +10,7 @@ import LoadingDots from '../../shared/components/LoadingDots';
 --https://www.reddit.com/r/mongodb/comments/6t4wfn/is_storing_images_in_a_mongodb_database_really/
 --Cloudinary or s3 from Amazon?  Research options and discuss with David
 
-? Or use cloudinary? or some other third-party service to convert to link free service to store images.  
+? Or use cloudinary? or some other third-party service to convert to link free service to store images.
 * Need to figure out how to turn picture into a binary data to store via gql.
 ? use GridFS for images?  https://docs.mongodb.com/manual/core/gridfs/#when-to-use-gridfs
 
@@ -82,9 +82,17 @@ function Account(){
   const gravatarURL = `https://www.gravatar.com/avatar/`;
 //Need to add conditional logic to only use if status === 200
   useEffect( ()=>{
-    fetch(`${gravatarURL}${md5Email}?s=400&d=404`)
-      // .then(response=> response.json())
-      .then(data=> console.log(data))  
+    const asynchronous = async function(){
+
+      const myResponse = await fetch(`${gravatarURL}${md5Email}?s=400&d=404`)
+      // .then(response=> JSON.stringify(response))
+      .then(data=> {
+        console.log(data, ` My fetched Data`)
+      })
+      return myResponse 
+    }
+    asynchronous();
+    console.log(data, `  I async fetched this!`)
   })
 
     const { loading, error, data } = useQuery(queryUser, {
@@ -93,11 +101,13 @@ function Account(){
         }
     });
     let userData;
-    console.log(loading, ` loading True?`);
+    
     if(loading){
-        userData = <LoadingDots/>
+      userData = <LoadingDots/>
     }
+    
     if(data){
+      console.log(data)
         userData = (
           <>
             <img src={`https://www.gravatar.com/avatar/${md5Email}?d=404`} alt={`${data.user.firstName} ${data.user.lastName} avatar`} />
