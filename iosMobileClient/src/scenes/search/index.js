@@ -2,7 +2,6 @@ import React from 'react';
 import {StatusBar, StyleSheet, Text, ScrollView, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import Header from '_components/header';
-import TabBar from '_components/tabbar';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,7 +23,7 @@ const Search = ({navigation}) => {
       <StatusBar barStyle="light-content" backgroundColor="#003167" />
 
       <View style={{flex: 1}}>
-        <Header />
+        <Header navigation={navigation} />
         <View style={styles.alignContent}>
           <Text>Search Page</Text>
         </View>

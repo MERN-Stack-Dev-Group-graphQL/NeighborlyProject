@@ -1,5 +1,4 @@
 import React from 'react';
-// import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
 import {
   StyleSheet,
   Text,
@@ -11,7 +10,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-// import moment from 'moment';
 import {currencyFormat} from '_utils/currencyFormat';
 import LinearGradient from 'react-native-linear-gradient';
 import StarCount from '_core/review/starcount';
@@ -23,8 +21,6 @@ const {height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   imageBlock: {
     ...StyleSheet.absoluteFillObject,
-    // width: '100%',
-    // aspectRatio: 1,
   },
   cardWrapper: {
     flex: 1,
@@ -45,8 +41,6 @@ const styles = StyleSheet.create({
   },
   toolImage: {
     ...StyleSheet.absoluteFillObject,
-    // height: '100%',
-    // width: '100%',
   },
   linearGradient: {
     flex: 1,
