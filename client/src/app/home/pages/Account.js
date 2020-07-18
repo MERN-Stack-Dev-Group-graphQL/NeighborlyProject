@@ -3,40 +3,11 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { AuthContext } from '../../../context/auth';
 import md5 from 'js-md5';
+import defaultImage from '../../../assets/img/avatars/ernie.jpg';
 
 import LoadingDots from '../../shared/components/LoadingDots';
 
-/*
---https://www.reddit.com/r/mongodb/comments/6t4wfn/is_storing_images_in_a_mongodb_database_really/
---Cloudinary or s3 from Amazon?  Research options and discuss with David
 
-? Or use cloudinary? or some other third-party service to convert to link free service to store images.
-* Need to figure out how to turn picture into a binary data to store via gql.
-? use GridFS for images?  https://docs.mongodb.com/manual/core/gridfs/#when-to-use-gridfs
-
-mutation register($UInput: UserInput!){
-  register(input: $UInput){
-    _id
-    username
-    firstName
-    lastName
-    email
-    phone
-    mobile
-  }
-}
-
-{
-  "UInput": {
-    "username": "Gabe",
-    "firstName": "Gabriel",
-    "lastName": "Codes",
-    "email": "gcodes@gmail.com",
-    "password": "gcodes1234",
-    "confirmPassword": "gcodes1234"    
-  }
-}
-*/
 const queryUser = gql`
   query user($userID: ID!){
     user(_id: $userID){
@@ -57,43 +28,24 @@ const queryUser = gql`
   }
 `
 
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-//???????????????????????????????????????????????????????????????????????????????
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-//##################################################################################
-//********************************************************************************** */
-
-// Or default populate user page info from local storage, until query returns with more detailed results.
-
-//********************************************************************************** */
-//##################################################################################
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-//???????????????????????????????????????????????????????????????????????????????
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-
-
 function Account(){
   const userContextID = useContext(AuthContext).user._id;
   const userContextEmail = useContext(AuthContext).user.email.toLowerCase();
-  const md5Email = md5(userContextEmail);
-  // const md5Email = md5('gceipper@gmail.com');
-
+  const md5Email = md5(userContextEmail); //To currently test the conditional logic here change md5Email to an email address associated with a valid wordpress.com account
   const gravatarURL = `https://www.gravatar.com/avatar/`;
-//Need to add conditional logic to only use if status === 200
+
+  const [account, setAccount] = useState({
+    avatar: defaultImage
+  });
+
   useEffect( ()=>{
     const asynchronous = async function(){
 
       const myResponse = await fetch(`${gravatarURL}${md5Email}?s=400&d=404`)
-      // .then(response=> JSON.stringify(response))
-      .then(data=> {
-        console.log(data, ` My fetched Data`)
-      })
-      return myResponse 
+      if(myResponse.status === 200) setAccount({...account, avatar: myResponse.url })
     }
     asynchronous();
-    console.log(data, `  I async fetched this!`)
-  })
+  }, [])
 
     const { loading, error, data } = useQuery(queryUser, {
         variables: {
@@ -110,7 +62,10 @@ function Account(){
       console.log(data)
         userData = (
           <>
-            <img src={`https://www.gravatar.com/avatar/${md5Email}?d=404`} alt={`${data.user.firstName} ${data.user.lastName} avatar`} />
+            <img 
+              src={ account.avatar }
+              alt={`${data.user.firstName} ${data.user.lastName} avatar`} 
+              style={{width: `${75}px`, height: `${75}px`}}/>
             <p>First Name: {data.user.firstName}</p>
             <p>Last Name: {data.user.lastName}</p>
             <p>User Name: {data.user.username}</p>
