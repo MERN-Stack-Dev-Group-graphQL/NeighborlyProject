@@ -1,22 +1,64 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
-  useTheme,
   Title,
   Avatar,
   Caption,
-  Paragraph,
   Drawer,
   Text,
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import {Image, View, StyleSheet, Alert, Button} from 'react-native';
-// Navigation
+import {AuthContext} from '_utils/context/';
 import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
+import {View, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const DrawNavigator = props => {
+const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1,
+  },
+  userInfoSection: {
+    paddingLeft: 20,
+  },
+  title: {
+    marginTop: 20,
+    fontWeight: 'bold',
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 14,
+  },
+  row: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  paragraph: {
+    fontWeight: 'bold',
+    marginRight: 3,
+  },
+  drawerSection: {
+    marginTop: 15,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
+  },
+});
+
+const DrawerContent = props => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const {user, logoutUser} = useContext(AuthContext);
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
@@ -31,8 +73,12 @@ const DrawNavigator = props => {
             }}
             size={50}
           />
-          <Title style={styles.title}>John Smith</Title>
-          <Caption style={styles.caption}>@johnsmith</Caption>
+          <Title style={styles.title}>
+            {user ? `${user.firstName} ${user.lastName}` : 'John Doe'}
+          </Title>
+          <Caption style={styles.caption}>
+            {user ? `@${user.username}` : '@johndoe'}
+          </Caption>
         </View>
         <Drawer.Section style={styles.drawerSection}>
           <DrawerItem
@@ -131,53 +177,13 @@ const DrawNavigator = props => {
             <MaterialCommunityIcons name="logout" color={color} size={size} />
           )}
           label="Sign Out"
+          onPress={() => {
+            logoutUser();
+          }}
         />
       </Drawer.Section>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  drawerContent: {
-    flex: 1,
-  },
-  userInfoSection: {
-    paddingLeft: 20,
-  },
-  title: {
-    marginTop: 20,
-    fontWeight: 'bold',
-  },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14,
-  },
-  row: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 15,
-  },
-  paragraph: {
-    fontWeight: 'bold',
-    marginRight: 3,
-  },
-  drawerSection: {
-    marginTop: 15,
-  },
-  preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  bottomDrawerSection: {
-    marginBottom: 15,
-  },
-});
-
-export default DrawNavigator;
+export default DrawerContent;

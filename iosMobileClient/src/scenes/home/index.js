@@ -1,33 +1,95 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {useQuery} from '@apollo/react-hooks';
-import {FETCH_TOOLS_QUERY} from '../../utils/graphql';
+import {FETCH_TOOLS_QUERY} from '_utils/graphql';
 import {
-  Alert,
   StatusBar,
   StyleSheet,
-  Dimensions,
   Text,
   View,
-  ScrollView,
+  RefreshControl,
   TouchableOpacity,
 } from 'react-native';
-import {TabView, SceneMap} from 'react-native-tab-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Header from '_components/header';
 import SafeAreaView from 'react-native-safe-area-view';
-import TabViewMenuBar from '_components/tabviewmenubar';
 import HomeScrollView from '_scenes/home/cardview';
 import ListView from '_scenes/home/listview';
 import HomeMapView from '_scenes/home/mapview';
-import styled from 'styled-components';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#003167',
+  },
+  tabContainer: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    height: 40,
+    alignItems: 'center',
+    marginTop: 10,
+    borderBottomWidth: 4,
+    borderBottomColor: '#e6e6e6',
+  },
+  tabViewMenu: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  homeContainer: {
+    flex: 1,
+    color: 'red',
+    backgroundColor: '#f8f8f8',
+  },
+  cartBubbleContainer: {
+    position: 'absolute',
+    backgroundColor: '#003167',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 60,
+    width: '100%',
+    bottom: 0,
+    paddingLeft: 30,
+    zIndex: 999,
+  },
+  cartBubble: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: 40,
+    marginRight: 10,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+  },
+  cartCount: {
+    color: '#003167',
+  },
+});
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+};
 
 const Home = ({navigation}) => {
+  const [refreshing, setRefreshing] = useState(false);
+
   const [key, setKey] = useState('cardview');
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartCount, setCartCount] = useState(0);
 
   const {loading, data} = useQuery(FETCH_TOOLS_QUERY);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    // Do something then
+    wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
 
   if (!data) {
     return null;
@@ -35,13 +97,9 @@ const Home = ({navigation}) => {
 
   const handleAddedToCart = () => {
     if (addedToCart) {
-      // setAddedToCart(false);
       setCartCount(cartCount - 1);
-      // Alert.alert(`${title} added to cart.`);
     } else {
-      // setAddedToCart(true);
       setCartCount(cartCount + 1);
-      // Alert.alert(`${title} removed to cart.`);
     }
   };
 
@@ -61,19 +119,16 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="rgba(16, 43, 70, 1)"
-      />
-      <HomeContainer>
+      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <View style={styles.homeContainer}>
         <Header navigation={navigation} />
         <View style={styles.tabContainer}>
           <TouchableOpacity activeKey={key} onPress={handleCardView}>
-            <TabViewMenu>
+            <View style={styles.tabViewMenu}>
               {key === 'cardview' ? (
                 <MaterialCommunityIcons
                   name="cards-variant"
-                  color={'rgba(0,0,0,1)'}
+                  color={'#003167'}
                   size={24}
                 />
               ) : (
@@ -84,14 +139,14 @@ const Home = ({navigation}) => {
                 />
               )}
               <Text>Card View</Text>
-            </TabViewMenu>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity activeKey={key} onPress={handleListView}>
-            <TabViewMenu>
+            <View style={styles.tabViewMenu}>
               {key === 'listview' ? (
                 <MaterialCommunityIcons
                   name="format-list-bulleted-square"
-                  color={'rgba(0,0,0,1)'}
+                  color={'#003167'}
                   size={24}
                 />
               ) : (
@@ -102,14 +157,14 @@ const Home = ({navigation}) => {
                 />
               )}
               <Text>List View</Text>
-            </TabViewMenu>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity activeKey={key} onPress={handleMapView}>
-            <TabViewMenu>
+            <View style={styles.tabViewMenu}>
               {key === 'mapview' ? (
                 <MaterialCommunityIcons
                   name="map-marker-outline"
-                  color={'rgba(0,0,0,1)'}
+                  color={'#003167'}
                   size={24}
                 />
               ) : (
@@ -121,30 +176,36 @@ const Home = ({navigation}) => {
               )}
 
               <Text>Map View</Text>
-            </TabViewMenu>
+            </View>
           </TouchableOpacity>
         </View>
-        {key === 'cardview' && (
+        <View style={{display: key === 'cardview' ? 'flex' : 'none'}}>
           <HomeScrollView
             navigation={navigation}
             loading={loading}
             data={data}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             handleAddedToCart={handleAddedToCart}
             cartCount={cartCount}
           />
-        )}
+        </View>
 
-        {key === 'listview' && (
+        <View style={{display: key === 'listview' ? 'flex' : 'none'}}>
           <ListView
             navigation={navigation}
             loading={loading}
             data={data}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             handleAddedToCart={handleAddedToCart}
             cartCount={cartCount}
           />
-        )}
+        </View>
 
-        {key === 'mapview' && (
+        <View style={{display: key === 'mapview' ? 'flex' : 'none'}}>
           <HomeMapView
             navigation={navigation}
             loading={loading}
@@ -152,73 +213,19 @@ const Home = ({navigation}) => {
             handleAddedToCart={handleAddedToCart}
             cartCount={cartCount}
           />
-        )}
+        </View>
 
         {cartCount > 0 && (
-          <CartBubbleWrapper>
-            <CartBubble>
+          <View style={styles.cartBubbleContainer}>
+            <View style={styles.cartBubble}>
               <Text style={styles.cartCount}>{cartCount}</Text>
-            </CartBubble>
-            <Text>Item(s) added to cart.</Text>
-          </CartBubbleWrapper>
+            </View>
+            <Text style={{color: '#ffffff'}}>Item(s) added to cart.</Text>
+          </View>
         )}
-      </HomeContainer>
+      </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(16, 43, 70, 1)',
-  },
-  tabContainer: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    height: 40,
-    alignItems: 'center',
-    marginTop: 10,
-    borderBottomWidth: 4,
-    borderBottomColor: '#e6e6e6',
-  },
-  cartCount: {
-    color: '#ffffff',
-  },
-});
-
-const TabViewMenu = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const HomeContainer = styled.View`
-  flex: 1;
-  color: red;
-  background: #f8f8f8;
-`;
-
-const CartBubbleWrapper = styled.View`
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-  height: 60px;
-  padding-left: 30px;
-`;
-
-const CartBubble = styled.View`
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-  border-radius: 20px;
-  background-color: rgba(16, 43, 70, 1);
-  z-index: 9999;
-`;
 
 export default Home;

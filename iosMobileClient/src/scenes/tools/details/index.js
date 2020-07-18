@@ -1,4 +1,5 @@
 import React from 'react';
+// import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
 import {
   StyleSheet,
   Text,
@@ -8,19 +9,22 @@ import {
   Image,
   Alert,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
-import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import moment from 'moment';
+import {currencyFormat} from '_utils/currencyFormat';
+import LinearGradient from 'react-native-linear-gradient';
 import StarCount from '_core/review/starcount';
-import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
+import * as routes from '_utils/constants/routes';
 import styled from 'styled-components';
 
-MaterialCommunityIcons.loadFont();
+const {height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   imageBlock: {
-    width: '100%',
-    aspectRatio: 1,
+    ...StyleSheet.absoluteFillObject,
+    // width: '100%',
+    // aspectRatio: 1,
   },
   cardWrapper: {
     flex: 1,
@@ -39,6 +43,29 @@ const styles = StyleSheet.create({
     color: '#fff',
     textTransform: 'uppercase',
   },
+  toolImage: {
+    ...StyleSheet.absoluteFillObject,
+    // height: '100%',
+    // width: '100%',
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    opacity: 0.25,
+  },
+  cardImage: {
+    flex: 1,
+    height: height * 0.33,
+    width: '100%',
+    backgroundColor: 'gray',
+  },
+  cardBody: {
+    flex: 2,
+    position: 'relative',
+    padding: 16,
+  },
 });
 
 const ToolDetails = ({route, navigation}) => {
@@ -49,7 +76,7 @@ const ToolDetails = ({route, navigation}) => {
       return (
         <Image
           source={{
-            uri: `${LOCAL_HOST_SERVER}${path.url}`,
+            uri: `${routes.LOCAL_HOST}${path.url}`,
           }}
           style={styles.imageBlock}
         />
@@ -58,7 +85,7 @@ const ToolDetails = ({route, navigation}) => {
     return (
       <Image
         source={{
-          uri: `${LOCAL_HOST_SERVER}/assets/img/default.jpg`,
+          uri: `${routes.LOCAL_HOST}/assets/img/default.jpg`,
         }}
         style={styles.imageBlock}
       />
@@ -67,11 +94,15 @@ const ToolDetails = ({route, navigation}) => {
 
   return (
     <ScrollView style={styles.cardWrapper}>
-      <CardBlock>
-        <CardImageWrapper>
+      <View>
+        <View style={styles.cardImage}>
           <ImageBlock url={tool.url} />
-        </CardImageWrapper>
-        <CardBody>
+          <LinearGradient
+            colors={['transparent', '#003167']}
+            style={styles.linearGradient}
+          />
+        </View>
+        <View style={styles.cardBody}>
           <Avatar
             source={{
               uri: 'https://randomuser.me/api/portraits/men/1.jpg',
@@ -80,7 +111,7 @@ const ToolDetails = ({route, navigation}) => {
           <CardTitle>{tool.title}</CardTitle>
           <StarCountWrapper>
             <StarCount starCount={starCount} rateCount={rateCount} />
-            <Price>$49.99</Price>
+            <Price>{currencyFormat(tool.price)}</Price>
           </StarCountWrapper>
 
           <CardText>{tool.description}</CardText>
@@ -136,13 +167,8 @@ const ToolDetails = ({route, navigation}) => {
             }}>
             <Text style={styles.cartText}>Add to Cart</Text>
           </AddToCart>
-
-          <Button
-            title="Return Home"
-            onPress={() => navigation.navigate('Home')}
-          />
-        </CardBody>
-      </CardBlock>
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -160,20 +186,6 @@ const HColLeft = styled.View`
 
 const HColLeftText = styled.Text`
   font-weight: bold;
-`;
-
-const CardBlock = styled.View``;
-
-const CardImageWrapper = styled.View`
-  width: 100%;
-  background: gray;
-  overflow: hidden;
-`;
-
-const CardBody = styled.View`
-  display: flex;
-  position: relative;
-  padding: 16px;
 `;
 
 const StarCountWrapper = styled.View`

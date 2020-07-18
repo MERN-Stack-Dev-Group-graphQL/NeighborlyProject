@@ -1,22 +1,7 @@
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import styled from 'styled-components';
-
-const Tools = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="rgba(16, 43, 70, 1)"
-      />
-
-      <View style={styles.alignContent}>
-        <Text>Tools Page</Text>
-      </View>
-    </SafeAreaView>
-  );
-};
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,5 +17,34 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
+const Tools = ({navigation}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+
+      <View style={[styles.alignContent, {paddingHorizontal: 40}]}>
+        <MaterialCommunityIcons
+          name="tools"
+          color={'#003167'}
+          size={80}
+          style={{marginBottom: 20, opacity: 0.15}}
+        />
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: 20,
+          }}>
+          You have no current or recently rented tools yet
+        </Text>
+        <Text style={{textAlign: 'center'}}>
+          Track status, changes, usage, transactions and more here
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default Tools;

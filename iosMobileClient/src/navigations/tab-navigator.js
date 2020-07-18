@@ -1,31 +1,50 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
-// Navigation
+import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// Screens
 import HomeScreen from '_scenes/home';
 import SearchScreen from '_scenes/search';
 import ListScreen from '_scenes/listtool';
 import ChatScreen from '_scenes/chat';
 import ToolsScreen from '_scenes/tools';
 import ToolDetailsScreen from '_scenes/tools/details';
-// Icons
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// Styles
-import styled from 'styled-components';
-// Load Icons
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();
 
-// Initialize Navigation
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const styles = StyleSheet.create({
+  headerRightNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  avatar: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+  },
+  hamburgerMenu: {
+    width: 30,
+    height: 20,
+    marginLeft: 10,
+  },
+  brandLogoImage: {
+    width: 168,
+    height: 30,
+  },
+});
+
 const BrandLogo = () => {
   return (
-    <BrandLogoImage
+    <Image
+      style={styles.brandLogoImage}
       source={require('../assets/images/brand-logo-navbar.png')}
     />
   );
@@ -34,19 +53,23 @@ const BrandLogo = () => {
 const screenOptions = ({navigation, route}) => ({
   headerTitle: props => <BrandLogo {...props} />,
   headerRight: () => (
-    <HeaderRightNav>
-      <Avatar
+    <View style={styles.headerRightNav}>
+      <Image
+        style={styles.avatar}
         source={{
           uri: 'https://randomuser.me/api/portraits/men/1.jpg',
         }}
       />
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <HamburgerMenu source={require('../assets/images/hamburger.png')} />
+        <Image
+          style={styles.hamburgerMenu}
+          source={require('../assets/images/hamburger.png')}
+        />
       </TouchableOpacity>
-    </HeaderRightNav>
+    </View>
   ),
   headerStyle: {
-    backgroundColor: 'rgba(16, 43, 70, 1)',
+    backgroundColor: '#003167',
     shadowOffset: {height: 0, width: 0},
   },
   headerTintColor: 'rgba(255,255,255, 1)',
@@ -126,7 +149,7 @@ const ChatStack = () => {
   );
 };
 
-const AppNavigator = () => {
+const TabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -152,7 +175,7 @@ const AppNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'rgba(16, 43, 70, 1)',
+        activeTintColor: '#003167',
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Search" component={SearchStack} />
@@ -164,30 +187,4 @@ const AppNavigator = () => {
   );
 };
 
-const HeaderRightNav = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 16px;
-`;
-
-const Avatar = styled.Image`
-  height: 36px;
-  width: 36px;
-  border-radius: 18px;
-  border-width: 2px;
-  border-color: #ffffff;
-`;
-
-const HamburgerMenu = styled.Image`
-  width: 30px;
-  height: 20px;
-  margin-left: 10px;
-`;
-
-const BrandLogoImage = styled.Image`
-  width: 168px;
-  height: 30px;
-`;
-
-export default AppNavigator;
+export default TabNavigator;

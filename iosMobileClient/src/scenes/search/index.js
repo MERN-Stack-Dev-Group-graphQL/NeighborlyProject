@@ -1,21 +1,8 @@
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
+import {StatusBar, StyleSheet, Text, ScrollView, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-
-const Search = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="rgba(16, 43, 70, 1)"
-      />
-
-      <View style={styles.alignContent}>
-        <Text>Search Page</Text>
-      </View>
-    </SafeAreaView>
-  );
-};
+import Header from '_components/header';
+import TabBar from '_components/tabbar';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,5 +17,20 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
+const Search = ({navigation}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+
+      <View style={{flex: 1}}>
+        <Header />
+        <View style={styles.alignContent}>
+          <Text>Search Page</Text>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default Search;

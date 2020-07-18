@@ -1,22 +1,6 @@
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import styled from 'styled-components';
-
-const ListTool = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="rgba(16, 43, 70, 1)"
-      />
-
-      <View style={styles.alignContent}>
-        <Text>List Tool Page</Text>
-      </View>
-    </SafeAreaView>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -31,5 +15,17 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
+const ListTool = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+
+      <View style={styles.alignContent}>
+        <Text>List Tool Page</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default ListTool;

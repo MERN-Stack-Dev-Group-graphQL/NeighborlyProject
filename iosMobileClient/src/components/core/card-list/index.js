@@ -1,47 +1,105 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  ActivityIndicator,
-  Text,
-  Alert,
-  TextInput,
-  TouchableHighlight,
-  Button,
-  View,
-  ScrollView,
-  Image,
-  Keyboard,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from 'react-native';
-import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import {AppButton} from '_core/button';
-import Feather from 'react-native-vector-icons/dist/Feather';
-import styled from 'styled-components';
-import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {currencyFormat} from '_utils/currencyFormat';
 import StarCount from '_core/review/starcount';
+import * as routes from '_utils/constants/routes';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
-Feather.loadFont();
-MaterialCommunityIcons.loadFont();
+
+const styles = StyleSheet.create({
+  cardWrapper: {
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 12,
+  },
+  cardBody: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+    padding: 10,
+  },
+  cardImage: {
+    height: 80,
+    width: 80,
+    backgroundColor: 'gray',
+  },
+  cardTitle: {
+    textTransform: 'capitalize',
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingRight: 55,
+    marginBottom: 4,
+  },
+  avatar: {
+    position: 'absolute',
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+    transform: [{translateY: -8}],
+    left: -8,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+  },
+  header: {
+    flexDirection: 'column',
+  },
+  subHeading: {
+    fontSize: 13,
+    color: 'rgba(0,0,0,0.5)',
+  },
+  priceUnitWrapper: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  price: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  unit: {
+    fontSize: 12,
+    color: 'rgba(0, 0, 0, 0.5)',
+    paddingLeft: 6,
+  },
+  buttonContainer: {
+    elevation: 8,
+    display: 'flex',
+    width: '100%',
+  },
+  starCountWrapper: {
+    marginBottom: 8,
+  },
+  actionWrapper: {
+    marginTop: 'auto',
+  },
+});
 
 const CardList = ({tool, navigation, handleCart, cartCount}) => {
   const [buttonState, setButtonState] = useState(true);
   const ImageBlock = path => {
     if (path.url.length > 1) {
       return (
-        <CardImage
+        <Image
+          style={{width: '100%', height: '100%'}}
           source={{
-            uri: `${LOCAL_HOST_SERVER}${path.url}`,
+            uri: `${routes.LOCAL_HOST}${path.url}`,
           }}
         />
       );
     }
     return (
-      <CardImage
+      <Image
+        style={{width: '100%', height: '100%'}}
         source={{
-          uri: `${LOCAL_HOST_SERVER}/assets/img/default.jpg`,
+          uri: `${routes.LOCAL_HOST}/assets/img/default.jpg`,
         }}
       />
     );
@@ -69,11 +127,12 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
 
   return (
     <View style={styles.cardWrapper}>
-      <ButtonContainer onPress={onPress}>
-        <CardBody>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+        <View style={styles.cardBody}>
           <View style={styles.cardImage}>
             <ImageBlock url={tool.url} />
-            <Avatar
+            <Image
+              style={styles.avatar}
               source={{
                 uri: 'https://randomuser.me/api/portraits/men/1.jpg',
               }}
@@ -81,118 +140,23 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
           </View>
           <View style={{paddingHorizontal: 10}}>
             <View style={styles.header}>
-              <CardTitle>{tool.title}</CardTitle>
-              <StarCountWrapper>
+              <Text style={styles.subHeading}>{tool.make}</Text>
+              <Text style={styles.cardTitle}>{tool.title}</Text>
+              <View style={styles.starCountWrapper}>
                 <StarCount starCount={starCount} rateCount={rateCount} />
-              </StarCountWrapper>
+              </View>
             </View>
-            <ActionWrapper>
-              <PriceUnitWrapper>
-                <Price>$49.99</Price>
-                <Unit>/ per day</Unit>
-              </PriceUnitWrapper>
-            </ActionWrapper>
+            <View style={styles.actionWrapper}>
+              <View style={styles.priceUnitWrapper}>
+                <Text style={styles.price}>{currencyFormat(tool.price)}</Text>
+                <Text style={styles.unit}>{`/ per ${tool.unitOfMeasure}`}</Text>
+              </View>
+            </View>
           </View>
-        </CardBody>
-      </ButtonContainer>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  cardWrapper: {
-    backgroundColor: '#ffffff',
-    margin: 10,
-    borderRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 12,
-  },
-  cardImage: {
-    height: 80,
-    width: 80,
-    backgroundColor: 'gray',
-  },
-  header: {
-    flexDirection: 'column',
-  },
-});
-
-const ButtonContainer = styled.TouchableOpacity`
-  elevation: 8;
-  display: flex;
-  width: 100%;
-`;
-
-const CardImage = styled.Image`
-  height: 100%;
-  width: 100%;
-`;
-
-const CardBody = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  padding: 10px;
-`;
-
-const StarCountWrapper = styled.View`
-  margin-bottom: 8px;
-`;
-
-const Avatar = styled.Image`
-  position: absolute;
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  transform: translateY(-8px);
-  left: -8px;
-  border-width: 2px;
-  border-color: #ffffff;
-`;
-
-const CardTitle = styled.Text`
-  text-transform: capitalize;
-  font-size: 18px;
-  font-weight: bold;
-  padding-right: 55px;
-  margin-bottom: 4px;
-`;
-
-const ActionWrapper = styled.View`
-  margin-top: auto;
-`;
-
-const PostedDate = styled.View`
-  flex-direction: row;
-`;
-
-const ActionText = styled.Text`
-  padding-left: 6px;
-  font-size: 12px;
-  color: gray;
-`;
-
-const PriceUnitWrapper = styled.View`
-  align-items: flex-start;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Price = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const Unit = styled.Text`
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
-  padding-left: 6px;
-`;
 
 export default CardList;

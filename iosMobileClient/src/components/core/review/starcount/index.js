@@ -1,9 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import styled from 'styled-components';
 
-MaterialCommunityIcons.loadFont();
+const styles = StyleSheet.create({
+  starCountWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+    color: 'rgb(252, 155, 70)',
+  },
+  rateCountWrapper: {
+    fontSize: 12,
+    color: 'rgba(0, 0, 0, 0.25)',
+    marginLeft: 10,
+  },
+});
 
 const StarCount = ({starCount, rateCount}) => {
   let content = [];
@@ -19,30 +30,16 @@ const StarCount = ({starCount, rateCount}) => {
   }
 
   return (
-    <StarCountWrapper>
+    <View style={styles.starCountWrapper}>
       {content}
       <MaterialCommunityIcons
         name="star"
         color={'rgba(0,0,0,0.25)'}
         size={14}
       />
-      {rateCount && <RateCountWrapper>({rateCount})</RateCountWrapper>}
-    </StarCountWrapper>
+      {rateCount && <Text style={styles.rateCountWrapper}>({rateCount})</Text>}
+    </View>
   );
 };
-
-const StarCountWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 10px;
-  color: rgb(252, 155, 70);
-`;
-
-const RateCountWrapper = styled.Text`
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.25);
-  margin-left: 10px;
-`;
 
 export default StarCount;

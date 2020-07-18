@@ -47,7 +47,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* neighborlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = neighborlyTests.m; sourceTree = "<group>"; };
 		0B53094139EF721BF945242D /* libPods-neighborly-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neighborly-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* neighborly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = neighborly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Neighborly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neighborly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = neighborly/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = neighborly/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -59,12 +59,12 @@
 		42D8680F6FB1B98208F3F2D0 /* Pods-neighborly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neighborly.release.xcconfig"; path = "Target Support Files/Pods-neighborly/Pods-neighborly.release.xcconfig"; sourceTree = "<group>"; };
 		51219B19C2B66851373A6849 /* Pods-neighborly-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neighborly-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-neighborly-tvOS/Pods-neighborly-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6447F7D5F31C38DC4E8D4AD7 /* libPods-neighborly-neighborlyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neighborly-neighborlyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		702890B27FDF4441A0D0599D /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		702890B27FDF4441A0D0599D /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F49C14B1DFCD444CF96E139 /* Pods-neighborly-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neighborly-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-neighborly-tvOSTests/Pods-neighborly-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		9EDE7938498BD0004D517FB8 /* Pods-neighborly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neighborly.debug.xcconfig"; path = "Target Support Files/Pods-neighborly/Pods-neighborly.debug.xcconfig"; sourceTree = "<group>"; };
 		9F95BFA9AFC68D232241F1E1 /* libPods-neighborly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neighborly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5EADE5F02F9E8B8DA2E0B9 /* libPods-neighborly-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neighborly-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D23D3CB16BA44066B50CBA7B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		D23D3CB16BA44066B50CBA7B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		E69F7C8AB47AAEEB004F10CD /* Pods-neighborly-neighborlyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neighborly-neighborlyTests.debug.xcconfig"; path = "Target Support Files/Pods-neighborly-neighborlyTests/Pods-neighborly-neighborlyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -160,7 +160,6 @@
 				D23D3CB16BA44066B50CBA7B /* OpenSans-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -189,7 +188,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* neighborly.app */,
+				13B07F961A680F5B00A75B9A /* Neighborly.app */,
 				00E356EE1AD99517003FC87E /* neighborlyTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* neighborly-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* neighborly-tvOSTests.xctest */,
@@ -253,7 +252,7 @@
 			);
 			name = neighborly;
 			productName = neighborly;
-			productReference = 13B07F961A680F5B00A75B9A /* neighborly.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Neighborly.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* neighborly-tvOS */ = {
@@ -768,7 +767,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = neighborly;
+				PRODUCT_NAME = Neighborly;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -791,7 +790,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = neighborly;
+				PRODUCT_NAME = Neighborly;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -1,8 +1,16 @@
 import React from 'react';
 import Loader from '_core/loader';
 import Card from '_core/card';
-import {ScrollView} from 'react-native';
-import styled from 'styled-components';
+import {ScrollView, StyleSheet} from 'react-native';
+// import {styles} from '_components';
+const styles = StyleSheet.create({
+  homeScrollView: {
+    position: 'relative',
+    paddingLeft: 16,
+    paddingRight: 16,
+    marginBottom: 120,
+  },
+});
 
 const CardView = ({
   navigation,
@@ -10,9 +18,10 @@ const CardView = ({
   data,
   handleAddedToCart,
   cartCount,
+  refreshControl,
 }) => {
   return (
-    <HomeScrollView>
+    <ScrollView style={styles.homeScrollView} refreshControl={refreshControl}>
       {loading ? (
         <Loader />
       ) : (
@@ -27,14 +36,8 @@ const CardView = ({
           />
         ))
       )}
-    </HomeScrollView>
+    </ScrollView>
   );
 };
-
-const HomeScrollView = styled.ScrollView`
-  position: relative;
-  padding-left: 16px;
-  padding-right: 16px;
-`;
 
 export default CardView;

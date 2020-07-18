@@ -5,14 +5,108 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  Image,
   View,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
+  Alert,
 } from 'react-native';
 import {SEARCH_TOOLS_QUERY} from '_utils/graphql';
-import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
+import * as routes from '_utils/constants/routes';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import styled from 'styled-components';
+
+const {width} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  searchBarContainer: {
+    position: 'relative',
+    backgroundColor: '#003167',
+    zIndex: 2,
+  },
+  searchWrapper: {
+    position: 'absolute',
+    paddingVertical: 16,
+    backgroundColor: '#ffffff',
+    borderRadius: 6,
+    borderColor: '#f6f6f6',
+    borderWidth: 0.5,
+    width: '100%',
+    top: Platform === 'ios' ? 80 : 65,
+    zIndex: 3,
+  },
+  searchFormWrapper: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 70,
+    width,
+  },
+  searchContainer: {
+    flex: 6,
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#ffffff',
+    marginLeft: 10,
+  },
+  filterButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  filter: {
+    color: '#ffffff',
+  },
+  searchIcon: {
+    marginLeft: 16,
+  },
+  formControl: {
+    flex: 1,
+    padding: 0,
+  },
+  filterIcon: {
+    marginRight: 16,
+  },
+
+  textBold: {
+    fontWeight: 'bold',
+    minWidth: 52,
+  },
+  textLight: {
+    color: 'rgba(0,0,0,0.5)',
+    fontSize: 13,
+  },
+  searchListText: {
+    flexDirection: 'row',
+  },
+
+  autoCompleteContainer: {
+    position: 'relative',
+    borderRadius: 5,
+  },
+  cardImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    borderWidth: 3,
+    borderColor: '#d0d4d5',
+    marginBottom: 4,
+  },
+  resultsView: {
+    paddingLeft: 8,
+  },
+  tapSearchResults: {
+    position: 'relative',
+    textAlign: 'left',
+    padding: 10,
+    width: '100%',
+  },
+});
 
 const Header = ({title, navigation}) => {
   const [search, setSearch] = useState('');
@@ -20,17 +114,19 @@ const Header = ({title, navigation}) => {
   const ImageBlock = path => {
     if (path.url.length > 1) {
       return (
-        <CardImage
+        <Image
+          style={styles.cardImage}
           source={{
-            uri: `${LOCAL_HOST_SERVER}${path.url}`,
+            uri: `${routes.LOCAL_HOST}${path.url}`,
           }}
         />
       );
     }
     return (
-      <CardImage
+      <Image
+        style={styles.cardImage}
         source={{
-          uri: `${LOCAL_HOST_SERVER}/assets/img/default.jpg`,
+          uri: `${routes.LOCAL_HOST}/assets/img/default.jpg`,
         }}
       />
     );
@@ -40,6 +136,10 @@ const Header = ({title, navigation}) => {
     variables: {search: search},
   });
 
+  const handleFilter = () => {
+    setSearch('');
+  };
+
   if (data) {
     var tools = data;
   }
@@ -48,30 +148,49 @@ const Header = ({title, navigation}) => {
   const rateCount = 252;
 
   return (
-    <SearchContainer>
-      <SearchFormWrapper>
-        <View style={{position: 'absolute', zIndex: 999, left: 16}}>
-          <MaterialCommunityIcons
-            name="search-web"
-            color={'rgba(0,0,0,0.25)'}
-            size={30}
+    <View style={styles.searchBarContainer}>
+      <View style={styles.searchFormWrapper}>
+        <View style={styles.searchContainer}>
+          <View style={styles.searchIcon}>
+            <MaterialCommunityIcons
+              name="search-web"
+              color={'rgba(16, 43, 70, 0.25)'}
+              size={30}
+            />
+          </View>
+          <TextInput
+            style={styles.formControl}
+            label="Search"
+            placeholder="Search"
+            onChangeText={search => setSearch(search)}
+            defaultValue={search}
           />
+
+          <TouchableOpacity style={styles.filterIcon} onPress={handleFilter}>
+            <MaterialCommunityIcons
+              name="close"
+              color={search !== '' ? '#003167' : 'rgba(16, 43, 70, 0.25)'}
+              size={24}
+            />
+          </TouchableOpacity>
         </View>
-        <FormControlTextInput
-          label="Search"
-          placeholder="Search"
-          onChangeText={search => setSearch(search)}
-          defaultValue={search}
-        />
-      </SearchFormWrapper>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => {
+            Alert.alert('Filter button clicked!');
+          }}>
+          <Text style={styles.filter}>Filter</Text>
+        </TouchableOpacity>
+      </View>
 
       {tools && search !== '' && (
         <ScrollView style={styles.searchWrapper}>
-          <AutoComplete>
+          <View style={styles.autoCompleteContainer}>
             {tools &&
               tools.searchTools.map((tool, index) => (
                 <TouchableOpacity key={index}>
-                  <SearchResultsTap
+                  <TouchableOpacity
+                    style={styles.tapSearchResults}
                     onPress={() => {
                       navigation.push('Tool Details', {
                         itemId: tool._id,
@@ -81,89 +200,36 @@ const Header = ({title, navigation}) => {
                         otherParam: 'anything you want here',
                       });
                     }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        borderBottomWidth: 1,
+                        borderBottomColor: 'rgba(0,0,0,0.075)',
+                        borderStyle: 'solid',
+                      }}>
                       <ImageBlock url={tool.url} />
-                      <ResultsText>
-                        <Text>{tool.make}:</Text> <Text>{tool.title}</Text>
-                      </ResultsText>
+                      <View style={styles.resultsView}>
+                        <View style={styles.searchListText}>
+                          <Text style={styles.textBold}>{tool.title}</Text>
+                        </View>
+                        <View style={styles.searchListText}>
+                          <Text style={styles.textLight}>{tool.make}</Text>
+                        </View>
+                      </View>
                     </View>
-                  </SearchResultsTap>
+                  </TouchableOpacity>
                 </TouchableOpacity>
               ))}
-          </AutoComplete>
+          </View>
         </ScrollView>
       )}
-    </SearchContainer>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  searchWrapper: {
-    position: 'absolute',
-    marginHorizontal: 16,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    backgroundColor: '#ffffff',
-    borderRadius: 6,
-    borderColor: '#f6f6f6',
-    borderWidth: 0.5,
-    width: '100%',
-    top: Platform === 'ios' ? 80 : 65,
-    zIndex: 3,
-  },
-});
 
 Header.defaultProps = {
   title: 'Neighborly',
 };
-
-const AutoComplete = styled.View`
-  position: relative;
-  border-radius: 5px;
-`;
-
-const CardImage = styled.Image`
-  height: 50px;
-  width: 50px;
-`;
-
-const SearchResultsTap = styled.TouchableOpacity`
-  position: relative;
-  text-align: left;
-  padding: 10px;
-  width: 100%;
-`;
-
-const ResultsText = styled.Text`
-  font-size: 16px;
-  letter-spacing: 1px;
-  padding-left: 10px;
-`;
-
-const SearchContainer = styled.View`
-  position: relative;
-  padding-left: 16px;
-  padding-right: 16px;
-  background-color: rgba(16, 43, 70, 1);
-  z-index: 2;
-`;
-
-const SearchFormWrapper = styled.View`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 70px;
-`;
-
-const FormControlTextInput = styled.TextInput`
-  width: 100%;
-  height: 50px;
-  padding: 10px 25px 10px 48px;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 1);
-  margin: 16px;
-`;
 
 export default Header;

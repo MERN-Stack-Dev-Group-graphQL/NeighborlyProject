@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
-import AppNavigator from './app-navigator';
-import DrawerNavigator from './draw-navigator';
+import TabNavigator from './tab-navigator';
+import DrawerContent from './drawer-content';
 // Scenes
 import ProfileScreen from '_scenes/profile';
 import AccountActivityScreen from '_scenes/account-activity';
@@ -11,16 +11,40 @@ import NotificationsScreen from '_scenes/notifications';
 import FiltersScreen from '_scenes/filters';
 import SavedToolsScreen from '_scenes/tools/saved';
 import TrackToolsScreen from '_scenes/tools/track';
-// Styles
-import styled from 'styled-components';
 
 // Initialize Navigation
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+const styles = StyleSheet.create({
+  headerRightNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  avatar: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+  },
+  hamburgerMenu: {
+    width: 30,
+    height: 20,
+    marginLeft: 10,
+  },
+  brandLogoImage: {
+    width: 168,
+    height: 30,
+  },
+});
+
 const BrandLogo = () => {
   return (
-    <BrandLogoImage
+    <Image
+      style={styles.brandLogoImage}
       source={require('../assets/images/brand-logo-navbar.png')}
     />
   );
@@ -29,19 +53,23 @@ const BrandLogo = () => {
 const screenOptions = ({navigation, route}) => ({
   headerTitle: props => <BrandLogo {...props} />,
   headerRight: () => (
-    <HeaderRightNav>
-      <Avatar
+    <View style={styles.headerRightNav}>
+      <Image
+        style={styles.avatar}
         source={{
           uri: 'https://randomuser.me/api/portraits/men/1.jpg',
         }}
       />
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <HamburgerMenu source={require('../assets/images/hamburger.png')} />
+        <Image
+          style={styles.hamburgerMenu}
+          source={require('../assets/images/hamburger.png')}
+        />
       </TouchableOpacity>
-    </HeaderRightNav>
+    </View>
   ),
   headerStyle: {
-    backgroundColor: 'rgba(16, 43, 70, 1)',
+    backgroundColor: '#003167',
     shadowOffset: {height: 0, width: 0},
   },
   headerTintColor: 'rgba(255,255,255, 1)',
@@ -130,10 +158,10 @@ const TrackTools = () => {
   );
 };
 
-const RootNavigator = () => {
+const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <DrawerNavigator {...props} />}>
-      <Drawer.Screen name="Home" component={AppNavigator} />
+    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+      <Drawer.Screen name="Home" component={TabNavigator} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Account Activity" component={AccountActivity} />
       <Drawer.Screen name="Notifications" component={Notifications} />
@@ -144,30 +172,4 @@ const RootNavigator = () => {
   );
 };
 
-const HeaderRightNav = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 16px;
-`;
-
-const Avatar = styled.Image`
-  height: 36px;
-  width: 36px;
-  border-radius: 18px;
-  border-width: 2px;
-  border-color: #ffffff;
-`;
-
-const HamburgerMenu = styled.Image`
-  width: 30px;
-  height: 20px;
-  margin-left: 10px;
-`;
-
-const BrandLogoImage = styled.Image`
-  width: 168px;
-  height: 30px;
-`;
-
-export default RootNavigator;
+export default DrawerNavigator;

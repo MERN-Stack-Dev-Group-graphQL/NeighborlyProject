@@ -1,13 +1,23 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import styled from 'styled-components';
+import {Text, View, StyleSheet} from 'react-native';
 import Star from '_core/review/star';
+
+const styles = StyleSheet.create({
+  starRatingsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  selectedStars: {
+    marginLeft: 10,
+  },
+});
 
 const StarRating = ({totalStars}) => {
   const [selectedStars, setSelectedStars] = useState(0);
 
   return (
-    <StarRatingWrapper>
+    <View style={styles.starRatingsWrapper}>
       {[...Array(totalStars)].map((n, i) => (
         <Star
           key={i}
@@ -15,21 +25,11 @@ const StarRating = ({totalStars}) => {
           onPress={() => setSelectedStars(i + 1)}
         />
       ))}
-      <SelectedStars>
+      <Text style={styles.selectedStars}>
         {selectedStars} of {totalStars} stars
-      </SelectedStars>
-    </StarRatingWrapper>
+      </Text>
+    </View>
   );
 };
-
-const StarRatingWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SelectedStars = styled.Text`
-  margin-left: 10px;
-`;
 
 export default StarRating;

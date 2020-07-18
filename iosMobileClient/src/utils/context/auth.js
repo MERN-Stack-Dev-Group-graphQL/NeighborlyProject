@@ -1,88 +1,96 @@
-import React, {useReducer, useState, createContext} from 'react';
+import React, {useReducer, createContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import jwtDecode from 'jwt-decode';
 
 const initialState = {
   user: null,
+  token: null,
+  login: null,
   isLoading: true,
 };
-
-if (AsyncStorage.getItem('x-token')) {
-  const decodedToken = jwtDecode(AsyncStorage.getItem('x-token'));
-
-  if (decodedToken.exp * 1000 < Date.now()) {
-    AsyncStorage.removeItem('x-token');
-  } else {
-    initialState.user = decodedToken;
-  }
-}
 
 const AuthContext = createContext({
   user: null,
   login: userData => {},
   logout: () => {},
-  toggleTheme: () => {
-    setIsDarkTheme(isDarkTheme => !isDarkTheme);
-  },
+  register: () => {},
 });
 
-function authReducer(state, action) {
+function authReducer(prevState, action) {
   switch (action.type) {
+    case 'RETRIEVE_TOKEN':
+      return {
+        ...prevState,
+        user: action.payload,
+        token: action.token,
+        login: action.login,
+        isLoading: false,
+      };
     case 'LOGIN':
       return {
-        ...state,
+        ...prevState,
         user: action.payload,
+        login: action.login,
+        token: action.token,
         isLoading: false,
       };
     case 'LOGOUT':
       return {
-        ...state,
+        ...prevState,
         user: null,
+        login: null,
+        token: null,
+        isLoading: false,
+      };
+    case 'REGISTER':
+      return {
+        ...prevState,
+        user: action.payload,
+        login: action.id,
+        token: action.token,
         isLoading: false,
       };
     default:
-      return state;
+      return prevState;
   }
 }
 
-const CustomDefaultTheme = {
-  colors: {
-    background: '#ffffff',
-    text: '#333333',
-  },
-};
-
-const CustomDarkTheme = {
-  colors: {
-    background: '#333333',
-    text: '#ffffff',
-  },
-};
-
 function AuthProvider(props) {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [loginState, dispatch] = useReducer(authReducer, initialState);
 
-  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+  const login = async userData => {
+    let token;
+    token = null;
+    if (login === userData.login && password === userData.password) {
+      try {
+        token = userData.token;
+        await AsyncStorage.setItem('x-token', token);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    dispatch({type: 'LOGIN', payload: userData, token: token});
+  };
 
-  function login(userData) {
-    AsyncStorage.setItem('x-token', userData.token);
-    dispatch({
-      type: 'LOGIN',
-      payload: userData,
-    });
-  }
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('x-token');
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch({type: 'LOGOUT'});
+  };
 
-  function logout() {
-    AsyncStorage.removeItem('x-token');
-    dispatch({
-      type: 'LOGOUT',
-    });
-  }
+  const register = async () => {};
 
   return (
     <AuthContext.Provider
-      value={{user: state.user, login, logout}}
+      value={{
+        user: loginState.user,
+        isLoading: loginState.isLoading,
+        login,
+        logout,
+        register,
+      }}
       {...props}
     />
   );

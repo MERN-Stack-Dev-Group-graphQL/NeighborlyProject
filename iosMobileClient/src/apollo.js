@@ -1,27 +1,28 @@
+import {ApolloClient} from '@apollo/client';
 import {createUploadLink} from 'apollo-upload-client';
-import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {setContext} from 'apollo-link-context';
 import AsyncStorage from '@react-native-community/async-storage';
+import * as routes from '_utils/constants/routes';
 
-import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
+// import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
 
 const makeApolloClient = () => {
-  const uploadLink = new createUploadLink({
-    uri: `${LOCAL_HOST_SERVER}/graphql`,
-  });
+  // const link = new createUploadLink({ uri: `${routes.LOCAL_HOST}/graphql`});
+  const link = new createUploadLink({uri: `${routes.LOCAL_HOST}/graphql`});
 
-  const authLink = setContext(() => {
-    const token = AsyncStorage.getItem('x-token');
+  const authLink = setContext(async (_, {headers}) => {
+    const token = await AsyncStorage.getItem('x-token');
     return {
       headers: {
-        Authorization: token ? `Bearer ${token}` : '',
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
       },
     };
   });
 
   const client = new ApolloClient({
-    link: authLink.concat(uploadLink),
+    link: authLink.concat(link),
     cache: new InMemoryCache(),
   });
 
