@@ -13,15 +13,6 @@ import Contact from './home/pages/Contact';
 
 const App = () => (
   <AuthProvider>
-<<<<<<< Updated upstream
-    <PageContainer>
-      <Router>
-        <AuthRoute exact path={routes.LOGIN} component={Login} />
-        <AuthRoute exact path={routes.REGISTER} component={Register} />
-        <PublicRoute exact path={routes.HOME} component={Home} />
-      </Router>
-    </PageContainer>
-=======
     <ToolProvider>
       <PageContainer>
         <Router>
@@ -33,7 +24,6 @@ const App = () => (
         </Router>
       </PageContainer>
     </ToolProvider>
->>>>>>> Stashed changes
   </AuthProvider>
 );
 
