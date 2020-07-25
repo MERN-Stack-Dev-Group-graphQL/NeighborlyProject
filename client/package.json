@@ -20,6 +20,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "history": "^4.7.2",
+    "js-md5": "^0.7.3",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.26.0",
