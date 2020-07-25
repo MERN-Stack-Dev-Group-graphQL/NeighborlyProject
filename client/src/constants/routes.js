@@ -9,3 +9,4 @@ export const ABOUT = '/about';
 export const CONTACT_US = '/contact-us';
 export const TOOLS = '/tools';
 export const ADD_TOOL = '/add-tool';
+export const CONTACT = '/contact';
