@@ -1,6 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import CardView from '_scenes/home/cardview';
+import ListView from '_scenes/home/listview';
+import HomeMapView from '_scenes/home/mapview';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const Tab = createMaterialTopTabNavigator();
 
 const styles = StyleSheet.create({
   tabContainer: {
@@ -21,35 +27,56 @@ const styles = StyleSheet.create({
   },
 });
 
-const TabViewMenuBar = () => {
+const HomeTabBarTop = () => {
   return (
-    <View style={styles.tabContainer}>
-      <View style={styles.tabViewMenu}>
-        <MaterialCommunityIcons
-          name="cards-variant"
-          color={'rgba(0,0,0,0.25)'}
-          size={24}
-        />
-        <Text>Card View</Text>
-      </View>
-      <View style={styles.tabViewMenu}>
-        <MaterialCommunityIcons
-          name="format-list-bulleted-square"
-          color={'rgba(0,0,0,0.25)'}
-          size={24}
-        />
-        <Text>List View</Text>
-      </View>
-      <View style={styles.tabViewMenu}>
-        <MaterialCommunityIcons
-          name="map-marker-outline"
-          color={'rgba(0,0,0,0.25)'}
-          size={24}
-        />
-        <Text>Map View</Text>
-      </View>
-    </View>
+    <Tab.Navigator
+      initialRouteName="Feed"
+      tabBarOptions={{
+        activeTintColor: '#ffffff',
+        style: {backgroundColor: '#003167'},
+        indicatorStyle: {backgroundColor: '#318FE6', height: 3},
+      }}>
+      <Tab.Screen
+        name="Card View"
+        component={CardView}
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="cards-variant"
+              color={'#318FE6'}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="List View"
+        component={ListView}
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="format-list-bulleted-square"
+              color={'#318FE6'}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Map View"
+        component={HomeMapView}
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="map-marker-outline"
+              color={'#318FE6'}
+              size={24}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
-export default TabViewMenuBar;
+export default HomeTabBarTop;

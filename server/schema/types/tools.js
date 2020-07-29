@@ -73,7 +73,7 @@ const toolsSchema = gql`
     description: String!
     electricalRatings: String
     price: Float
-    unit: String
+    unitOfMeasure: String
     quantity: Int
     category: ToolCategory
     location: Location

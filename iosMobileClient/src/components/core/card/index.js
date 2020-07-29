@@ -1,22 +1,32 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
-  Alert,
   View,
   Image,
   TouchableOpacity,
+  Animated,
+  Dimensions,
 } from 'react-native';
 import {currencyFormat} from '_utils/currencyFormat';
+import {useTheme} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarCount from '_core/review/starcount';
-import {styles} from '_core/card/card.component.styles';
+import {
+  styles,
+  CARD_HEIGHT as DEFAULT_CARD_HEIGHT,
+} from '_core/card/card.component.styles';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as routes from '_utils/constants/routes';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
-const Card = ({tool, navigation, handleCart, cartCount}) => {
+export const MARGIN = 12;
+export const CARD_HEIGHT = DEFAULT_CARD_HEIGHT + MARGIN * 2;
+const {height: wHeight} = Dimensions.get('window');
+const height = wHeight - 84;
+
+const Card = ({tool, navigation, handleCart, cartCount, y, index}) => {
+  const {colors} = useTheme();
   const [buttonState, setButtonState] = useState(true);
   const ImageBlock = path => {
     if (path.url.length > 1) {
@@ -41,19 +51,13 @@ const Card = ({tool, navigation, handleCart, cartCount}) => {
 
   const starCount = 4;
   const rateCount = 252;
-
   const onPress = () => {
     navigation.push('Tool Details', {
       itemId: tool._id,
       tool: tool,
       starCount,
       rateCount,
-      otherParam: 'anything you want here',
     });
-  };
-
-  const handleSaveTool = () => {
-    Alert.alert('Save tool pressed!');
   };
 
   const handleAddToCart = () => {
@@ -64,20 +68,35 @@ const Card = ({tool, navigation, handleCart, cartCount}) => {
   };
 
   return (
-    <View style={styles.cardWrapper}>
-      <View>
+    <Animated.View
+      style={[
+        styles.cardWrapper,
+        {
+          alignSelf: 'center',
+          marginVertical: MARGIN,
+        },
+      ]}
+      key={index}>
+      <TouchableOpacity style={{flex: 1}} onPress={onPress}>
         <View style={styles.cardImage}>
           <ImageBlock url={tool.url} />
           <LinearGradient
-            colors={['transparent', '#003167']}
+            colors={['transparent', colors.primary]}
             style={styles.linearGradient}
           />
           <View style={styles.actionWrapper}>
-            <TouchableOpacity style={styles.saveTool} onPress={handleSaveTool}>
+            <TouchableOpacity style={styles.likeTool} onPress={() => {}}>
+              <MaterialCommunityIcons
+                name="heart-outline"
+                color={'#f2f2f2'}
+                size={16}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.saveTool} onPress={() => {}}>
               <MaterialCommunityIcons
                 name="bookmark-outline"
-                color={'#003167'}
-                size={20}
+                color={'#f2f2f2'}
+                size={16}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -85,7 +104,16 @@ const Card = ({tool, navigation, handleCart, cartCount}) => {
               onPress={handleAddToCart}>
               <MaterialCommunityIcons
                 name="cart-plus"
-                color={'#003167'}
+                color={'#f2f2f2'}
+                size={16}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.moreMenu}
+              onPress={() => navigation.navigate('BottomScreen')}>
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                color={'#1B2023'}
                 size={20}
               />
             </TouchableOpacity>
@@ -106,14 +134,8 @@ const Card = ({tool, navigation, handleCart, cartCount}) => {
             <StarCount starCount={starCount} rateCount={rateCount} />
           </View>
         </View>
-        <View style={{paddingHorizontal: 10}}>
-          <View
-            style={{
-              height: 1,
-              width: '100%',
-              backgroundColor: 'rgba(0,0,0,0.05)',
-            }}
-          />
+        <View style={[styles.cardBase, {paddingHorizontal: 10}]}>
+          <View style={styles.divider} />
           <View style={styles.cardFooter}>
             <View style={styles.priceUnitWrapper}>
               <Text style={styles.price}>{currencyFormat(tool.price)}</Text>
@@ -124,8 +146,8 @@ const Card = ({tool, navigation, handleCart, cartCount}) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-    </View>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 

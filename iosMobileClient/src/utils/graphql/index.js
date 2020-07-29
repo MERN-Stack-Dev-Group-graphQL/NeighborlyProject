@@ -119,7 +119,51 @@ export const ADD_TOOL_MUTATION = gql`
   }
 `;
 
-export const GET_USER = gql`
+export const LOGIN_USER = gql`
+  mutation login($login: String!, $password: String!) {
+    login(login: $login, password: $password) {
+      token
+      _id
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation resetUserPassword($email: String!) {
+    resetUserPassword(email: $email) {
+      _id
+      email
+      resetToken
+    }
+  }
+`;
+
+export const REGISTER_USER = gql`
+  mutation register(
+    $username: String!
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+  ) {
+    register(
+      input: {
+        username: $username
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+      }
+    ) {
+      token
+      _id
+    }
+  }
+`;
+
+export const GET_CURRENT_USER = gql`
   query me {
     me {
       _id

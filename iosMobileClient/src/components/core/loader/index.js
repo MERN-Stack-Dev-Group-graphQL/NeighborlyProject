@@ -2,14 +2,14 @@ import React from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
 
 const styles = StyleSheet.create({
-  modalBackground: {
+  loaderContainer: {
     flex: 1,
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-around',
     backgroundColor: '#00000040',
   },
-  activityIndicatorWrapper: {
+  activityIndicatorContainer: {
     height: 100,
     width: 100,
     borderRadius: 10,
@@ -30,8 +30,8 @@ const Loader = props => {
       onRequestClose={() => {
         console.log('close modal');
       }}>
-      <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
+      <View style={styles.loaderContainer}>
+        <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator animating={loading} />
         </View>
       </View>

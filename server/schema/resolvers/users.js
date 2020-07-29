@@ -52,15 +52,18 @@ const usersResolver = {
         });
       return user;
     },
-    me: async (parent, args, { me }) => {
-      console.log('ran me');
+    me: async (_, __, { me }) => {
+      console.log('ran me: ', me);
       if (!me) {
         return null;
       }
-      return await mongoDao.pool
-        .db(database)
-        .collection('users')
-        .findOne({ _id: ObjectID(me._id) });
+
+      return await mongoDao.getOneDoc(database, 'users', '_id', ObjectID(me._id));
+
+      // return await mongoDao.pool
+      //   .db(database)
+      //   .collection('users')
+      //   .findOne({ _id: ObjectID(me._id) });
     },
   },
   Mutation: {
@@ -157,6 +160,9 @@ const usersResolver = {
         return false;
       }
     }),
+    resetUserPassword: async () => {
+      // ADD RESET LOGIC HERE
+    },
   },
 };
 

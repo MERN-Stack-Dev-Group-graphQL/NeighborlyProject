@@ -8,9 +8,10 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import {AuthContext} from '_utils/context/';
+import {AuthContext, ThemeContext, UserContext} from '_utils/context/';
 import {DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
 import {View, StyleSheet} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const styles = StyleSheet.create({
@@ -58,8 +59,12 @@ const styles = StyleSheet.create({
 
 const DrawerContent = props => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const {user, logoutUser} = useContext(AuthContext);
+  const switchTheme = useContext(ThemeContext);
+  const {logoutUser} = useContext(AuthContext);
+  const {user} = useContext(UserContext);
+  const {colors} = useTheme();
   const toggleTheme = () => {
+    switchTheme();
     setIsDarkTheme(!isDarkTheme);
   };
 
@@ -164,7 +169,7 @@ const DrawerContent = props => {
             <View style={styles.preference}>
               <Text>Dark Theme</Text>
               <View pointerEvents="none">
-                <Switch value={isDarkTheme} />
+                <Switch value={isDarkTheme} color={colors.primary} />
               </View>
             </View>
           </TouchableRipple>

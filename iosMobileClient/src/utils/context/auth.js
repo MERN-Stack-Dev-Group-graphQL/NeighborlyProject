@@ -1,4 +1,4 @@
-import React, {useReducer, createContext} from 'react';
+/* import React, {useReducer, createContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const initialState = {
@@ -97,3 +97,4 @@ function AuthProvider(props) {
 }
 
 export {AuthContext, AuthProvider};
+ */

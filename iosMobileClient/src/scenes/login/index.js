@@ -1,36 +1,31 @@
 import React, {useState, useContext} from 'react';
-import {useMutation} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import {useMutation} from '@apollo/client';
 import {
   StatusBar,
   Image,
   ImageBackground,
-  Alert,
   View,
   Text,
-  TextInput,
   TouchableHighlight,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import {AuthContext} from '_utils/context/';
 import {AppButton, AppButtonOutline} from '_core/button';
+import {Formik} from 'formik';
+import AuthContainer from '_components/auth-container';
 import DismissKeyboard from '_core/dismiss-keyboard';
+import SocialLogin from '_components/social-login';
+import TextInput from '_components/form/text-input';
+import CheckBox from '_components/form/checkbox';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Animatable from 'react-native-animatable';
+import * as Yup from 'yup';
 
-const bgImage = require('_assets/images/main-background-tools.png');
+import {BG_IMAGE, BRAND_LOGO, BRAND_LOGO_NAME} from '_assets';
+import {LOGIN_USER} from '_utils/graphql';
 
 const styles = StyleSheet.create({
-  heading: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 30,
-    marginBottom: 8,
-    fontWeight: '400',
-  },
   label: {
     width: 200,
     textAlign: 'center',
@@ -59,53 +54,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
-  imageIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 8,
-  },
-  formContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    height: 50,
-    width: '100%',
-    maxWidth: 320,
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  formControl: {
-    flex: 1,
-    padding: 0,
-  },
-  formFieldIcon: {
-    paddingRight: 8,
-  },
   errorMessage: {
     color: 'rgba(255, 194, 11, 1)',
     paddingHorizontal: 10,
     marginBottom: 20,
     maxWidth: 320,
-  },
-  forgotPassword: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    width: '100%',
-    marginBottom: 30,
-  },
-  authSocialWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  paragraph: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.85)',
-    marginBottom: 10,
   },
   buttonText: {
     color: 'rgba(255, 255, 255, 0.85)',
@@ -119,16 +72,24 @@ const styles = StyleSheet.create({
   },
 });
 
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  password: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+});
+
 const LoginScreen = ({navigation}) => {
   const {loginUser} = useContext(AuthContext);
-  const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState({
     login: '',
     password: '',
-    checkInputChange: false,
     secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
   });
 
   const [getUser, {loading}] = useMutation(LOGIN_USER, {
@@ -140,206 +101,108 @@ const LoginScreen = ({navigation}) => {
     ) {
       loginUser(userData);
     },
-    onError(err) {
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
     variables: userData,
   });
 
   const loginHandle = (login, password) => {
-    userData.password.length === 0 &&
-      userData.login.length === 0 &&
-      Alert.alert('Invalid Entry', 'Please enter a valid email and password.', [
-        {text: 'Okay'},
-      ]);
-
-    userData.login.length === 0 &&
-      Alert.alert('Error', 'Email field cannot be empty.', [{text: 'Okay'}]);
-
-    userData.password.length === 0 &&
-      Alert.alert('Error', 'Password field cannot be empty.', [{text: 'Okay'}]);
-
+    setUserData({
+      ...userData,
+      login,
+      password,
+    });
     getUser(login, password);
   };
 
-  const handleTextInputChange = value => {
-    value.trim().length >= 4
-      ? setUserData({
-          ...userData,
-          login: value,
-          checkInputChange: true,
-          isValidUser: true,
-        })
-      : setUserData({
-          ...userData,
-          login: value,
-          checkInputChange: false,
-          isValidUser: false,
-        });
-  };
-
-  const handlePasswordChange = value => {
-    value.trim().length >= 6
-      ? setUserData({
-          ...userData,
-          password: value,
-          isValidPassword: true,
-        })
-      : setUserData({
-          ...userData,
-          password: value,
-          isValidPassword: false,
-        });
-  };
-
-  const handleSecureTextEntry = () => {
-    setUserData({
-      ...userData,
-      secureTextEntry: !userData.secureTextEntry,
-    });
-  };
-
-  const handleValidUser = value => {
-    value.trim().length >= 4
-      ? setUserData({
-          ...userData,
-          isValidUser: true,
-        })
-      : setUserData({
-          ...userData,
-          isValidUser: false,
-        });
-  };
-
   return (
-    <ImageBackground source={bgImage} style={styles.backgroundImage}>
+    <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
       <DismissKeyboard>
-        <View style={styles.container}>
+        <AuthContainer>
           <StatusBar
             barStyle="light-content"
             backgroundColor="transparent"
             translucent={true}
           />
 
-          <Image
+          <Animatable.Image
+            animation="bounceIn"
+            iterationCount={1}
+            direction="alternate"
             style={styles.imageWrapper}
-            source={require('../../assets/images/brand-logo.png')}
+            source={BRAND_LOGO}
           />
-          <Image
+          <Animatable.Image
+            animation="bounceIn"
+            iterationCount={1}
+            direction="alternate"
             style={[styles.imageWrapper, {marginBottom: 40}]}
-            source={require('../../assets/images/brand-text.png')}
+            source={BRAND_LOGO_NAME}
           />
 
-          <View style={styles.formContainer}>
-            <View style={styles.formFieldIcon}>
-              <MaterialCommunityIcons
-                name="email-outline"
-                color={'rgba(16, 43, 70, 0.25)'}
-                size={24}
-              />
-            </View>
-            <TextInput
-              label="Email"
-              placeholder="Email"
-              name="login"
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={value => handleTextInputChange(value)}
-              onEndEditing={e => {
-                handleValidUser(e.nativeEvent.text);
-              }}
-              style={styles.formControl}
-            />
-            <TouchableOpacity style={styles.filterIcon}>
-              {userData.checkInputChange ? (
-                <Animatable.View animation="bounceIn">
-                  <MaterialCommunityIcons
-                    name="checkbox-marked-circle"
-                    color={'#003167'}
-                    size={20}
-                  />
-                </Animatable.View>
-              ) : (
-                <MaterialCommunityIcons
-                  name="checkbox-marked-circle-outline"
-                  color={
-                    userData.password !== ''
-                      ? '#003167'
-                      : 'rgba(16, 43, 70, 0.25)'
-                  }
-                  size={20}
+          <Formik
+            validationSchema={LoginSchema}
+            initialValues={{email: '', password: '', remember: false}}
+            onSubmit={values => loginHandle(values.email, values.password)}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              setFieldValue,
+            }) => (
+              <View style={{width: '100%', alignItems: 'center'}}>
+                <TextInput
+                  iconError="email-outline"
+                  iconValid="email-outline"
+                  placeholder="Enter your Email"
+                  keyboardType="email-address"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  autoCapitalize="none"
+                  error={errors.email}
+                  touched={touched.email}
                 />
-              )}
-            </TouchableOpacity>
-          </View>
-          {userData.isValidUser ? null : (
-            <Animatable.View animation="fadeIn" duration={500}>
-              <Text style={styles.errorMessage}>
-                Username or email address must contain more than four (4)
-                characters.
-              </Text>
-            </Animatable.View>
-          )}
 
-          <View style={styles.formContainer}>
-            <View style={styles.formFieldIcon}>
-              <MaterialCommunityIcons
-                name="lock-open-outline"
-                color={'rgba(16, 43, 70, 0.25)'}
-                size={24}
-              />
-            </View>
-
-            <TextInput
-              label="Password"
-              placeholder="Password"
-              name="password"
-              autoCapitalize="none"
-              secureTextEntry={userData.secureTextEntry ? true : false}
-              onChangeText={value => handlePasswordChange(value)}
-              style={styles.formControl}
-            />
-
-            <TouchableOpacity
-              style={styles.filterIcon}
-              onPress={handleSecureTextEntry}>
-              {userData.secureTextEntry ? (
-                <MaterialCommunityIcons
-                  name="eye-off-outline"
-                  color={
-                    userData.password !== ''
-                      ? '#003167'
-                      : 'rgba(16, 43, 70, 0.25)'
-                  }
-                  size={20}
+                <TextInput
+                  iconError="lock-open-outline"
+                  iconValid="lock-outline"
+                  placeholder="Enter your Password"
+                  secureTextEntry={userData.secureTextEntry ? true : false}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  autoCapitalize="none"
+                  error={errors.password}
+                  touched={touched.password}
                 />
-              ) : (
-                <Animatable.View animation="bounceIn">
-                  <MaterialCommunityIcons
-                    name="eye-outline"
-                    color={'#003167'}
-                    size={20}
-                  />
-                </Animatable.View>
-              )}
-            </TouchableOpacity>
-          </View>
-          {userData.isValidPassword ? null : (
-            <Animatable.View animation="fadeIn" duration={500}>
-              <Text style={styles.errorMessage}>
-                Password must not be empty and more than eight (8) characters.
-              </Text>
-            </Animatable.View>
-          )}
 
-          <AppButton
-            title="Login"
-            size="sm"
-            onPress={() => {
-              loginHandle(userData.login, userData.password);
-            }}
-          />
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    maxWidth: 300,
+                    marginBottom: 30,
+                  }}>
+                  <CheckBox
+                    label="Remember me"
+                    checked={values.remember}
+                    onChange={() => setFieldValue('remember', !values.remember)}
+                  />
+
+                  <TouchableHighlight
+                    onPress={() => navigation.navigate('ForgotPassword')}>
+                    <View style={styles.forgotPassword}>
+                      <Text style={styles.buttonText}>Forgot password?</Text>
+                    </View>
+                  </TouchableHighlight>
+                </View>
+
+                <AppButton title="Login" size="sm" onPress={handleSubmit} />
+              </View>
+            )}
+          </Formik>
 
           <AppButtonOutline
             title="Register"
@@ -347,45 +210,7 @@ const LoginScreen = ({navigation}) => {
             onPress={() => navigation.navigate('Register')}
           />
 
-          <TouchableHighlight
-            onPress={() => navigation.navigate('ForgotPassword')}>
-            <View style={styles.forgotPassword}>
-              <Text style={styles.buttonText}>Forgot password?</Text>
-            </View>
-          </TouchableHighlight>
-
-          <View style={styles.authSocialWrapper}>
-            <TouchableOpacity
-              onPress={() => {
-                // TODO: Google Authentication
-                Alert.alert('TODO: Google Auth');
-              }}>
-              <Image
-                style={styles.imageIcon}
-                source={require('../../assets/images/auth-google.png')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                // TODO: Facebook Authentication
-                Alert.alert('TODO: Facebook Auth');
-              }}>
-              <Image
-                style={styles.imageIcon}
-                source={require('../../assets/images/auth-facebook.png')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                // TODO: Apple Authentication
-                Alert.alert('TODO: Apple Auth');
-              }}>
-              <Image
-                style={styles.imageIcon}
-                source={require('../../assets/images/auth-apple.png')}
-              />
-            </TouchableOpacity>
-          </View>
+          <SocialLogin />
 
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -396,19 +221,10 @@ const LoginScreen = ({navigation}) => {
               size={24}
             />
           </TouchableOpacity>
-        </View>
+        </AuthContainer>
       </DismissKeyboard>
     </ImageBackground>
   );
 };
 
 export default LoginScreen;
-
-const LOGIN_USER = gql`
-  mutation login($login: String!, $password: String!) {
-    login(login: $login, password: $password) {
-      token
-      _id
-    }
-  }
-`;

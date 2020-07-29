@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { AuthProvider } from '../context/auth';
+import { ToolProvider } from '../context/tool';
 import PageContainer from './shared/components/PageContainer';
 import AuthRoute from '../util/AuthRoute';
 import PublicRoute from '../util/PublicRoute';
@@ -22,25 +23,27 @@ import * as routes from '../constants/routes';
 
 const App = () => (
   <AuthProvider>
-    <PageContainer>
-      <Router>
-        <Switch>
-          <AuthRoute path={routes.LOGIN} component={Login} />
-          <AuthRoute path={routes.REGISTER} component={Register} />
-          <PrivateRoute path={routes.ADMIN} component={Admin} />
-          <PublicRoute exact path={routes.HOME} component={Home} />
-          <PublicRoute path={routes.TOOLS} component={Tools} />
-          <PublicRoute exact path={routes.TOOL_DETAIL} component={ToolDetailPage} />
-          <PublicRoute path={routes.CART} component={Cart} />
-          <PublicRoute path={routes.FAQS} component={FAQs} />
-          <PublicRoute path={routes.PRIVACY_POLICY} component={PrivacyPolicy} />
-          <PublicRoute path={routes.TERMS_AND_CONDITIONS} component={TermsAndConditions} />
-          <PublicRoute path={routes.CONTACT} component={Contact} />
-          <PublicRoute path={routes.SEARCH_RESULTS} component={SearchResults} />
-          <PublicRoute path='*' component={PageNotFound} />
-        </Switch>
-      </Router>
-    </PageContainer>
+    <ToolProvider>
+      <PageContainer>
+        <Router>
+          <Switch>
+            <AuthRoute path={routes.LOGIN} component={Login} />
+            <AuthRoute path={routes.REGISTER} component={Register} />
+            <PrivateRoute path={routes.ADMIN} component={Admin} />
+            <PublicRoute exact path={routes.HOME} component={Home} />
+            <PublicRoute path={routes.TOOLS} component={Tools} />
+            <PublicRoute exact path={routes.TOOL_DETAIL} component={ToolDetailPage} />
+            <PublicRoute path={routes.CART} component={Cart} />
+            <PublicRoute path={routes.FAQS} component={FAQs} />
+            <PublicRoute path={routes.PRIVACY_POLICY} component={PrivacyPolicy} />
+            <PublicRoute path={routes.TERMS_AND_CONDITIONS} component={TermsAndConditions} />
+            <PublicRoute path={routes.CONTACT} component={Contact} />
+            <PublicRoute path={routes.SEARCH_RESULTS} component={SearchResults} />
+            <PublicRoute path='*' component={PageNotFound} />
+          </Switch>
+        </Router>
+      </PageContainer>
+    </ToolProvider>
   </AuthProvider>
 );
 

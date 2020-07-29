@@ -2,19 +2,16 @@ import React from 'react';
 import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '_scenes/home';
+import HomeTopTabScreen from '_components/tabviewmenubar';
 import SearchScreen from '_scenes/search';
 import ListScreen from '_scenes/listtool';
 import ChatScreen from '_scenes/chat';
 import ToolsScreen from '_scenes/tools';
 import ToolDetailsScreen from '_scenes/tools/details';
-import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-Feather.loadFont();
-MaterialCommunityIcons.loadFont();
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const AppTab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   headerRightNav: {
@@ -78,10 +75,10 @@ const screenOptions = ({navigation, route}) => ({
   },
 });
 
-const Home = () => {
+const HomeTabScreen = () => {
   return (
     <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeTopTabScreen} />
       <Stack.Screen
         name="Tool Details"
         component={ToolDetailsScreen}
@@ -91,7 +88,7 @@ const Home = () => {
   );
 };
 
-const ToolsStack = () => {
+const ToolsTabScreen = () => {
   return (
     <Stack.Navigator initialRouteName="Tools" screenOptions={screenOptions}>
       <Stack.Screen
@@ -108,7 +105,7 @@ const ToolsStack = () => {
   );
 };
 
-const SearchStack = () => {
+const SearchTabScreen = () => {
   return (
     <Stack.Navigator initialRouteName="Search" screenOptions={screenOptions}>
       <Stack.Screen
@@ -120,7 +117,7 @@ const SearchStack = () => {
   );
 };
 
-const ListToolStack = () => {
+const ListToolTabScreen = () => {
   return (
     <Stack.Navigator initialRouteName="Tools" screenOptions={screenOptions}>
       <Stack.Screen
@@ -137,7 +134,7 @@ const ListToolStack = () => {
   );
 };
 
-const ChatStack = () => {
+const ChatTabScreen = () => {
   return (
     <Stack.Navigator initialRouteName="Chat" screenOptions={screenOptions}>
       <Stack.Screen
@@ -151,7 +148,7 @@ const ChatStack = () => {
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator
+    <AppTab.Navigator
       initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
@@ -175,15 +172,15 @@ const TabNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#003167',
+        activeTintColor: '#0B57BF',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Search" component={SearchStack} />
-      <Tab.Screen name="List Tool" component={ListToolStack} />
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Chat" component={ChatStack} />
-      <Tab.Screen name="Tools" component={ToolsStack} />
-    </Tab.Navigator>
+      <AppTab.Screen name="Search" component={SearchTabScreen} />
+      <AppTab.Screen name="List Tool" component={ListToolTabScreen} />
+      <AppTab.Screen name="Home" component={HomeTabScreen} />
+      <AppTab.Screen name="Chat" component={ChatTabScreen} />
+      <AppTab.Screen name="Tools" component={ToolsTabScreen} />
+    </AppTab.Navigator>
   );
 };
 

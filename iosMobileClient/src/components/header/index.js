@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import {
   Platform,
   StyleSheet,
@@ -177,7 +177,7 @@ const Header = ({title, navigation}) => {
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => {
-            Alert.alert('Filter button clicked!');
+            navigation.navigate('Alert');
           }}>
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
@@ -197,7 +197,6 @@ const Header = ({title, navigation}) => {
                         tool: tool,
                         starCount,
                         rateCount,
-                        otherParam: 'anything you want here',
                       });
                     }}>
                     <View

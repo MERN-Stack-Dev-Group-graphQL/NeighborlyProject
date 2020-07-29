@@ -1,28 +1,41 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {Dimensions, Image, StyleSheet} from 'react-native';
+
+const {width} = Dimensions.get('window');
+const ratio = 300 / 260;
+export const CARD_WIDTH = width * 0.9;
+export const CARD_HEIGHT = CARD_WIDTH * ratio;
 
 export const styles = StyleSheet.create({
   cardWrapper: {
     backgroundColor: '#ffffff',
-    margin: 10,
-    borderRadius: 5,
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    borderRadius: 15,
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 8,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 12,
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 16,
+  },
+  cardImage: {
+    flex: 3,
+    overflow: 'hidden',
+    backgroundColor: 'gray',
+    borderRadius: 15,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   cardBody: {
-    display: 'flex',
+    flex: 1,
     position: 'relative',
     padding: 10,
   },
-  cardImage: {
-    height: 260,
-    width: '100%',
-    backgroundColor: 'gray',
+  cardBase: {
+    flex: 1,
   },
   cardTitle: {
     textTransform: 'capitalize',
@@ -34,14 +47,18 @@ export const styles = StyleSheet.create({
   cardText: {
     paddingBottom: 10,
   },
+  divider: {
+    height: 1,
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.05)',
+  },
   cardFooter: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     padding: 10,
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   avatarWrapper: {
     position: 'relative',
@@ -51,7 +68,7 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 25,
-    top: -25,
+    top: -35,
     right: 16,
   },
   actionWrapper: {
@@ -96,7 +113,16 @@ export const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: 'rgba(255,255,255,0.85)',
+    backgroundColor: '#1B2023',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  likeTool: {
+    marginLeft: 'auto',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#1B2023',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -104,8 +130,16 @@ export const styles = StyleSheet.create({
     marginLeft: 'auto',
     width: 30,
     height: 30,
+    marginLeft: 6,
     borderRadius: 15,
-    backgroundColor: 'rgba(255,255,255,0.85)',
+    backgroundColor: '#1B2023',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  moreMenu: {
+    width: 20,
+    height: 30,
+    marginLeft: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -132,8 +166,6 @@ export const styles = StyleSheet.create({
   },
   toolImage: {
     ...StyleSheet.absoluteFillObject,
-    // height: '100%',
-    // width: '100%',
   },
   linearGradient: {
     flex: 1,

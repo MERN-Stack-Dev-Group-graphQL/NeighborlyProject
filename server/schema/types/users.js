@@ -63,6 +63,7 @@ const usersSchema = gql`
     login(login: String!, password: String!): Token!
     updateUser(login: String!): User!
     deleteUser(_id: ID!): Boolean!
+    resetUserPassword(email: String!): Token!
   }
 `;
 

@@ -1,20 +1,24 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
+// import MapViewDirections from 'react-native-maps-directions';
+import Geolocation from '@react-native-community/geolocation';
+import {useQuery} from '@apollo/client';
+import {FETCH_TOOLS_QUERY} from '_utils/graphql';
 import {
-  StyleSheet,
   View,
   Text,
   Image,
   Platform,
   Alert,
   ScrollView,
+  StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-// import {LOCAL_HOST_SERVER} from 'react-native-dotenv';
-import Geolocation from '@react-native-community/geolocation';
 import {useTheme} from '@react-navigation/native';
 import * as routes from '_utils/constants/routes';
 import {mapDarkStyle, mapStandardStyle} from '_scenes/home/mapview/mapstyles';
+import Loader from '_core/loader';
+import Error from '_core/error';
 
 const styles = StyleSheet.create({
   container: {
@@ -90,10 +94,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeMapView = props => {
+const HomeMapView = ({navigation}) => {
+  const mapRef = useRef();
   const theme = useTheme();
-  const _map = useRef(null);
-  const tools = props.data.getTools.edges;
+  const {loading, error, data} = useQuery(FETCH_TOOLS_QUERY);
+  // const tools = data.getTools.edges;
   const [region, setRegion] = useState({
     latitude: 39.931911,
     longitude: -75.340184,
@@ -105,7 +110,7 @@ const HomeMapView = props => {
     Geolocation.getCurrentPosition(
       position => {
         // const initialPosition = JSON.stringify(position);
-        console.log(JSON.stringify(position));
+        // console.log(JSON.stringify(position));
 
         setRegion({
           latitude: position.coords.latitude,
@@ -120,19 +125,14 @@ const HomeMapView = props => {
   };
 
   useEffect(() => {
+    if (mapRef) {
+      console.log(mapRef);
+    }
+
     (async () => {
       if (Platform.OS == 'ios') {
         locateCurrentPosition();
       }
-      // else {
-      //   var response = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
-
-      //   console.log('Android: ' + response);
-
-      //   if (response === 'granted') {
-      //     locateCurrentPosition();
-      //   }
-      // }
     })();
   }, []);
 
@@ -157,19 +157,30 @@ const HomeMapView = props => {
     );
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Error error={error} />;
+  }
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <MapView
-        ref={_map}
+        ref={mapRef}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation={true}
         style={styles.map}
-        customMapStyle={theme.dark ? mapDarkStyle : mapStandardStyle}
         initialRegion={region}
-        // onRegionChangeComplete={region => setRegion(region)}
-      >
-        {tools.map(
-          (tool, index) =>
+        showsUserLocation
+        customMapStyle={theme.dark ? mapDarkStyle : mapStandardStyle}
+        onRegionChangeComplete={region => setRegion(region)}>
+        {/* {tools.map(
+          tool =>
             tool.location.latitude &&
             tool.location.longitude && (
               <Marker
@@ -201,9 +212,9 @@ const HomeMapView = props => {
                 </Callout>
               </Marker>
             ),
-        )}
+        )} */}
       </MapView>
-      <ScrollView
+      {/* <ScrollView
         horizontal
         scrollEventThrottle={1}
         showsHorizontalScrollIndicator={false}
@@ -214,7 +225,7 @@ const HomeMapView = props => {
             <Text>{tool.make}</Text>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };

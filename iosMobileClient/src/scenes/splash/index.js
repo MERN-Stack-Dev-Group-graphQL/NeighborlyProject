@@ -20,10 +20,10 @@ import Animated, {
   Extrapolate,
 } from 'react-native-reanimated';
 import Slide, {SLIDE_HEIGHT, BORDER_RADIUS} from './slide';
+import {BG_IMAGE} from '_assets';
 import FooterSlide from './footer-slide';
 import Dot from './dot';
 
-const bgImage = require('_assets/images/tool-background.png');
 const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -117,7 +117,7 @@ const slides = [
   },
 ];
 
-const SplashScreen = ({navigation}) => {
+const Splash = ({navigation}) => {
   const scroll = useRef(null);
   const {scrollHandler, x} = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
@@ -126,7 +126,7 @@ const SplashScreen = ({navigation}) => {
   });
 
   return (
-    <ImageBackground source={bgImage} style={styles.backgroundImage}>
+    <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
       <View style={styles.container}>
         <StatusBar
           barStyle="light-content"
@@ -223,4 +223,4 @@ const SplashScreen = ({navigation}) => {
   );
 };
 
-export default SplashScreen;
+export default Splash;

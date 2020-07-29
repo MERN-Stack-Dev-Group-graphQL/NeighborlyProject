@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {currencyFormat} from '_utils/currencyFormat';
 import StarCount from '_core/review/starcount';
+import LinearGradient from 'react-native-linear-gradient';
 import * as routes from '_utils/constants/routes';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
@@ -10,6 +11,8 @@ const styles = StyleSheet.create({
   cardWrapper: {
     backgroundColor: '#ffffff',
     margin: 10,
+    marginLeft: 0,
+    marginRight: 0,
     borderRadius: 5,
     shadowOffset: {
       width: 0,
@@ -22,27 +25,29 @@ const styles = StyleSheet.create({
   cardBody: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    padding: 10,
   },
   cardImage: {
-    height: 80,
-    width: 80,
     backgroundColor: 'gray',
+    minHeight: 120,
   },
   cardTitle: {
     textTransform: 'capitalize',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     paddingRight: 55,
     marginBottom: 4,
   },
+  toolImage: {
+    ...StyleSheet.absoluteFillObject,
+  },
   avatar: {
     position: 'absolute',
-    height: 30,
-    width: 30,
-    borderRadius: 15,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
     transform: [{translateY: -8}],
     left: -8,
     borderWidth: 2,
@@ -80,6 +85,13 @@ const styles = StyleSheet.create({
   actionWrapper: {
     marginTop: 'auto',
   },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    opacity: 0.25,
+  },
 });
 
 const CardList = ({tool, navigation, handleCart, cartCount}) => {
@@ -88,7 +100,7 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
     if (path.url.length > 1) {
       return (
         <Image
-          style={{width: '100%', height: '100%'}}
+          style={styles.toolImage}
           source={{
             uri: `${routes.LOCAL_HOST}${path.url}`,
           }}
@@ -97,9 +109,9 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
     }
     return (
       <Image
-        style={{width: '100%', height: '100%'}}
+        style={styles.toolImage}
         source={{
-          uri: `${routes.LOCAL_HOST}/assets/img/default.jpg`,
+          uri: `${routes.LOCAL_HOST}${path.url}`,
         }}
       />
     );
@@ -129,8 +141,12 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
     <View style={styles.cardWrapper}>
       <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
         <View style={styles.cardBody}>
-          <View style={styles.cardImage}>
+          <View style={[styles.cardImage, {flex: 1}]}>
             <ImageBlock url={tool.url} />
+            <LinearGradient
+              colors={['transparent', '#003167']}
+              style={styles.linearGradient}
+            />
             <Image
               style={styles.avatar}
               source={{
@@ -138,7 +154,7 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
               }}
             />
           </View>
-          <View style={{paddingHorizontal: 10}}>
+          <View style={{paddingHorizontal: 10, flex: 2}}>
             <View style={styles.header}>
               <Text style={styles.subHeading}>{tool.make}</Text>
               <Text style={styles.cardTitle}>{tool.title}</Text>

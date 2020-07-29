@@ -4,7 +4,6 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import TabNavigator from './tab-navigator';
 import DrawerContent from './drawer-content';
-// Scenes
 import ProfileScreen from '_scenes/profile';
 import AccountActivityScreen from '_scenes/account-activity';
 import NotificationsScreen from '_scenes/notifications';
@@ -13,7 +12,7 @@ import SavedToolsScreen from '_scenes/tools/saved';
 import TrackToolsScreen from '_scenes/tools/track';
 
 // Initialize Navigation
-const Drawer = createDrawerNavigator();
+const AppDrawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
@@ -160,15 +159,19 @@ const TrackTools = () => {
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={TabNavigator} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Account Activity" component={AccountActivity} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
-      <Drawer.Screen name="Filters" component={Filters} />
-      <Drawer.Screen name="Saved Tools" component={SavedTools} />
-      <Drawer.Screen name="Track Tools" component={TrackTools} />
-    </Drawer.Navigator>
+    <AppDrawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+      <AppDrawer.Screen
+        name="Tabs"
+        component={TabNavigator}
+        options={{drawerLabel: 'Home'}}
+      />
+      <AppDrawer.Screen name="Profile" component={Profile} />
+      <AppDrawer.Screen name="Account Activity" component={AccountActivity} />
+      <AppDrawer.Screen name="Notifications" component={Notifications} />
+      <AppDrawer.Screen name="Filters" component={Filters} />
+      <AppDrawer.Screen name="Saved Tools" component={SavedTools} />
+      <AppDrawer.Screen name="Track Tools" component={TrackTools} />
+    </AppDrawer.Navigator>
   );
 };
 

@@ -6,9 +6,7 @@ import { mkdir } from 'fs';
 const { ObjectID } = require('mongodb');
 const { validateToolInput } = require('../../util/validators');
 const database = process.env.MONGODB_DB;
-
 const toCursorHash = (string) => Buffer.from(string).toString('base64');
-
 const fromCursorHash = (string) => {
   console.log(string, 'test string');
   return Buffer.from(string, 'base64').toString('ascii');
@@ -17,12 +15,8 @@ const fromCursorHash = (string) => {
 const toolsResolver = {
   Query: {
     getTools: async (parent, { cursor, limit = 9 }, context, info) => {
-      // console.log('ran tools');
-      // console.log(cursor, 'test cursor');
       const cursorOptions = cursor ? { createdAt: { $lt: fromCursorHash(cursor) } } : {};
-      // console.log(cursorOptions, 'test option');
       const allTools = await mongoDao.getAllDocs(database, 'tools', cursorOptions, limit);
-
       const hasNextPage = allTools.length > limit;
       const edges = hasNextPage ? allTools.slice(0, -1) : allTools;
       return {
@@ -34,7 +28,6 @@ const toolsResolver = {
       };
     },
     getToolById: async (_, { toolId }) => {
-      console.log('ran tool');
       const tool = await mongoDao.getOneDoc(database, 'tools', '_id', ObjectID(toolId));
 
       return tool;
@@ -91,6 +84,9 @@ const toolsResolver = {
             description: 1,
             location: 1,
             category: 1,
+            price: 1,
+            unitOfMeasure: 1,
+            quantity: 1,
             userId: 1,
             url: 1,
             photo: 1,

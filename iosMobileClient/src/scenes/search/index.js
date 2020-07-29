@@ -22,8 +22,8 @@ const Search = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#003167" />
 
+      <Header navigation={navigation} />
       <View style={{flex: 1}}>
-        <Header navigation={navigation} />
         <View style={styles.alignContent}>
           <Text>Search Page</Text>
         </View>

@@ -1,9 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
 const styles = StyleSheet.create({
+  container: {},
   buttonContainer: {
     elevation: 8,
     display: 'flex',
@@ -39,9 +41,11 @@ const styles = StyleSheet.create({
 });
 
 export const AppButton = ({onPress, title}) => {
+  const {colors} = useTheme();
+
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={[styles.buttonText, {color: colors.primary}]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -52,6 +56,14 @@ export const AppButtonOutline = ({onPress, title}) => {
       style={[styles.buttonContainer, styles.buttonContainerOutline]}
       onPress={onPress}>
       <Text style={[styles.buttonText, styles.buttonTextOutline]}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export const TextButton = ({onPress, title}) => {
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text>{title}</Text>
     </TouchableOpacity>
   );
 };

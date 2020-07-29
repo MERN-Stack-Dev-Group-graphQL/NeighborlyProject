@@ -1,20 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {useMutation} from '@apollo/client';
 import {
   StyleSheet,
   StatusBar,
   View,
   Text,
-  TextInput,
   ImageBackground,
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import Loader from '_core/loader';
 import {AppButton} from '_components/core/button';
+import {AuthContext} from '_utils/context/';
+import {Formik} from 'formik';
+import TextInput from '_components/form/text-input';
+import Loader from '_core/loader';
 import DismissKeyboard from '_core/dismiss-keyboard';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const bgImage = require('_assets/images/main-background-tools.png');
+import * as Yup from 'yup';
+import {BG_IMAGE} from '_assets';
+import {RESET_PASSWORD} from '_utils/graphql';
 
 const styles = StyleSheet.create({
   container: {
@@ -83,13 +87,38 @@ const styles = StyleSheet.create({
   },
 });
 
-const ForgotPasswordScreen = ({navigation}) => {
-  const [login, setLogin] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
+const ForgotPasswordSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+});
 
-  const handleSubmit = () => {
-    navigation.navigate('Home');
+const ForgotPasswordScreen = ({navigation}) => {
+  const {resetUserPassord} = useContext(AuthContext);
+  const [userData, setUserData] = useState({
+    email: '',
+  });
+
+  const [resetPassword, {loading}] = useMutation(RESET_PASSWORD, {
+    update(
+      __,
+      {
+        data: {email: userData},
+      },
+    ) {
+      resetUserPassord(userData);
+    },
+    variables: userData,
+  });
+
+  const passwordHandle = email => {
+    setUserData({
+      ...userData,
+      email,
+    });
+    resetPassword(email);
   };
 
   const handleOnPressRegister = () => {
@@ -98,35 +127,50 @@ const ForgotPasswordScreen = ({navigation}) => {
 
   return (
     <DismissKeyboard>
-      <ImageBackground source={bgImage} style={styles.backgroundImage}>
+      <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
         <View style={styles.container}>
           <StatusBar barStyle="light-content" backgroundColor="#003167" />
           <Loader loading={loading} />
 
-          <View style={{width: '100%', maxWidth: 320}}>
-            <Text style={styles.header}>Forgot password?</Text>
+          <Formik
+            validationSchema={ForgotPasswordSchema}
+            initialValues={{email: ''}}
+            onSubmit={values => passwordHandle(values.email)}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              setFieldValue,
+            }) => (
+              <View style={{width: '100%', maxWidth: 320}}>
+                <Text style={styles.header}>Forgot password?</Text>
 
-            <TextInput
-              label="Email"
-              placeholder="Email"
-              name="login"
-              style={styles.formControl}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={() => {
-                setLogin(login);
-              }}
-              defaultValue={login}
-            />
-            <AppButton title="Reset" size="sm" onPress={handleSubmit} />
+                <TextInput
+                  iconError="email-outline"
+                  iconValid="email-outline"
+                  placeholder="Enter your Email"
+                  keyboardType="email-address"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  autoCapitalize="none"
+                  error={errors.email}
+                  touched={touched.email}
+                />
+                <AppButton title="Reset" size="sm" onPress={handleSubmit} />
 
-            <TouchableHighlight onPress={handleOnPressRegister}>
-              <Text style={styles.paragraph}>
-                <Text>You don’t have an account? </Text>
-                <Text style={styles.span}>Register</Text> here.
-              </Text>
-            </TouchableHighlight>
-          </View>
+                <TouchableHighlight onPress={handleOnPressRegister}>
+                  <Text style={styles.paragraph}>
+                    <Text>You don’t have an account? </Text>
+                    <Text style={styles.span}>Register</Text> here.
+                  </Text>
+                </TouchableHighlight>
+              </View>
+            )}
+          </Formik>
+
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={styles.goBackButton}>
