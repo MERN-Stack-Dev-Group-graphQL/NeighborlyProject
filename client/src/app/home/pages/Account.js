@@ -60,20 +60,21 @@ function Account(){
     }
     
     if(data){
-      console.log(data)
+      const { firstName, lastName, username, email, phone, mobile, role } = data.user;
+
         userData = (
           <>
             <img 
               src={ account.avatar }
-              alt={`${data.user.firstName} ${data.user.lastName} avatar`} 
+              alt={`${firstName} ${lastName} avatar`} 
               style={{width: `${75}px`, height: `${75}px`}}/>
-            <p>First Name: {data.user.firstName}</p>
-            <p>Last Name: {data.user.lastName}</p>
-            <p>User Name: {data.user.username}</p>
-            <p>Email: {data.user.email}</p>
-            <p>Phone: {data.user.phone}</p>
-            <p>Cell: {data.user.mobile}</p>
-            <p>Role: {data.user.role}</p>
+            <p>First Name: {firstName}</p>
+            <p>Last Name: {lastName}</p>
+            <p>User Name: {username}</p>
+            <p>Email: {email}</p>
+            <p>Phone: {phone}</p>
+            <p>Cell: {mobile}</p>
+            <p>Role: {role}</p>
           </>
         )
     }
