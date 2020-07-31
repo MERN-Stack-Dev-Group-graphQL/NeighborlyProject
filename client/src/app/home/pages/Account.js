@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/auth';
 import md5 from 'js-md5';
 import defaultImage from '../../../assets/img/avatars/ernie.jpg';
 
-import LoadingDots from '../../shared/components/LoadingDots';
+import LoadingDots from '../../shared/components/LoadingDots/LoadingDots';
 
 
 const queryUser = gql`
