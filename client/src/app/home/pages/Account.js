@@ -31,7 +31,8 @@ const queryUser = gql`
 function Account(){
   const userContextID = useContext(AuthContext).user._id;
   const userContextEmail = useContext(AuthContext).user.email.toLowerCase();
-  const md5Email = md5(userContextEmail); //To currently test the conditional logic here change md5Email to an email address associated with a valid wordpress.com account
+//To test the gravatar image change this to an email address associated with a wordpress.com account
+  const md5Email = md5(userContextEmail);
   const gravatarURL = `https://www.gravatar.com/avatar/`;
 
   const [account, setAccount] = useState({

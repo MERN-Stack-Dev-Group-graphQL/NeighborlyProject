@@ -27,7 +27,6 @@ function Home() {
     },
   });
 
-  console.log(data, " Test data");
 
   return (
     <div>
