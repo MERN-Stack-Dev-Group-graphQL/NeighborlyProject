@@ -1,6 +1,39 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
+const FooterSlide = ({header, description, last, onPress, onSkip}) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>{header}</Text>
+      <Text style={styles.description}>{description}</Text>
+
+      <View style={styles.footerButtons}>
+        {last ? (
+          <View />
+        ) : (
+          <TouchableOpacity onPress={onSkip} style={{flex: 1}}>
+            <View>
+              <Text style={styles.skipText}>Skip</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+
+        <TouchableOpacity {...{onPress}} style={{flex: 1}}>
+          <View
+            style={[
+              styles.cta,
+              {backgroundColor: last ? '#0B57BF' : '#ECA900'},
+            ]}>
+            <Text style={{fontSize: 20, color: '#ffffff'}}>
+              {last ? "Let's get Started" : 'Next'}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,38 +73,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-
-const FooterSlide = ({header, description, last, onPress, onSkip}) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>{header}</Text>
-      <Text style={styles.description}>{description}</Text>
-
-      <View style={styles.footerButtons}>
-        {last ? (
-          <View />
-        ) : (
-          <TouchableOpacity onPress={onSkip} style={{flex: 1}}>
-            <View>
-              <Text style={styles.skipText}>Skip</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-
-        <TouchableOpacity {...{onPress}} style={{flex: 1}}>
-          <View
-            style={[
-              styles.cta,
-              {backgroundColor: last ? '#0B57BF' : '#ECA900'},
-            ]}>
-            <Text style={{fontSize: 20, color: '#ffffff'}}>
-              {last ? "Let's get Started" : 'Next'}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
 
 export default FooterSlide;

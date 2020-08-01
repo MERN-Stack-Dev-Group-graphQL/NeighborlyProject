@@ -1,8 +1,14 @@
 import React, {useRef, useState, useEffect} from 'react';
-import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {
+  AnimatedRegion,
+  Marker,
+  Callout,
+  PROVIDER_GOOGLE,
+} from 'react-native-maps';
 // import MapViewDirections from 'react-native-maps-directions';
 import Geolocation from '@react-native-community/geolocation';
 import {useQuery} from '@apollo/client';
+// import {CATEGORIES} from '_utils/graphql/mock';
 import {FETCH_TOOLS_QUERY} from '_utils/graphql';
 import {
   View,
@@ -10,93 +16,21 @@ import {
   Image,
   Platform,
   Alert,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
+  PermissionStatus,
 } from 'react-native';
-import {useTheme} from '@react-navigation/native';
 import * as routes from '_utils/constants/routes';
+import {useTheme} from '@react-navigation/native';
 import {mapDarkStyle, mapStandardStyle} from '_scenes/home/mapview/mapstyles';
 import Loader from '_core/loader';
+import CategoryTabs from '_components/category-tabs';
 import Error from '_core/error';
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  toolsMapScroll: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 10 : 10,
-    paddingHorizontal: 10,
-  },
-  toolsMakeIcon: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 8,
-    paddingHorizontal: 20,
-    marginHorizontal: 10,
-    height: 35,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
-  },
-  bubble: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignSelf: 'flex-start',
-    backgroundColor: '#ffffff',
-    borderRadius: 6,
-    borderColor: '#ccc',
-    borderWidth: 0.5,
-    width: 150,
-    overflow: 'hidden',
-  },
-  arrow: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#fff',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#007a87',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -0.5,
-  },
-  name: {
-    fontSize: 14,
-    marginBottom: 4,
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    color: '#007a87',
-  },
-  description: {
-    fontSize: 11,
-    marginBottom: 5,
-  },
-  body: {
-    flexGrow: 1,
-    padding: 10,
-  },
-  image: {
-    width: '100%',
-    height: 80,
-  },
-});
 
 const HomeMapView = ({navigation}) => {
   const mapRef = useRef();
   const theme = useTheme();
+  const {colors} = useTheme();
   const {loading, error, data} = useQuery(FETCH_TOOLS_QUERY);
   // const tools = data.getTools.edges;
   const [region, setRegion] = useState({
@@ -158,7 +92,7 @@ const HomeMapView = ({navigation}) => {
   };
 
   if (loading) {
-    return <Loader />;
+    return <Loader loading={loading} />;
   }
 
   if (error) {
@@ -214,20 +148,70 @@ const HomeMapView = ({navigation}) => {
             ),
         )} */}
       </MapView>
-      {/* <ScrollView
-        horizontal
-        scrollEventThrottle={1}
-        showsHorizontalScrollIndicator={false}
-        height={50}
-        style={styles.toolsMapScroll}>
-        {tools.map((tool, index) => (
-          <TouchableOpacity key={index} style={styles.toolsMakeIcon}>
-            <Text>{tool.make}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView> */}
+      <CategoryTabs />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  categoryScrollView: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
+  bubble: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
+    backgroundColor: '#ffffff',
+    borderRadius: 6,
+    borderColor: '#ccc',
+    borderWidth: 0.5,
+    width: 150,
+    overflow: 'hidden',
+  },
+  arrow: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#fff',
+    borderWidth: 16,
+    alignSelf: 'center',
+    marginTop: -32,
+  },
+  arrowBorder: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#007a87',
+    borderWidth: 16,
+    alignSelf: 'center',
+    marginTop: -0.5,
+  },
+  name: {
+    fontSize: 14,
+    marginBottom: 4,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    color: '#007a87',
+  },
+  description: {
+    fontSize: 11,
+    marginBottom: 5,
+  },
+  body: {
+    flexGrow: 1,
+    padding: 10,
+  },
+  image: {
+    width: '100%',
+    height: 80,
+  },
+});
 
 export default HomeMapView;

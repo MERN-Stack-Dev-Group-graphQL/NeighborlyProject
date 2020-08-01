@@ -5,8 +5,6 @@ import CreateApolloServer from './apollo/createApolloServer';
 import createLogger from './@lib/logger';
 import cors from 'cors';
 
-// nothing
-
 const path = require('path');
 const logger = createLogger('main');
 

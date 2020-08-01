@@ -18,96 +18,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  searchBarContainer: {
-    position: 'relative',
-    backgroundColor: '#003167',
-    zIndex: 2,
-  },
-  searchWrapper: {
-    position: 'absolute',
-    paddingVertical: 16,
-    backgroundColor: '#ffffff',
-    borderRadius: 6,
-    borderColor: '#f6f6f6',
-    borderWidth: 0.5,
-    width: '100%',
-    top: Platform === 'ios' ? 80 : 65,
-    zIndex: 3,
-  },
-  searchFormWrapper: {
-    position: 'relative',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 70,
-    width,
-  },
-  searchContainer: {
-    flex: 6,
-    position: 'relative',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#ffffff',
-    marginLeft: 10,
-  },
-  filterButton: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10,
-  },
-  filter: {
-    color: '#ffffff',
-  },
-  searchIcon: {
-    marginLeft: 16,
-  },
-  formControl: {
-    flex: 1,
-    padding: 0,
-  },
-  filterIcon: {
-    marginRight: 16,
-  },
-
-  textBold: {
-    fontWeight: 'bold',
-    minWidth: 52,
-  },
-  textLight: {
-    color: 'rgba(0,0,0,0.5)',
-    fontSize: 13,
-  },
-  searchListText: {
-    flexDirection: 'row',
-  },
-
-  autoCompleteContainer: {
-    position: 'relative',
-    borderRadius: 5,
-  },
-  cardImage: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    borderWidth: 3,
-    borderColor: '#d0d4d5',
-    marginBottom: 4,
-  },
-  resultsView: {
-    paddingLeft: 8,
-  },
-  tapSearchResults: {
-    position: 'relative',
-    textAlign: 'left',
-    padding: 10,
-    width: '100%',
-  },
-});
-
 const Header = ({title, navigation}) => {
   const [search, setSearch] = useState('');
 
@@ -230,5 +140,95 @@ const Header = ({title, navigation}) => {
 Header.defaultProps = {
   title: 'Neighborly',
 };
+
+const styles = StyleSheet.create({
+  searchBarContainer: {
+    position: 'relative',
+    backgroundColor: '#003167',
+    zIndex: 2,
+  },
+  searchWrapper: {
+    position: 'absolute',
+    paddingVertical: 16,
+    backgroundColor: '#ffffff',
+    borderRadius: 6,
+    borderColor: '#f6f6f6',
+    borderWidth: 0.5,
+    width: '100%',
+    top: Platform === 'ios' ? 80 : 65,
+    zIndex: 3,
+  },
+  searchFormWrapper: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 70,
+    width,
+  },
+  searchContainer: {
+    flex: 6,
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#ffffff',
+    marginLeft: 10,
+  },
+  filterButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  filter: {
+    color: '#ffffff',
+  },
+  searchIcon: {
+    marginLeft: 16,
+  },
+  formControl: {
+    flex: 1,
+    padding: 0,
+  },
+  filterIcon: {
+    marginRight: 16,
+  },
+
+  textBold: {
+    fontWeight: 'bold',
+    minWidth: 52,
+  },
+  textLight: {
+    color: 'rgba(0,0,0,0.5)',
+    fontSize: 13,
+  },
+  searchListText: {
+    flexDirection: 'row',
+  },
+
+  autoCompleteContainer: {
+    position: 'relative',
+    borderRadius: 5,
+  },
+  cardImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    borderWidth: 3,
+    borderColor: '#d0d4d5',
+    marginBottom: 4,
+  },
+  resultsView: {
+    paddingLeft: 8,
+  },
+  tapSearchResults: {
+    position: 'relative',
+    textAlign: 'left',
+    padding: 10,
+    width: '100%',
+  },
+});
 
 export default Header;

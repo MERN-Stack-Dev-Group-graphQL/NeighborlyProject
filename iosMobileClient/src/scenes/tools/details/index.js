@@ -21,99 +21,6 @@ import Error from '_core/error';
 
 const {height} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  imageBlock: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  cardWrapper: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    margin: 10,
-    borderRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 12,
-  },
-  cardImage: {
-    flex: 1,
-    height: height * 0.33,
-    width: '100%',
-    backgroundColor: 'gray',
-  },
-  cardBody: {
-    flex: 2,
-    position: 'relative',
-    padding: 16,
-  },
-  cardTitle: {
-    textTransform: 'capitalize',
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingRight: 55,
-    marginBottom: 4,
-  },
-  cardText: {
-    paddingBottom: 20,
-  },
-  avatar: {
-    position: 'absolute',
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    transform: [{translateY: -25}],
-    right: 16,
-  },
-  startCountWrapper: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  text: {
-    fontWeight: 'bold',
-  },
-  cartText: {
-    color: '#fff',
-    textTransform: 'uppercase',
-  },
-  toolImage: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-    opacity: 0.25,
-  },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  colLeft: {
-    minWidth: 140,
-  },
-  colRight: {},
-  price: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginLeft: 'auto',
-  },
-  addToCart: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 240,
-    height: 50,
-    marginVertical: 10,
-    marginHorizontal: 'auto',
-    borderRadius: 25,
-    backgroundColor: '#0b57bf',
-  },
-});
-
 const ToolDetails = ({route, navigation}) => {
   const {itemId, tool, starCount, rateCount} = route.params;
   const {loading, error, data} = useQuery(FETCH_TOOLS_BY_ID_QUERY, {
@@ -145,7 +52,7 @@ const ToolDetails = ({route, navigation}) => {
   };
 
   if (loading) {
-    return <Loader />;
+    return <Loader loading={loading} />;
   }
 
   if (error) {
@@ -238,5 +145,98 @@ const ToolDetails = ({route, navigation}) => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  imageBlock: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  cardWrapper: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 12,
+  },
+  cardImage: {
+    flex: 1,
+    height: height * 0.33,
+    width: '100%',
+    backgroundColor: 'gray',
+  },
+  cardBody: {
+    flex: 2,
+    position: 'relative',
+    padding: 16,
+  },
+  cardTitle: {
+    textTransform: 'capitalize',
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingRight: 55,
+    marginBottom: 4,
+  },
+  cardText: {
+    paddingBottom: 20,
+  },
+  avatar: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    transform: [{translateY: -25}],
+    right: 16,
+  },
+  startCountWrapper: {
+    flexDirection: 'row',
+    marginBottom: 16,
+  },
+  text: {
+    fontWeight: 'bold',
+  },
+  cartText: {
+    color: '#fff',
+    textTransform: 'uppercase',
+  },
+  toolImage: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    opacity: 0.25,
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  colLeft: {
+    minWidth: 140,
+  },
+  colRight: {},
+  price: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginLeft: 'auto',
+  },
+  addToCart: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 240,
+    height: 50,
+    marginVertical: 10,
+    marginHorizontal: 'auto',
+    borderRadius: 25,
+    backgroundColor: '#0b57bf',
+  },
+});
 
 export default ToolDetails;

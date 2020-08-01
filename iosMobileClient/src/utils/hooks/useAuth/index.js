@@ -9,23 +9,6 @@ export const useAuth = () => {
     token: null,
   };
 
-  // const xToken = 'x-token';
-  // const jwtToken = SecureStorage.getItem(xToken);
-  // // const jwtToken = AsyncStorage.getItem('x-token');
-  // if (jwtToken !== 'undefined') {
-  //   SecureStorage.getItem(xToken).then(value => {
-  //     if (value !== null) {
-  //       const decodedToken = jwt_decode(value);
-
-  //       if (decodedToken.exp * 1000 < Date.now()) {
-  //         SecureStorage.removeItem(xToken);
-  //       } else {
-  //         initialState.user = decodedToken;
-  //       }
-  //     }
-  //   });
-  // }
-
   loginReducer = (prevState, action) => {
     switch (action.type) {
       case 'RETRIEVE_TOKEN':
@@ -91,7 +74,6 @@ export const useAuth = () => {
         dispatch({
           type: 'LOGIN',
           payload: currentUser,
-          // token: gotUser,
         });
       },
       logoutUser: async () => {
@@ -118,7 +100,6 @@ export const useAuth = () => {
         dispatch({
           type: 'REGISTER',
           payload: jwt_decode(gotToken),
-          // token: gotToken,
         });
       },
       toggleTheme: () => {

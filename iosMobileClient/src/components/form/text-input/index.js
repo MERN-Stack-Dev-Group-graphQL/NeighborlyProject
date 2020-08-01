@@ -2,33 +2,6 @@ import React from 'react';
 import {View, Text, TextInput as RNTextInput, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const styles = StyleSheet.create({
-  formContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    height: 50,
-    width: '100%',
-    maxWidth: 320,
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  formControl: {
-    flex: 1,
-    padding: 0,
-  },
-  formFieldIcon: {
-    paddingRight: 8,
-  },
-  errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
-    paddingHorizontal: 10,
-    marginBottom: 16,
-  },
-});
-
 const TextInput = ({iconValid, iconError, touched, error, ...props}) => {
   const errColor = !touched
     ? 'rgba(16, 43, 70, 0.25)'
@@ -61,5 +34,32 @@ const TextInput = ({iconValid, iconError, touched, error, ...props}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  formContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    height: 50,
+    width: '100%',
+    maxWidth: 320,
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  formControl: {
+    flex: 1,
+    padding: 0,
+  },
+  formFieldIcon: {
+    paddingRight: 8,
+  },
+  errorMessage: {
+    color: 'rgba(255, 194, 11, 1)',
+    paddingHorizontal: 10,
+    marginBottom: 16,
+  },
+});
 
 export default TextInput;

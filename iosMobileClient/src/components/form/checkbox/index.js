@@ -2,32 +2,6 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const styles = StyleSheet.create({
-  formContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 20,
-    width: '100%',
-    maxWidth: 320,
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  formControl: {
-    flex: 1,
-    padding: 0,
-  },
-  label: {
-    color: '#ffffff',
-  },
-  errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
-    paddingHorizontal: 10,
-    marginBottom: 16,
-  },
-});
-
 const CheckBox = ({label, onChange, checked, ...props}) => {
   return (
     <TouchableOpacity
@@ -55,5 +29,31 @@ const CheckBox = ({label, onChange, checked, ...props}) => {
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  formContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 20,
+    width: '100%',
+    maxWidth: 320,
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  formControl: {
+    flex: 1,
+    padding: 0,
+  },
+  label: {
+    color: '#ffffff',
+  },
+  errorMessage: {
+    color: 'rgba(255, 194, 11, 1)',
+    paddingHorizontal: 10,
+    marginBottom: 16,
+  },
+});
 
 export default CheckBox;

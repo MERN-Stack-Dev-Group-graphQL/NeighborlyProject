@@ -4,20 +4,6 @@ import Animated, {interpolate} from 'react-native-reanimated';
 
 const {height} = Dimensions.get('screen');
 
-const styles = StyleSheet.create({
-  overlay: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  container: {
-    backgroundColor: 'white',
-    paddingTop: 12,
-    borderTopRightRadius: 12,
-    borderTopLeftRadius: 12,
-  },
-});
-
 const BottomSheet = ({children, isVisible, onDismiss}) => {
   const HEIGHT = Animated.Value(height);
   const [visible, setVisible] = useState(false);
@@ -67,5 +53,19 @@ const BottomSheet = ({children, isVisible, onDismiss}) => {
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  container: {
+    backgroundColor: 'white',
+    paddingTop: 12,
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
+  },
+});
 
 export default BottomSheet;

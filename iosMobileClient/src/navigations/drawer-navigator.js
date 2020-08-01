@@ -11,34 +11,8 @@ import FiltersScreen from '_scenes/filters';
 import SavedToolsScreen from '_scenes/tools/saved';
 import TrackToolsScreen from '_scenes/tools/track';
 
-// Initialize Navigation
 const AppDrawer = createDrawerNavigator();
 const Stack = createStackNavigator();
-
-const styles = StyleSheet.create({
-  headerRightNav: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  avatar: {
-    height: 36,
-    width: 36,
-    borderRadius: 18,
-    borderWidth: 2,
-    borderColor: '#ffffff',
-  },
-  hamburgerMenu: {
-    width: 30,
-    height: 20,
-    marginLeft: 10,
-  },
-  brandLogoImage: {
-    width: 168,
-    height: 30,
-  },
-});
 
 const BrandLogo = () => {
   return (
@@ -174,5 +148,30 @@ const DrawerNavigator = () => {
     </AppDrawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  headerRightNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  avatar: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+  },
+  hamburgerMenu: {
+    width: 30,
+    height: 20,
+    marginLeft: 10,
+  },
+  brandLogoImage: {
+    width: 168,
+    height: 30,
+  },
+});
 
 export default DrawerNavigator;

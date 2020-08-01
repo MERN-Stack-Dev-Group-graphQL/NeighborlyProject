@@ -2,20 +2,6 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const styles = StyleSheet.create({
-  starCountWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 10,
-    color: 'rgb(252, 155, 70)',
-  },
-  rateCountWrapper: {
-    fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.25)',
-    marginLeft: 10,
-  },
-});
-
 const StarCount = ({starCount, rateCount}) => {
   let content = [];
   for (let i = 0; i < starCount; i++) {
@@ -41,5 +27,19 @@ const StarCount = ({starCount, rateCount}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  starCountWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+    color: 'rgb(252, 155, 70)',
+  },
+  rateCountWrapper: {
+    fontSize: 12,
+    color: 'rgba(0, 0, 0, 0.25)',
+    marginLeft: 10,
+  },
+});
 
 export default StarCount;

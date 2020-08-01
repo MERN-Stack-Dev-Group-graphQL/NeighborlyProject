@@ -4,15 +4,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Divider from '_core/divider';
 import {CATEGORIES} from '_utils/graphql/mock';
 
-const styles = StyleSheet.create({
-  categoryItem: {
-    paddingVertical: 10,
-  },
-  categoryName: {
-    fontSize: 16,
-  },
-});
-
 const Category = ({name, icon}) => (
   <View style={styles.categoryItem}>
     <Text style={styles.categoryName}>{name}</Text>
@@ -55,5 +46,14 @@ const ToolCategory = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  categoryItem: {
+    paddingVertical: 10,
+  },
+  categoryName: {
+    fontSize: 16,
+  },
+});
 
 export default ToolCategory;

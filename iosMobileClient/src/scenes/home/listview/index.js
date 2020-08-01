@@ -11,14 +11,6 @@ import {
   RefreshControl,
 } from 'react-native';
 
-const styles = StyleSheet.create({
-  homeScrollView: {
-    position: 'relative',
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
-});
-
 const ListView = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -55,7 +47,7 @@ const ListView = ({navigation}) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         {loading ? (
-          <Loader />
+          <Loader loading={loading} />
         ) : (
           data.getTools.edges &&
           data.getTools.edges.map(tool => (
@@ -72,5 +64,13 @@ const ListView = ({navigation}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  homeScrollView: {
+    position: 'relative',
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+});
 
 export default ListView;

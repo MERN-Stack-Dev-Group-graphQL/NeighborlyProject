@@ -20,73 +20,6 @@ import * as Yup from 'yup';
 import {BG_IMAGE} from '_assets';
 import {RESET_PASSWORD} from '_utils/graphql';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    padding: 20,
-  },
-  heading: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 30,
-    marginBottom: 8,
-    fontWeight: '400',
-  },
-  span: {
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    paddingLeft: 16,
-  },
-  formControl: {
-    width: '100%',
-    height: 50,
-    padding: 10,
-    paddingLeft: 25,
-    paddingRight: 25,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    marginBottom: 16,
-  },
-  header: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    marginBottom: 24,
-    maxWidth: 220,
-    alignSelf: 'flex-start',
-  },
-  paragraph: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: 'rgba(255, 255, 255, 0.85)',
-    marginBottom: 10,
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    backgroundColor: '#003167',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  goBackButton: {
-    position: 'absolute',
-    flexDirection: 'row',
-    alignItems: 'center',
-    top: 50,
-    right: 20,
-  },
-});
-
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
@@ -185,5 +118,72 @@ const ForgotPasswordScreen = ({navigation}) => {
     </DismissKeyboard>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    padding: 20,
+  },
+  heading: {
+    width: 200,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    fontSize: 30,
+    marginBottom: 8,
+    fontWeight: '400',
+  },
+  span: {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    paddingLeft: 16,
+  },
+  formControl: {
+    width: '100%',
+    height: 50,
+    padding: 10,
+    paddingLeft: 25,
+    paddingRight: 25,
+    borderRadius: 25,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    marginBottom: 16,
+  },
+  header: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    marginBottom: 24,
+    maxWidth: 220,
+    alignSelf: 'flex-start',
+  },
+  paragraph: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.85)',
+    marginBottom: 10,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    backgroundColor: '#003167',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  goBackButton: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    top: 50,
+    right: 20,
+  },
+});
 
 export default ForgotPasswordScreen;

@@ -81,6 +81,7 @@ const toolsSchema = gql`
     photo: File
     userId: ID
     user: User
+    isRented: Boolean
     # reviews: [Review!]
     createdAt: Date!
     updatedAt: Date!
@@ -113,6 +114,8 @@ const toolsSchema = gql`
 
   extend type Mutation {
     addTool(input: ToolInput!, location: ToolLocation!, file: Upload!): Tool!
+    rentTools(toolIds: [ID]!): ToolUpdateResponse!
+    cancelTool(toolId: ID!): ToolUpdateResponse!
     updateTool(_id: ID!, input: ToolInput!): Boolean!
     deleteTool(_id: ID!): Boolean!
     createComment(toolId: String, content: String): Comment
@@ -124,6 +127,12 @@ const toolsSchema = gql`
 
   type ToolAdded {
     tool: Tool!
+  }
+
+  type ToolUpdateResponse {
+    success: Boolean!
+    message: String
+    tools: [Tool]
   }
 `;
 

@@ -7,6 +7,87 @@ import * as routes from '_utils/constants/routes';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
+const CardList = ({tool, navigation, handleCart, cartCount}) => {
+  const [buttonState, setButtonState] = useState(true);
+  const ImageBlock = path => {
+    if (path.url.length > 1) {
+      return (
+        <Image
+          style={styles.toolImage}
+          source={{
+            uri: `${routes.LOCAL_HOST}${path.url}`,
+          }}
+        />
+      );
+    }
+    return (
+      <Image
+        style={styles.toolImage}
+        source={{
+          uri: `${routes.LOCAL_HOST}${path.url}`,
+        }}
+      />
+    );
+  };
+
+  const starCount = 4;
+  const rateCount = 252;
+
+  const onPress = () => {
+    navigation.push('Tool Details', {
+      itemId: tool._id,
+      tool: tool,
+      starCount,
+      rateCount,
+      otherParam: 'anything you want here',
+    });
+  };
+
+  const handleAddToCart = () => {
+    if (buttonState) {
+      setButtonState(false);
+      handleCart();
+    }
+  };
+
+  return (
+    <View style={styles.cardWrapper}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+        <View style={styles.cardBody}>
+          <View style={[styles.cardImage, {flex: 1}]}>
+            <ImageBlock url={tool.url} />
+            <LinearGradient
+              colors={['transparent', '#003167']}
+              style={styles.linearGradient}
+            />
+            <Image
+              style={styles.avatar}
+              source={{
+                uri: 'https://randomuser.me/api/portraits/men/1.jpg',
+              }}
+            />
+          </View>
+          <View style={{paddingHorizontal: 10, flex: 2}}>
+            <View style={styles.header}>
+              <Text style={styles.subHeading}>{tool.make}</Text>
+              <Text style={styles.cardTitle}>{tool.title}</Text>
+              <View style={styles.starCountWrapper}>
+                <StarCount starCount={starCount} rateCount={rateCount} />
+              </View>
+            </View>
+            <View style={styles.actionWrapper}>
+              <View style={styles.priceUnitWrapper}>
+                <Text style={styles.price}>{currencyFormat(tool.price)}</Text>
+                <Text style={styles.unit}>{`/ per ${tool.unitOfMeasure}`}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   cardWrapper: {
     backgroundColor: '#ffffff',
@@ -93,86 +174,5 @@ const styles = StyleSheet.create({
     opacity: 0.25,
   },
 });
-
-const CardList = ({tool, navigation, handleCart, cartCount}) => {
-  const [buttonState, setButtonState] = useState(true);
-  const ImageBlock = path => {
-    if (path.url.length > 1) {
-      return (
-        <Image
-          style={styles.toolImage}
-          source={{
-            uri: `${routes.LOCAL_HOST}${path.url}`,
-          }}
-        />
-      );
-    }
-    return (
-      <Image
-        style={styles.toolImage}
-        source={{
-          uri: `${routes.LOCAL_HOST}${path.url}`,
-        }}
-      />
-    );
-  };
-
-  const starCount = 4;
-  const rateCount = 252;
-
-  const onPress = () => {
-    navigation.push('Tool Details', {
-      itemId: tool._id,
-      tool: tool,
-      starCount,
-      rateCount,
-      otherParam: 'anything you want here',
-    });
-  };
-
-  const handleAddToCart = () => {
-    if (buttonState) {
-      setButtonState(false);
-      handleCart();
-    }
-  };
-
-  return (
-    <View style={styles.cardWrapper}>
-      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-        <View style={styles.cardBody}>
-          <View style={[styles.cardImage, {flex: 1}]}>
-            <ImageBlock url={tool.url} />
-            <LinearGradient
-              colors={['transparent', '#003167']}
-              style={styles.linearGradient}
-            />
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-              }}
-            />
-          </View>
-          <View style={{paddingHorizontal: 10, flex: 2}}>
-            <View style={styles.header}>
-              <Text style={styles.subHeading}>{tool.make}</Text>
-              <Text style={styles.cardTitle}>{tool.title}</Text>
-              <View style={styles.starCountWrapper}>
-                <StarCount starCount={starCount} rateCount={rateCount} />
-              </View>
-            </View>
-            <View style={styles.actionWrapper}>
-              <View style={styles.priceUnitWrapper}>
-                <Text style={styles.price}>{currencyFormat(tool.price)}</Text>
-                <Text style={styles.unit}>{`/ per ${tool.unitOfMeasure}`}</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 export default CardList;

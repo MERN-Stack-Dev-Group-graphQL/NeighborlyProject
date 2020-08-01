@@ -25,53 +25,6 @@ import * as Yup from 'yup';
 import {BG_IMAGE, BRAND_LOGO, BRAND_LOGO_NAME} from '_assets';
 import {LOGIN_USER} from '_utils/graphql';
 
-const styles = StyleSheet.create({
-  label: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 14,
-    marginBottom: 16,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    backgroundColor: '#003167',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  imageWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    maxWidth: 320,
-  },
-  buttonText: {
-    color: 'rgba(255, 255, 255, 0.85)',
-  },
-  goBackButton: {
-    position: 'absolute',
-    flexDirection: 'row',
-    alignItems: 'center',
-    top: 50,
-    right: 20,
-  },
-});
-
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
@@ -226,5 +179,52 @@ const LoginScreen = ({navigation}) => {
     </ImageBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  label: {
+    width: 200,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    backgroundColor: '#003167',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  imageWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  errorMessage: {
+    color: 'rgba(255, 194, 11, 1)',
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    maxWidth: 320,
+  },
+  buttonText: {
+    color: 'rgba(255, 255, 255, 0.85)',
+  },
+  goBackButton: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    top: 50,
+    right: 20,
+  },
+});
 
 export default LoginScreen;

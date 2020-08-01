@@ -13,7 +13,7 @@ const usersSchema = gql`
     locationId: Int
     locationDetails: String
     role: UserRole
-    postedTools: [Tool!]!
+    tools: [Tool]!
     # neighbors: [Neighborhood!]!
     # messages: [Message!]!
     # comments: [Comment!]

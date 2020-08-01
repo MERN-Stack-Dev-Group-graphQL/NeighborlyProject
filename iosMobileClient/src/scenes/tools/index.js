@@ -3,21 +3,6 @@ import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  alignContent: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'red',
-    height: '100%',
-  },
-});
-
 const Tools = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -46,5 +31,20 @@ const Tools = ({navigation}) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  alignContent: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'red',
+    height: '100%',
+  },
+});
 
 export default Tools;

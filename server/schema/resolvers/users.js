@@ -164,6 +164,34 @@ const usersResolver = {
       // ADD RESET LOGIC HERE
     },
   },
+  User: {
+    tools: async (_, __, { me }) => {
+      console.log(me);
+      // get ids of tools by user
+      const userId = me._id;
+      const found = await mongoDao.pool
+        .db(database)
+        .collection('tools')
+        .find({ userId: ObjectID(userId) })
+        .toArray()
+        .then((data) => {
+          return data;
+        });
+
+      const toolIds = found && found.length ? found.map((t) => t._id).filter((t) => !!t) : [];
+
+      if (!toolIds.length) return [];
+      // return all tools added by user
+      return (
+        Promise.all(
+          toolIds.map(async (toolId) => {
+            const response = await mongoDao.getOneDoc(database, 'tools', '_id', ObjectID(toolId));
+            return response;
+          })
+        ) || []
+      );
+    },
+  },
 };
 
 export default usersResolver;

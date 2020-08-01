@@ -1,15 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.15)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
 const Modal = ({navigation, children}) => {
   return (
     <View style={styles.container}>
@@ -22,5 +13,14 @@ const Modal = ({navigation, children}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default Modal;

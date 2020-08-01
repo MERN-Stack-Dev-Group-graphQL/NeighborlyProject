@@ -8,35 +8,11 @@ import ListScreen from '_scenes/listtool';
 import ChatScreen from '_scenes/chat';
 import ToolsScreen from '_scenes/tools';
 import ToolDetailsScreen from '_scenes/tools/details';
+import DIYDetails from '_scenes/diy/details';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
-
-const styles = StyleSheet.create({
-  headerRightNav: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  avatar: {
-    height: 36,
-    width: 36,
-    borderRadius: 18,
-    borderWidth: 2,
-    borderColor: '#ffffff',
-  },
-  hamburgerMenu: {
-    width: 30,
-    height: 20,
-    marginLeft: 10,
-  },
-  brandLogoImage: {
-    width: 168,
-    height: 30,
-  },
-});
 
 const BrandLogo = () => {
   return (
@@ -82,6 +58,11 @@ const HomeTabScreen = () => {
       <Stack.Screen
         name="Tool Details"
         component={ToolDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
+      />
+      <Stack.Screen
+        name="DIY Detail"
+        component={DIYDetails}
         options={({route}) => ({title: route.params.name})}
       />
     </Stack.Navigator>
@@ -183,5 +164,30 @@ const TabNavigator = () => {
     </AppTab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  headerRightNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  avatar: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+  },
+  hamburgerMenu: {
+    width: 30,
+    height: 20,
+    marginLeft: 10,
+  },
+  brandLogoImage: {
+    width: 168,
+    height: 30,
+  },
+});
 
 export default TabNavigator;

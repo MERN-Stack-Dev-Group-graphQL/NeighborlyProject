@@ -24,8 +24,7 @@ export default {
             },
           }
         : {};
-      // console.log(fromCursorHash(cursor), 'test cursor');
-      // console.log(cursorOptions, 'test option');
+
       const messages = await mongoDao.getAllDocs(database, 'messages', cursorOptions, limit);
 
       const hasNextPage = messages.length > limit;
