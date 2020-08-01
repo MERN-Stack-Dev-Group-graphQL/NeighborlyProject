@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet, FlatList, Dimensions} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+} from 'react-native';
 import Divider from '_core/divider';
 import FeaturedTools from '_scenes/tools/featured';
 
@@ -10,16 +17,20 @@ const WIDTH = width - 40;
 const DIYDetails = ({route, navigation}) => {
   const {itemId, video} = route.params;
 
-  console.log('ID', video._id);
   return (
     <FlatList
       ListFooterComponent={() => <FeaturedTools navigation={navigation} />}
+      scrollEventThrottle={1}
+      showsHorizontalScrollIndicator={false}
       data={[{video}]}
       renderItem={({index, item}) => (
         <View style={styles.container} key={index}>
           <View style={styles.featuredContent}>
             <Text style={styles.header}>{video.title}</Text>
-            <View style={styles.video} />
+            <Image
+              style={[styles.video, {width: '100%'}]}
+              source={video.videoThumbnail}
+            />
             <Text style={styles.description}>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
               quis odio distinctio eius asperiores maiores harum..

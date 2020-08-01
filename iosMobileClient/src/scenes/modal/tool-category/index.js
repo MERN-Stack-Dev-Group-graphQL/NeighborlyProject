@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, FlatList, StyleSheet, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Divider from '_core/divider';
 import {CATEGORIES} from '_utils/graphql/mock';

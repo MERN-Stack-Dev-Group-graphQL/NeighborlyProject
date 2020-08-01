@@ -2,10 +2,11 @@ import React, {useState, useCallback, useRef, useContext} from 'react';
 import {useQuery} from '@apollo/client';
 import Card from '_core/card';
 import {
+  Text,
   View,
+  Image,
   FlatList,
   StyleSheet,
-  Text,
   StatusBar,
   ScrollView,
   RefreshControl,
@@ -88,7 +89,8 @@ const CardView = ({navigation}) => {
       <CategoryTabs />
       <FlatList
         ListHeaderComponent={() => <FeaturedTools navigation={navigation} />}
-        scrollEventThrottle={16}
+        scrollEventThrottle={1}
+        showsHorizontalScrollIndicator={false}
         data={data.getTools.edges}
         renderItem={({index, item}) => {
           return (
@@ -142,6 +144,8 @@ const CardView = ({navigation}) => {
                   });
                 };
 
+                console.log(item.videoThumbnail);
+
                 return (
                   <View style={{width: (width - 40) / 2}}>
                     <View style={{width: '100%', paddingRight: 10}}>
@@ -151,19 +155,29 @@ const CardView = ({navigation}) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           marginRight: 10,
-                          borderRadius: 0,
+                          borderRadius: 5,
                           width: '100%',
                           height: 120,
+                          overflow: 'hidden',
                         }}
                         onPress={handleDIYVideo}>
+                        <Image
+                          style={{
+                            ...StyleSheet.absoluteFillObject,
+                            width: '100%',
+                            height: '100%',
+                          }}
+                          source={item.videoThumbnail}
+                        />
+
                         <View
                           style={{
                             backgroundColor: colors.accent,
                             width: 60,
                             height: 60,
                             borderRadius: 30,
-                            borderColor: 'rgba(255,255,255, 1)',
-                            borderWidth: 5,
+                            borderColor: 'rgba(255,255,255, 0.75)',
+                            borderWidth: 4,
                             alignItems: 'center',
                             justifyContent: 'center',
                           }}>
@@ -171,7 +185,6 @@ const CardView = ({navigation}) => {
                             name="play"
                             color={'#ffffff'}
                             size={36}
-                            style={{marginLeft: 6}}
                           />
                         </View>
                       </TouchableOpacity>

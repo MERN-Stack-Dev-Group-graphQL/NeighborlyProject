@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const CATEGORIES = [
   {
     id: 1,
@@ -42,32 +44,32 @@ export const DYI = [
     title: 'DIY built in bookcases',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    url: '',
-    thumbnail: '',
+    videoUrl: require('_assets/images/pexels-one.jpg'),
+    videoThumbnail: require('_assets/images/pexels-one.jpg'),
   },
   {
     _id: '5ef7ed7b3a13ed79b349914d',
     title: 'DIY window grids/mullions',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    url: '',
-    thumbnail: '',
+    videoUrl: require('_assets/images/pexels-two.jpg'),
+    videoThumbnail: require('_assets/images/pexels-two.jpg'),
   },
   {
     _id: '5ef7ec893a13ed79b349914b',
     title: 'DIY shutters',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    url: '',
-    thumbnail: '',
+    videoUrl: require('_assets/images/pexels-one.jpg'),
+    videoThumbnail: require('_assets/images/pexels-one.jpg'),
   },
   {
     _id: '5ef7ec873a13ed79b348814a',
     title: 'DIY patio',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    url: '',
-    thumbnail: '',
+    videoUrl: require('_assets/images/pexels-two.jpg'),
+    videoThumbnail: require('_assets/images/pexels-two.jpg'),
   },
 ];
 

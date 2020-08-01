@@ -60,7 +60,7 @@ const HomeMapView = ({navigation}) => {
 
   useEffect(() => {
     if (mapRef) {
-      console.log(mapRef);
+      // console.log(mapRef);
     }
 
     (async () => {
