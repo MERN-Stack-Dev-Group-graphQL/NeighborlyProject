@@ -17,8 +17,6 @@ import styled from 'styled-components';
 function Register(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
-  const [disable, setDisabled] = useState(false);
-
   const currentYear = new Date().getFullYear();
   const initialState = {
     username: '',

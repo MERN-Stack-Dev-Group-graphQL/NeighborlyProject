@@ -30,6 +30,13 @@ function Dashboard() {
     electricalRatings: '',
   };
 
+  const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
+
+  const addNewTool = async () => {
+    console.log('Add New Tool clicked!');
+    await addTool();
+  };
+
   const { onChange, onSubmit, values } = useForm(addNewTool, initialState);
 
   const [addTool, { error }] = useMutation(ADD_TOOL_MUTATION, {
@@ -56,8 +63,6 @@ function Dashboard() {
     },
   });
 
-  const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
-
   const categoryOptions = [
     { key: 'gen', name: 'category', text: 'GENERAL', value: 'GENERAL' },
     { key: 'con', name: 'category', text: 'CONSTRUCTION', value: 'CONSTRUCTION' },
@@ -67,8 +72,8 @@ function Dashboard() {
     { key: 'saf', name: 'category', text: 'SAFETY', value: 'SAFETY' },
   ];
 
-  function addNewTool() {
-    console.log('Add New Tool clicked!');
+  if (error) {
+    console.log(error.message);
   }
 
   function AddToolModal(props) {

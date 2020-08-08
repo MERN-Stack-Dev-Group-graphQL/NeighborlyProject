@@ -1,11 +1,7 @@
-import React, { Fragment, useContext } from 'react';
-import { ToolContext } from '../../../context/tool';
+import React, { Fragment } from 'react';
 import Block from './Block';
 
 function Contact() {
-  const { tool, tools } = useContext(ToolContext);
-  console.log(tools);
-
   return (
     <Fragment>
       <div className='container'>

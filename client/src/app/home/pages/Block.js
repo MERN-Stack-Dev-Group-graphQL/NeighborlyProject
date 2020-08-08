@@ -1,14 +1,18 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { ToolContext } from '../../../context/tool';
 import gql from 'graphql-tag';
 
 const Block = (props) => {
-  const { tool, tools, updateSingleTool, updateTools } = useContext(ToolContext);
+  const { updateTools } = useContext(ToolContext);
   const { loading, data } = useQuery(GET_TOOLS);
   const handleClick = () => {
     updateTools(data);
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

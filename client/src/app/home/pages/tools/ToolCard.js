@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
 import { BsBookmarkPlus, BsHeart, BsPlus } from 'react-icons/bs';
@@ -18,7 +18,7 @@ function ToolCard({ tool }) {
   const toolId = tool._id;
   const starCount = 4;
   const rateCount = 252;
-  const [avatar, setAvatar] = useState({
+  const avatar = {
     styles: {
       position: 'absolute',
       height: '50px',
@@ -28,7 +28,10 @@ function ToolCard({ tool }) {
       right: '1rem',
     },
     url: 'https://randomuser.me/api/portraits/men/1.jpg',
-  });
+  };
+
+  if (tool) {
+  }
 
   return (
     <CardWrapper className='col-md-4'>
