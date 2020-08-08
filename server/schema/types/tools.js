@@ -1,9 +1,6 @@
 import { gql } from 'apollo-server';
 
 const toolsSchema = gql`
-  # # scalar Coordinates
-  # scalar Float
-
   type File {
     _id: ID!
     filename: String!
@@ -82,7 +79,6 @@ const toolsSchema = gql`
     userId: ID
     user: User
     isRented: Boolean
-    # reviews: [Review!]
     createdAt: Date!
     updatedAt: Date!
   }

@@ -39,15 +39,14 @@ export const SectionWrapper = styled.section`
     grid-row-gap: 1rem;
 
     grid-template-areas:
-      'leftcol leftcol leftcol centercol centercol centercol centercol rightcol rightcol'
-      'leftcol leftcol leftcol centercol centercol centercol centercol rightcol rightcol'
-      'leftcol leftcol leftcol centercol centercol centercol centercol rightcol rightcol'
-      'leftcol leftcol leftcol centercol centercol centercol centercol rightcol rightcol'
-      'leftcol leftcol leftcol bottomcol bottomcol bottomcol bottomcol rightcol rightcol';
+      'leftcol leftcol leftcol leftcol leftcol centercol centercol centercol centercol'
+      'leftcol leftcol leftcol leftcol leftcol centercol centercol centercol centercol'
+      'leftcol leftcol leftcol leftcol leftcol centercol centercol centercol centercol'
+      'leftcol leftcol leftcol leftcol leftcol centercol centercol centercol centercol'
+      'leftcol leftcol leftcol leftcol leftcol bottomcol bottomcol bottomcol bottomcol';
 
     #leftCol,
     #centerCol,
-    #rightCol,
     #bottomCol {
       background: #fff;
       padding: 1rem;
@@ -55,6 +54,7 @@ export const SectionWrapper = styled.section`
 
     #leftCol {
       grid-area: leftcol;
+      padding: 0;
 
       .feature-image {
         position: relative;
@@ -81,6 +81,75 @@ export const SectionWrapper = styled.section`
           transition: opacity 0.5s ease;
           opacity: 1;
         }
+      }
+
+      .price-wrapper {
+        display: flex;
+        position: relative;
+        align-items: center;
+        margin-bottom: 1rem;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 85%;
+          z-index: 1;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 0 30vw 40vw;
+          border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
+        }
+
+        .price {
+          font-size: 2.5rem;
+          font-weight: bold;
+          letter-spacing: -2px;
+          margin-bottom: 0;
+          margin-right: 1rem;
+        }
+
+        .per-unit {
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      .other-recommendations {
+        .title {
+          font-weight: 700;
+        }
+
+        .content {
+        }
+      }
+
+      .other-details {
+        span {
+          display: inline-block;
+          font-weight: 600;
+          min-width: 80px;
+        }
+      }
+
+      ul {
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+        list-style: none;
+
+        li {
+          margin-bottom: 10px;
+        }
+
+        .make,
+        .model,
+        .weight {
+        }
+      }
+
+      .btn-primary {
+        text-transform: uppercase;
       }
     }
 
@@ -153,79 +222,6 @@ export const SectionWrapper = styled.section`
             color: var(--color-primary);
           }
         }
-      }
-    }
-
-    #rightCol {
-      grid-area: rightcol;
-
-      .price-wrapper {
-        display: flex;
-        position: relative;
-        align-items: center;
-        margin-bottom: 1rem;
-        overflow: hidden;
-
-        &::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 85%;
-          z-index: 1;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 0 0 30vw 40vw;
-          border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
-        }
-
-        .price {
-          font-size: 2.5rem;
-          font-weight: 400;
-          letter-spacing: -2px;
-          margin-bottom: 0;
-          margin-right: 1rem;
-        }
-
-        .per-unit {
-          color: rgba(0, 0, 0, 0.5);
-        }
-      }
-
-      .other-recommendations {
-        .title {
-          font-weight: 700;
-        }
-
-        .content {
-        }
-      }
-
-      .other-details {
-        span {
-          display: inline-block;
-          font-weight: 600;
-          min-width: 80px;
-        }
-      }
-
-      ul {
-        padding-left: 1rem;
-        margin-bottom: 2rem;
-        list-style: none;
-
-        li {
-          margin-bottom: 10px;
-        }
-
-        .make,
-        .model,
-        .weight {
-        }
-      }
-
-      .btn-primary {
-        text-transform: uppercase;
       }
     }
 

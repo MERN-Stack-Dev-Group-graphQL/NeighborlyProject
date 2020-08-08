@@ -15,18 +15,10 @@ const usersSchema = gql`
     locationDetails: String
     role: UserRole
     tools: [Tool]!
-    # neighbors: [Neighborhood!]!
-    # messages: [Message!]!
-    # comments: [Comment!]
     token: String
     createdAt: Date
     updatedAt: Date
   }
-
-  # type Neighborhood {
-  #   neighbors: User!
-  #   howLong: Int!
-  # }
 
   enum UserRole {
     ADMIN
@@ -63,7 +55,6 @@ const usersSchema = gql`
   extend type Mutation {
     register(input: UserInput!): User!
     login(login: String!, password: String!): Token!
-    # updateUser(login: String!): User!
     updateUser(_id: ID!, input: UserInput!): Boolean!
     deleteUser(_id: ID!): Boolean!
     resetUserPassword(email: String!): Token!

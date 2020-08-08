@@ -186,7 +186,6 @@ const usersResolver = {
   User: {
     tools: async (_, __, { me }) => {
       console.log(me);
-      // get ids of tools by user
       const userId = me._id;
       const found = await mongoDao.pool
         .db(database)
@@ -200,7 +199,6 @@ const usersResolver = {
       const toolIds = found && found.length ? found.map((t) => t._id).filter((t) => !!t) : [];
 
       if (!toolIds.length) return [];
-      // return all tools added by user
       return (
         Promise.all(
           toolIds.map(async (toolId) => {

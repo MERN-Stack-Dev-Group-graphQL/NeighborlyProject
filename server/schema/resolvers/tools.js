@@ -27,7 +27,6 @@ const toolsResolver = {
 
       // const cursorOptions = cursor ? { createdAt: { $lt: fromCursorHash(cursor) } } : {};
       // console.log(cursorOptions, 'test option');
-
       const tools = await mongoDao.getAllDocs(database, 'tools', cursorOptions, limit);
       const hasNextPage = tools.length > limit;
       const edges = hasNextPage ? tools.slice(0, -1) : tools;
@@ -205,18 +204,7 @@ const toolsResolver = {
   Tool: {
     url: (parent) => `/${parent.photo.path || parent.photo.path.toString()}`,
     user: async (parent, _, { userLoader }) => {
-      // console.log('Tool Owner ID', parent.userId);
-      // const user = await mongoDao.pool
-      //   .db(database)
-      //   .collection('users')
-      //   .find({ _id: parent.userId })
-      //   .toArray()
-      //   .then((data) => {
-      //     return data;
-      //   });
-
       const user = await userLoader.load(parent.userId);
-      // console.log('Tool Owner', user);
       return user;
     },
   },

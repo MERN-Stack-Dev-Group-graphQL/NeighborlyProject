@@ -2,15 +2,9 @@ import React, { useState, useCallback, useRef } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-// import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-// import { AuthContext } from '../../../../context/auth';
-
-// ICONS
 import { FaMapMarkerAlt } from 'react-icons/fa';
-// COMPONENTS
 import ControlledTabs from '../../../shared/components/ControlledTabs';
 import StarCount from '../../../shared/components/reviews/StarCount';
-// STYLES
 import { SectionWrapper } from './styles';
 import mapStyles from '../../../shared/components/MapStyles';
 import pinIcon from '../../../../assets/img/icons/pin.svg';
@@ -22,13 +16,6 @@ const mapContainerStyle = {
   border: '1px solid #f8f8f8',
 };
 
-// const mapCenter = {
-//   lat: 39.931911,
-//   lng: -75.340184,
-//   // lat: props.location.latitude ? props.location.latitude : 39.931911,
-//   // lng: props.location.longitude ? props.location.longitude : -75.340184,
-// };
-
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
@@ -37,6 +24,7 @@ const options = {
 
 const ToolDetail = (props) => {
   console.log('location:', props.location.latitude);
+  console.log('tool: ', props);
   const mapCenter = {
     lat: props.location.latitude ? props.location.latitude : 39.931911,
     lng: props.location.longitude ? props.location.longitude : -75.340184,
@@ -70,13 +58,6 @@ const ToolDetail = (props) => {
     mapRef.current = map;
   }, []);
 
-  // const panTo = useCallback(({ lat, lng }) => {
-  //   mapRef.current.panTo({ lat, lng });
-  //   mapRef.current.setZoom(14);
-  // }, []);
-
-  // const { user, logout } = useContext(AuthContext);
-
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading maps';
 
@@ -107,6 +88,21 @@ const ToolDetail = (props) => {
             <div id='leftCol'>
               <div className='feature-image'>
                 <ToolImage url={props.url} className='tool-thumb' />
+              </div>
+              <div style={{ padding: '1rem' }}>
+                <div className='price-wrapper'>
+                  <h2 className='price'>{props.price}</h2>
+                  <div className='per-unit'>{`/ per ${props.unitOfMeasure}`}</div>
+                </div>
+                <div className='other-recommendations'>
+                  <p className='title'>You might also need</p>
+                  <p className='content'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                </div>
+
+                <button className='btn btn-primary'>Add to Cart</button>
               </div>
             </div>
             <div id='centerCol'>
@@ -179,21 +175,6 @@ const ToolDetail = (props) => {
                   ) : null}
                 </GoogleMap>
               </div>
-            </div>
-            <div id='rightCol'>
-              <div className='price-wrapper'>
-                <h2 className='price'>$40.00</h2>
-                <div className='per-unit'>Per day</div>
-              </div>
-              <div className='other-recommendations'>
-                <p className='title'>You might also need</p>
-                <p className='content'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua.
-                </p>
-              </div>
-
-              <button className='btn btn-primary'>Add to Cart</button>
             </div>
             <div id='bottomCol'>
               <ControlledTabs {...props} />

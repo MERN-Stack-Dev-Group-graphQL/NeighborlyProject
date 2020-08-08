@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import { toolLoader } from '../loaders/toolLoader';
 import { userLoader } from '../loaders/userLoader';
-
 import typeDefs from '../schema/types';
 import resolvers from '../schema/resolvers';
 

@@ -6,9 +6,6 @@ import gql from 'graphql-tag';
 const Block = (props) => {
   const { tool, tools, updateSingleTool, updateTools } = useContext(ToolContext);
   const { loading, data } = useQuery(GET_TOOLS);
-
-  console.log(data);
-
   const handleClick = () => {
     updateTools(data);
   };

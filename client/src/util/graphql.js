@@ -13,6 +13,9 @@ export const FETCH_TOOLS_QUERY = gql`
         weight
         description
         electricalRatings
+        price
+        unitOfMeasure
+        quantity
         location {
           address1
           address2
@@ -55,7 +58,9 @@ export const FETCH_TOOLS_BY_ID_QUERY = gql`
       weight
       description
       electricalRatings
-      category
+      price
+      unitOfMeasure
+      quantity
       location {
         address1
         address2
@@ -67,7 +72,7 @@ export const FETCH_TOOLS_BY_ID_QUERY = gql`
         provinceCode
         zip
       }
-      url
+      category
       userId
       user {
         _id
@@ -75,6 +80,7 @@ export const FETCH_TOOLS_BY_ID_QUERY = gql`
         firstName
         lastName
       }
+      url
       photo {
         _id
         path

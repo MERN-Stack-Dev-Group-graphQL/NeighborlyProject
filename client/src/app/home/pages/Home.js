@@ -1,31 +1,16 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { FETCH_TOOLS_QUERY } from '../../../util/graphql';
 import ToolCard from './tools/ToolCard';
 import Carousel from 'react-bootstrap/Carousel';
-// Assets
 import videoOne from '../../../assets/videos/video1.mp4';
 import videoTwo from '../../../assets/videos/video2.mp4';
-// Styles
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Avatar from '../../temp/Avatar';
 
 function Home() {
   const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
-  // console.log('Home', data);
-
   const onClickHandler = (event) => event.preventDefault();
-
-  const [avatar, setAvatar] = useState({
-    styles: {
-      position: 'absolute',
-      height: '75px',
-      width: '75px',
-      transform: 'translate(-35px, -45px)',
-    },
-    url: 'https://randomuser.me/api/portraits/men/1.jpg',
-  });
 
   return (
     <Fragment>
@@ -59,7 +44,6 @@ function Home() {
           <div className='row'>
             <div className='col-md-12'>
               <div className='page-title my-5'>
-                {/* <Avatar avatar={avatar} /> */}
                 <h1>Featured Categories</h1>
               </div>
               <ul className='nav nav-category-wrapper justify-content-center mb-4'>
@@ -196,6 +180,7 @@ const CarouselWrapper = styled.div`
     border-color: var(--color-light);
 
     &:hover {
+      background-color: var(--color-primary);
       border-color: var(--color-primary);
     }
   }

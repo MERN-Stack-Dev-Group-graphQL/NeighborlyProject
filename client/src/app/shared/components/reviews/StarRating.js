@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Star from './Star';
 
 const StarRating = ({ totalStars }) => {
-  // const [hoverRef, isHovered] = useHover();
   const [selectedStars, setSelectedStars] = useState(0);
 
   return (

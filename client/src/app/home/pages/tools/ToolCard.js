@@ -1,54 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import Card from 'react-bootstrap/Card';
-import LikesButton from '../../../shared/components/Buttons/LikesButton';
-import CommentsButton from '../../../shared/components/Buttons/CommentsButton';
-import avatar from '../../../../assets/img/avatars/avatar-default.png';
-import styled from 'styled-components';
-// Icons
-import { BsBookmarkPlus } from 'react-icons/bs';
-// import { Link } from 'react-router-dom';
+import { BsBookmarkPlus, BsHeart, BsPlus } from 'react-icons/bs';
 import MoreDetailsButton from '../../../shared/components/Buttons/MoreDetailsButton';
 import StarCount from '../../../shared/components/reviews/StarCount';
+import Avatar from '../../../shared/components/Avatar';
+import styled from 'styled-components';
 
-function ToolCard({ tool: { _id, title, description, createdAt, url, photo } }) {
-  function bookmarkTool() {
-    console.log('Bookmark tool button clicked!');
-  }
-
+function ToolCard({ tool }) {
   function CardImage(path) {
     if (path.url.length > 1) {
-      return <img src={`http://localhost:4000${path.url}`} alt={title} className='card-img-top' />;
+      return <img src={`http://localhost:4000${path.url}`} alt={tool.title} className='card-img-top' />;
     }
-    return <img src='http://localhost:4000/assets/img/default.jpg' alt={title} className='card-img-top' />;
+    return <img src='http://localhost:4000/assets/img/default.jpg' alt={tool.title} className='card-img-top' />;
   }
 
-  const toolId = _id;
+  const toolId = tool._id;
   const starCount = 4;
   const rateCount = 252;
+  const [avatar, setAvatar] = useState({
+    styles: {
+      position: 'absolute',
+      height: '50px',
+      width: '50px',
+      borderRadius: '25px',
+      transform: ['translateY(-85%)'],
+      right: '1rem',
+    },
+    url: 'https://randomuser.me/api/portraits/men/1.jpg',
+  });
 
   return (
     <CardWrapper className='col-md-4'>
       <Card className='mb-5'>
         <div className='card-image-wrapper'>
-          <CardImage url={url} />
+          <CardImage url={tool.url} />
+
+          <div className='actionBar'>
+            <div className='like-tool' onClick={() => {}}>
+              <BsHeart />
+            </div>
+            <div className='save-tool' onClick={() => {}}>
+              <BsBookmarkPlus />
+            </div>
+            <div className='add-to-cart' onClick={() => {}}>
+              <BsPlus />
+            </div>
+          </div>
         </div>
 
         <Card.Body>
-          <img src={avatar} alt='Avatar' className='card-avatar' />
-          <Card.Title>{title}</Card.Title>
+          <Avatar avatar={avatar} />
+          <Card.Title>{tool.title}</Card.Title>
           <StarCount starCount={starCount} rateCount={rateCount} />
-          {/* <Card.Text>{description}</Card.Text> */}
-          <div className='card-action d-flex'>
-            <small className='text-muted d-block'>Posted {moment(createdAt).fromNow(true)} ago</small>
-            <div className=' bookmark-btn ml-auto' onClick={bookmarkTool}>
-              <BsBookmarkPlus />
-            </div>
-          </div>
+          {<small className='text-muted d-block'>Posted {moment(tool.createdAt).fromNow(true)} ago</small>}
         </Card.Body>
         <Card.Footer className='d-flex align-items-center'>
-          <LikesButton />
-          <CommentsButton />
+          <div className='price-wrapper'>
+            <h2 className='price'>{tool.price}</h2>
+            <div className='per-unit'>{`/ per ${tool.unitOfMeasure}`}</div>
+          </div>
           <MoreDetailsButton toolId={toolId} />
         </Card.Footer>
       </Card>
@@ -82,6 +93,35 @@ const CardWrapper = styled.div`
     }
   }
 
+  .actionBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    .like-tool,
+    .save-tool,
+    .add-to-cart {
+      display: flex;
+      text-align: center;
+      color: var(--color-light);
+      width: 40px;
+      height: 40px;
+      margin-left: 5px;
+      border-radius: 20px;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      transition: 0.2s ease-in;
+
+      &:hover {
+        background-color: var(--color-primary-light);
+      }
+    }
+  }
+
   .card-body {
     display: flex;
     flex-direction: column;
@@ -96,6 +136,7 @@ const CardWrapper = styled.div`
     position: absolute;
     height: 50px;
     width: 50px;
+    border-radius: 25px;
     transform: translateY(-85%);
     right: 1rem;
   }
@@ -117,13 +158,22 @@ const CardWrapper = styled.div`
     padding: 0 4px;
   }
 
-  .bookmark-btn {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: var(--color-light);
-    background-color: var(--color-primary);
-    border-radius: 15px;
+  .price-wrapper {
+    display: flex;
+    position: relative;
+    align-items: center;
+    overflow: hidden;
+
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: -2px;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+
+    .per-unit {
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
 `;

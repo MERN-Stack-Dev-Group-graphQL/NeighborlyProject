@@ -15,12 +15,18 @@ const MoreDetailsButton = ({ toolId }) => {
 export default MoreDetailsButton;
 
 const MoreDetailButton = styled.div`
-  background: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  border-radius: 5px;
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary-light);
+  border-radius: 20px;
+  height: 40px;
+  min-width: 120px;
+  text-align: center;
   margin-left: auto;
 
   a {
+    text-transform: uppercase;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
     color: #ffffff;
   }
 

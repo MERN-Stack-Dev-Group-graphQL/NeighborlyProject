@@ -235,14 +235,20 @@ const NavigationWrapper = styled.div`
       height: 50px;
       width: 80%;
       padding: 0.375rem 1.75rem;
+      border-radius: 25px 0 0 25px;
       border: none;
     }
 
     .nav-search-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 50px;
       line-height: 50px;
       min-width: 50px;
-      padding: 0;
+      padding: 0 5px 0 0;
+      border-radius: 0 25px 25px 0;
+      background-color: var(--color-primary) !important;
     }
 
     a {

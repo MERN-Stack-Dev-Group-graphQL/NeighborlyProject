@@ -1,10 +1,8 @@
 import { ForbiddenError } from 'apollo-server';
 import { combineResolvers, skip } from 'graphql-resolvers';
-
 const { ObjectID } = require('mongodb');
 
 export const isAuthenticated = (_, args, { me }) => (me ? skip : new ForbiddenError('Not authenticated as user.'));
-
 export const isAdmin = combineResolvers(isAuthenticated, (_, args, { me: { role } }) =>
   role === 'ADMIN' ? skip : new ForbiddenError('Not authorized as admin.')
 );

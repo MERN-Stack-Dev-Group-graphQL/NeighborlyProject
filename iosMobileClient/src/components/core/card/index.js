@@ -55,6 +55,7 @@ const Card = ({tool, navigation, handleCart, cartCount, y, index}) => {
             colors={['transparent', colors.primary]}
             style={styles.linearGradient}
           />
+
           <View style={styles.actionWrapper}>
             {tool.location.provinceCode && (
               <TouchableOpacity style={styles.locationTool} onPress={() => {}}>

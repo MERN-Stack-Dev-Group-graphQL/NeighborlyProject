@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BsChatQuoteFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
-// Initialize dummy comments
 let databaseComments = 0;
 
 const getComments = () => {
@@ -69,15 +68,15 @@ const CommentButton = styled.div`
   .btn {
     font-weight: 400;
     border-radius: 0.28571429rem 0 0 0.28571429rem;
-    box-shadow: 0 0 0 1px var(--color-primary) inset !important;
+    box-shadow: 0 0 0 1px var(--color-secondary) inset !important;
 
-    color: var(--color-primary) !important;
+    color: var(--color-secondary) !important;
     height: 36px;
     width: 50px;
     line-height: 1;
 
     &:hover {
-      background: var(--color-primary);
+      background: var(--color-secondary);
 
       svg {
         fill: var(--color-light);
@@ -92,9 +91,9 @@ const CommentButton = styled.div`
     padding: 0.5833em 0.833em;
     margin: 0 0 0 -2px;
     font-size: 0.875rem;
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
     border-radius: 0.28571429rem;
     transition: background 0.1s ease;
 

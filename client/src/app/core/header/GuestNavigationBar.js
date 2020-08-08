@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import * as routes from '../../../constants/routes';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
@@ -9,26 +8,13 @@ import Button from 'react-bootstrap/Button';
 import { SEARCH_TOOLS_QUERY } from '../../../util/graphql';
 import { useForm } from '../../../util/hooks';
 import { FiSearch } from 'react-icons/fi';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { MdShoppingCart } from 'react-icons/md';
-// import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import MenuBar from './MenuBar';
+import styled from 'styled-components';
+import * as routes from '../../../constants/routes';
 
 function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick, menuHandler, overlayHandler }) {
-  // const {
-  //   ready,
-  //   value,
-  //   suggestions: { status, data },
-  //   setValue,
-  //   clearSuggestions,
-  // } = usePlacesAutoComplete({
-  //   requestOptions: {
-  //     location: { lat: () => 40.11045312448596, lng: () => -75.3861729415272 },
-  //     radius: 200 * 1000,
-  //   },
-  // });
-
   const findTools = () => {
     console.log('find tools ran', values.search ? values.search : 'nothing to see here');
   };
@@ -128,7 +114,7 @@ function GuestNavigationBar({ brandLogo, isMenuOpen, activeItem, handleItemClick
             >
               Register
             </Nav.Link>
-            <Nav.Link className='nav-cart-icon'>
+            <Nav.Link href={routes.CART} className='nav-cart-icon'>
               <span className='cart-pill'>3</span>
               <MdShoppingCart size={24} className='cart-icon' />
             </Nav.Link>
@@ -264,6 +250,7 @@ const NavigationWrapper = styled.div`
       min-width: 50px;
       padding: 0 5px 0 0;
       border-radius: 0 25px 25px 0;
+      background-color: var(--color-primary) !important;
     }
 
     a {

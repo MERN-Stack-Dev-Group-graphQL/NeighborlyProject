@@ -56,6 +56,10 @@
   }
 }
 
+.btn-primary {
+  background-color: var(--color-primary) !important;
+}
+
 .btn-primary,
 .btn-secondary {
   display: block;

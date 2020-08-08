@@ -4,15 +4,14 @@ import { Form, Button } from 'semantic-ui-react';
 import { useMutation } from '@apollo/react-hooks';
 import { AuthContext } from '../../../context/auth';
 import { useForm } from '../../../util/hooks';
+import { MdArrowBack } from 'react-icons/md';
 import gql from 'graphql-tag';
-import * as routes from '../../../constants/routes';
-
 import brandLogo from '../../../assets/img/brand/brand-logo.svg';
 import dotsTopLeft from '../../../assets/img/patterns/dots-left.svg';
 import dotsTopRight from '../../../assets/img/patterns/dots-right-top.svg';
 import dotsBottomLeft from '../../../assets/img/patterns/dots-left-bottom.svg';
 import dotsBottomRight from '../../../assets/img/patterns/dots-right.svg';
-import { MdArrowBack } from 'react-icons/md';
+import * as routes from '../../../constants/routes';
 import styled from 'styled-components';
 
 function Login(props) {
@@ -111,7 +110,6 @@ function Login(props) {
         </div>
         <p className='text-center foot-note'>&copy; 2020 - {currentYear} Neighborly</p>
 
-        {/* Back Home */}
         <Link className='return-home-btn' to={routes.HOME}>
           <MdArrowBack className='arrow-left' /> Return Home
         </Link>

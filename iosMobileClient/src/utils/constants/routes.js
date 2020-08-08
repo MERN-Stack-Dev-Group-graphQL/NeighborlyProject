@@ -23,5 +23,5 @@ export const PRIVACY_POLICY = '/privacy-policy';
 export const TERMS_AND_CONDITIONS = '/terms-and-conditions';
 export const SEARCH_RESULTS = '/search-results';
 export const FAQS = '/faqs';
-export const LOCAL_HOST = 'http://10.0.0.107:4000';
+export const LOCAL_HOST = 'http://192.168.0.107:4000';
 export const GRAPHQL_URL = `${LOCAL_HOST}/graphql`;

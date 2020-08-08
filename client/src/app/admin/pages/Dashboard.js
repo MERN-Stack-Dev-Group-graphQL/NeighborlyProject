@@ -1,25 +1,18 @@
-import React, { Fragment, /* useContext, */ useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Form, Select } from 'semantic-ui-react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { FaAngleLeft, FaArrowUp, FaTrash, FaArrowDown, FaPlusCircle } from 'react-icons/fa';
 import { RiMenu2Line } from 'react-icons/ri';
-
 import { useForm } from '../../../util/hooks';
-
 import { FETCH_TOOLS_QUERY } from '../../../util/graphql';
 import { ADD_TOOL_MUTATION } from '../../../util/graphql';
-// import { useFormFile } from '../../../util/hooks';
-// import { AuthContext } from '../../../context/auth';
-
 import styled from 'styled-components';
 
 function Dashboard() {
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
-  // const { user } = useContext(AuthContext);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleOnChange = () => {};
@@ -42,7 +35,6 @@ function Dashboard() {
   const [addTool, { error }] = useMutation(ADD_TOOL_MUTATION, {
     variables: { input: values },
     update(proxy, result) {
-      // console.log(result);
       const data = proxy.readQuery({
         query: FETCH_TOOLS_QUERY,
       });
@@ -60,13 +52,11 @@ function Dashboard() {
       values.electricalRatings = '';
     },
     onError(err) {
-      // console.log(err.graphQLErrors[0].extensions.exception.errors);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
   });
 
   const { loading, data } = useQuery(FETCH_TOOLS_QUERY);
-  // console.log(data);
 
   const categoryOptions = [
     { key: 'gen', name: 'category', text: 'GENERAL', value: 'GENERAL' },
