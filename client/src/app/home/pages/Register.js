@@ -18,6 +18,7 @@ import styled from 'styled-components';
 function Register(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
+  const [disable, setDisabled] = useState(false);
 
   const currentYear = new Date().getFullYear();
   const initialState = {
@@ -29,9 +30,9 @@ function Register(props) {
     confirmPassword: '',
   };
 
-  const { onChange, onSubmit, values } = useForm(registerUser, initialState);
+  const { handleChange, handleSubmit, values } = useForm(registerUserCallback, initialState);
 
-  const [addUser, { loading }] = useMutation(REGISTER_USER, {
+  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, { data: { register: userData } }) {
       context.login(userData);
       props.history.push('/');
@@ -42,8 +43,8 @@ function Register(props) {
     variables: values,
   });
 
-  function registerUser() {
-    addUser();
+  function registerUserCallback() {
+    registerUser();
   }
 
   return (
@@ -53,7 +54,7 @@ function Register(props) {
           <Link className='d-flex align-items-center justify-content-center' to={routes.HOME}>
             <img className='brand-logo' alt='Neighborly Logo' src={brandLogo} />
           </Link>
-          <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
+          <Form onSubmit={handleSubmit} noValidate className={loading ? 'loading' : ''}>
             <div className='title-header registration-header'>Sign Up for an Account</div>
             <Form.Input
               label='Username'
@@ -64,7 +65,7 @@ function Register(props) {
               autoComplete='username'
               value={values.username}
               error={errors.username ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Form.Input
               label='First Name'
@@ -74,7 +75,7 @@ function Register(props) {
               type='text'
               value={values.firstName}
               error={errors.firstName ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Form.Input
               label='Last Name'
@@ -84,7 +85,7 @@ function Register(props) {
               name='lastName'
               value={values.lastName}
               error={errors.lastName ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Form.Input
               label='Email'
@@ -95,7 +96,7 @@ function Register(props) {
               name='email'
               value={values.email}
               error={errors.email ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Form.Input
               label='Password'
@@ -106,7 +107,7 @@ function Register(props) {
               autoComplete='new-password'
               value={values.password}
               error={errors.password ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Form.Input
               label='Confirm Password'
@@ -117,7 +118,7 @@ function Register(props) {
               autoComplete='new-password'
               value={values.confirmPassword}
               error={errors.confirmPassword ? true : false}
-              onChange={onChange}
+              onChange={handleChange}
             />
             <Button type='submit' className='form-button' primary>
               Register
