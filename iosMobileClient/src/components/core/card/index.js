@@ -1,56 +1,27 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Animated,
-  Dimensions,
-} from 'react-native';
+import {Text, View, Image, TouchableOpacity, Animated} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {currencyFormat} from '_utils/currencyFormat';
 import {useTheme} from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
-import StarCount from '_core/review/starcount';
+import {CardImage} from '_core/card/card-image';
 import {
   styles,
   CARD_HEIGHT as DEFAULT_CARD_HEIGHT,
 } from '_core/card/card.component.styles';
+import StarCount from '_core/review/starcount';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as routes from '_utils/constants/routes';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
 export const MARGIN = 12;
 export const CARD_HEIGHT = DEFAULT_CARD_HEIGHT + MARGIN * 2;
-const {height: wHeight} = Dimensions.get('window');
-const height = wHeight - 84;
 
 const Card = ({tool, navigation, handleCart, cartCount, y, index}) => {
   const {colors} = useTheme();
   const [buttonState, setButtonState] = useState(true);
-  const ImageBlock = path => {
-    if (path.url.length > 1) {
-      return (
-        <Image
-          style={styles.toolImage}
-          source={{
-            uri: `${routes.LOCAL_HOST}${path.url}`,
-          }}
-        />
-      );
-    }
-    return (
-      <Image
-        style={styles.toolImage}
-        source={{
-          uri: `${routes.LOCAL_HOST}}/assets/img/default.jpg`,
-        }}
-      />
-    );
-  };
-
   const starCount = 4;
   const rateCount = 252;
+
   const onPress = () => {
     navigation.push('Tool Details', {
       itemId: tool._id,
@@ -79,12 +50,25 @@ const Card = ({tool, navigation, handleCart, cartCount, y, index}) => {
       key={index}>
       <TouchableOpacity style={{flex: 1}} onPress={onPress}>
         <View style={styles.cardImage}>
-          <ImageBlock url={tool.url} />
+          <CardImage path={tool.url} />
           <LinearGradient
             colors={['transparent', colors.primary]}
             style={styles.linearGradient}
           />
           <View style={styles.actionWrapper}>
+            {tool.location.provinceCode && (
+              <TouchableOpacity style={styles.locationTool} onPress={() => {}}>
+                <MaterialCommunityIcons
+                  name="map-marker"
+                  color={'#ffffff'}
+                  size={16}
+                />
+                <Text style={{color: '#ffffff'}}>
+                  Popular tool in{' '}
+                  {tool.location.provinceCode ? tool.location.provinceCode : ''}
+                </Text>
+              </TouchableOpacity>
+            )}
             <TouchableOpacity style={styles.likeTool} onPress={() => {}}>
               <MaterialCommunityIcons
                 name="heart-outline"

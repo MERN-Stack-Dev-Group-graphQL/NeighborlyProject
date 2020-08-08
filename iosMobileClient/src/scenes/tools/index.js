@@ -1,17 +1,20 @@
 import React from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tools = ({navigation}) => {
+  const {colors} = useTheme();
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
       <View style={[styles.alignContent, {paddingHorizontal: 40}]}>
         <MaterialCommunityIcons
           name="tools"
-          color={'#003167'}
+          color={colors.primary}
           size={80}
           style={{marginBottom: 20, opacity: 0.15}}
         />

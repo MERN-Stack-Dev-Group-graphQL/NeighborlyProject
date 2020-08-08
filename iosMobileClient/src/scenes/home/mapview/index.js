@@ -5,21 +5,10 @@ import MapView, {
   Callout,
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
-// import MapViewDirections from 'react-native-maps-directions';
 import Geolocation from '@react-native-community/geolocation';
 import {useQuery} from '@apollo/client';
-// import {CATEGORIES} from '_utils/graphql/mock';
 import {FETCH_TOOLS_QUERY} from '_utils/graphql';
-import {
-  View,
-  Text,
-  Image,
-  Platform,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-  PermissionStatus,
-} from 'react-native';
+import {View, Text, Image, Platform, Alert, StyleSheet} from 'react-native';
 import * as routes from '_utils/constants/routes';
 import {useTheme} from '@react-navigation/native';
 import {mapDarkStyle, mapStandardStyle} from '_scenes/home/mapview/mapstyles';
@@ -31,8 +20,10 @@ const HomeMapView = ({navigation}) => {
   const mapRef = useRef();
   const theme = useTheme();
   const {colors} = useTheme();
-  const {loading, error, data} = useQuery(FETCH_TOOLS_QUERY);
-  // const tools = data.getTools.edges;
+  const {data, loading, error} = useQuery(FETCH_TOOLS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
+
   const [region, setRegion] = useState({
     latitude: 39.931911,
     longitude: -75.340184,
@@ -43,9 +34,6 @@ const HomeMapView = ({navigation}) => {
   const locateCurrentPosition = () => {
     Geolocation.getCurrentPosition(
       position => {
-        // const initialPosition = JSON.stringify(position);
-        // console.log(JSON.stringify(position));
-
         setRegion({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -53,14 +41,18 @@ const HomeMapView = ({navigation}) => {
           longitudeDelta: 0.0121,
         });
       },
-      error => Alert.alert('Error', JSON.stringify(error)),
+      error => {
+        setTimeout(() => {
+          Alert.alert('Error', JSON.stringify(error));
+        }, 100);
+      },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
   };
 
   useEffect(() => {
     if (mapRef) {
-      // console.log(mapRef);
+      console.log(mapRef);
     }
 
     (async () => {
@@ -112,42 +104,8 @@ const HomeMapView = ({navigation}) => {
         initialRegion={region}
         showsUserLocation
         customMapStyle={theme.dark ? mapDarkStyle : mapStandardStyle}
-        onRegionChangeComplete={region => setRegion(region)}>
-        {/* {tools.map(
-          tool =>
-            tool.location.latitude &&
-            tool.location.longitude && (
-              <Marker
-                key={tool._id}
-                coordinate={{
-                  latitude: tool.location.latitude,
-                  longitude: tool.location.longitude,
-                }}
-                title={tool.title}
-                description={`Make: ${tool.make} / Model: ${tool.model}`}
-                image={require('_assets/images/map-marker.png')}>
-                <Callout tooltip>
-                  <View>
-                    <View style={styles.bubble}>
-                      <View style={styles.body}>
-                        <Text style={styles.name}>{tool.title}</Text>
-                        <Text style={styles.description}>
-                          A short decription should be place here.
-                        </Text>
-                        <Text style={{fontWeight: 'bold'}}>$49.99</Text>
-                      </View>
-                      <View style={{flexGrow: 1, margin: 4}}>
-                        <ImageBlock url={tool.url} />
-                      </View>
-                    </View>
-                    <View style={styles.arrowBorder} />
-                    <View style={styles.arrow} />
-                  </View>
-                </Callout>
-              </Marker>
-            ),
-        )} */}
-      </MapView>
+        onRegionChangeComplete={region => setRegion(region)}
+      />
       <CategoryTabs />
     </View>
   );

@@ -59,11 +59,6 @@ const usersResolver = {
       }
 
       return await mongoDao.getOneDoc(database, 'users', '_id', ObjectID(me._id));
-
-      // return await mongoDao.pool
-      //   .db(database)
-      //   .collection('users')
-      //   .findOne({ _id: ObjectID(me._id) });
     },
   },
   Mutation: {
@@ -145,9 +140,33 @@ const usersResolver = {
         token,
       };
     },
-    updateUser: combineResolvers(isAuthenticated, async (parent, { email }, { me }) => {
-      return await mongoDao.pool.db(database).collection('users').findByIdAndUpdate(me._id, { email }, { new: true });
-    }),
+    updateUser: async (_, { input }, { me }, info) => {
+      try {
+        const userData = {
+          _id: me._id,
+          input: {
+            ...input,
+            updatedAt: new Date(),
+          },
+        };
+
+        console.log('USER: ', userData);
+
+        const result = await mongoDao.updateOneDoc(database, 'users', '_id', userData);
+
+        if (result.matchedCount === 0) {
+          console.error(`Update failed! ${result.matchedCount} document(s) matched the query criteria`);
+          console.log(`${result.modifiedCount} document(s) was/were updated`);
+          return false;
+        } else {
+          console.log(`${result.matchedCount} document(s) matched the query criteria`);
+          console.log(`${result.modifiedCount} document(s) was/were updated`);
+          return true;
+        }
+      } catch (error) {
+        throw error;
+      }
+    },
     deleteUser: combineResolvers(isAdmin, async (parent, { _id }, context) => {
       const user = await mongoDao.pool
         .db(database)

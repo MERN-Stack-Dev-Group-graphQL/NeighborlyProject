@@ -19,6 +19,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import * as Yup from 'yup';
 import {BG_IMAGE} from '_assets';
 import {RESET_PASSWORD} from '_utils/graphql';
+import {useTheme} from '@react-navigation/native';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,6 +30,7 @@ const ForgotPasswordSchema = Yup.object().shape({
 });
 
 const ForgotPasswordScreen = ({navigation}) => {
+  const {colors} = useTheme();
   const {resetUserPassord} = useContext(AuthContext);
   const [userData, setUserData] = useState({
     email: '',
@@ -60,9 +62,14 @@ const ForgotPasswordScreen = ({navigation}) => {
 
   return (
     <DismissKeyboard>
-      <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
+      <ImageBackground
+        source={BG_IMAGE}
+        style={[styles.backgroundImage, {backgroundColor: colors.primary}]}>
         <View style={styles.container}>
-          <StatusBar barStyle="light-content" backgroundColor="#003167" />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colors.primary}
+          />
           <Loader loading={loading} />
 
           <Formik
@@ -79,7 +86,9 @@ const ForgotPasswordScreen = ({navigation}) => {
               setFieldValue,
             }) => (
               <View style={{width: '100%', maxWidth: 320}}>
-                <Text style={styles.header}>Forgot password?</Text>
+                <Text style={[styles.header, {color: colors.white}]}>
+                  Forgot password?
+                </Text>
 
                 <TextInput
                   iconError="email-outline"
@@ -95,9 +104,13 @@ const ForgotPasswordScreen = ({navigation}) => {
                 <AppButton title="Reset" size="sm" onPress={handleSubmit} />
 
                 <TouchableHighlight onPress={handleOnPressRegister}>
-                  <Text style={styles.paragraph}>
+                  <Text
+                    style={[styles.paragraph, {color: colors.whiteOpaqueHigh}]}>
                     <Text>You don’t have an account? </Text>
-                    <Text style={styles.span}>Register</Text> here.
+                    <Text style={[styles.span, {color: colors.white}]}>
+                      Register
+                    </Text>{' '}
+                    here.
                   </Text>
                 </TouchableHighlight>
               </View>
@@ -109,7 +122,7 @@ const ForgotPasswordScreen = ({navigation}) => {
             style={styles.goBackButton}>
             <MaterialCommunityIcons
               name="close"
-              color={'rgba(255,255,255,1)'}
+              color={colors.white}
               size={24}
             />
           </TouchableOpacity>
@@ -127,38 +140,17 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 20,
   },
-  heading: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 30,
-    marginBottom: 8,
-    fontWeight: '400',
-  },
   span: {
     textAlign: 'center',
     textTransform: 'uppercase',
-    color: '#ffffff',
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 16,
     paddingLeft: 16,
   },
-  formControl: {
-    width: '100%',
-    height: 50,
-    padding: 10,
-    paddingLeft: 25,
-    paddingRight: 25,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    marginBottom: 16,
-  },
   header: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#ffffff',
     marginBottom: 24,
     maxWidth: 220,
     alignSelf: 'flex-start',
@@ -166,13 +158,11 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 14,
     textAlign: 'center',
-    color: 'rgba(255, 255, 255, 0.85)',
     marginBottom: 10,
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: '#003167',
     justifyContent: 'center',
     width: '100%',
     height: '100%',

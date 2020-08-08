@@ -6,8 +6,8 @@ const Loader = props => {
 
   return (
     <Modal
-      transparent={true}
       animationType={'none'}
+      transparent={true}
       visible={loading}
       onRequestClose={() => {
         console.log('close modal');

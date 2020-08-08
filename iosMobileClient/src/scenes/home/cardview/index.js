@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useRef, useContext} from 'react';
-import {useQuery} from '@apollo/client';
+import {useQuery, NetworkStatus} from '@apollo/client';
 import Card from '_core/card';
 import {
   Text,
@@ -8,7 +8,6 @@ import {
   FlatList,
   StyleSheet,
   StatusBar,
-  ScrollView,
   RefreshControl,
   TouchableOpacity,
   Dimensions,
@@ -16,33 +15,25 @@ import {
 import Loader from '_core/loader';
 import {FETCH_TOOLS_QUERY} from '_utils/graphql';
 import {DYI} from '_utils/graphql/mock';
-import {UserContext} from '_utils/context/';
 import {useTheme} from '@react-navigation/native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as Animatable from 'react-native-animatable';
 import CategoryTabs from '_components/category-tabs';
 import FeaturedTools from '_scenes/tools/featured';
+import {AppButton} from '_components/core/button';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Animatable from 'react-native-animatable';
 
-const {height, width} = Dimensions.get('window');
-const BOTTOM_SHEET_HEIGHT = height / 2;
-
-const wait = timeout => {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-};
+const {width} = Dimensions.get('window');
 
 const CardView = ({navigation}) => {
-  const {token} = useContext(UserContext);
+  const {colors} = useTheme();
   const [refreshing, setRefreshing] = useState(false);
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const {colors} = useTheme();
-  const {loading, data, error, fetchMore, refetch} = useQuery(
+  const {data, loading, error, fetchMore, refetch} = useQuery(
     FETCH_TOOLS_QUERY,
     {
-      fetchPolicy: 'cache-and-network',
+      notifyOnNetworkStatusChange: true,
     },
   );
 
@@ -62,22 +53,9 @@ const CardView = ({navigation}) => {
     setIsCartVisible(!isCartVisible);
   };
 
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
+  loading && <Loader loading={loading} />;
 
-    wait(1000).then(() => {
-      refetch();
-      setRefreshing(false);
-    });
-  }, [refreshing]);
-
-  if (loading) {
-    return <Loader loading={loading} />;
-  }
-
-  if (error) {
-    return <Error error={error.message} />;
-  }
+  error && <Error error={error.message} />;
 
   if (!data) {
     return null;
@@ -85,7 +63,7 @@ const CardView = ({navigation}) => {
 
   return (
     <View style={{paddingTop: 50}}>
-      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
       <CategoryTabs />
       <FlatList
         ListHeaderComponent={() => <FeaturedTools navigation={navigation} />}
@@ -111,18 +89,26 @@ const CardView = ({navigation}) => {
               width: width - 40,
               marginVertical: 40,
             }}>
+            {data.getTools.pageInfo.hasNextPage && (
+              <AppButton
+                title="More"
+                size="sm"
+                onPress={() => {}}
+                style={{alignSelf: 'center'}}
+              />
+            )}
             <Text
               style={{
                 paddingBottom: 8,
                 marginTop: 20,
                 textTransform: 'uppercase',
-                color: 'rgba(0,0,0,0.75)',
+                color: colors.blackOpaqueHigh,
               }}>
               How is it done?
             </Text>
             <Text
               style={{
-                color: '#000000',
+                color: colors.black,
                 fontSize: 32,
                 fontWeight: 'bold',
                 lineHeight: 34,
@@ -143,8 +129,6 @@ const CardView = ({navigation}) => {
                     video: item,
                   });
                 };
-
-                console.log(item.videoThumbnail);
 
                 return (
                   <View style={{width: (width - 40) / 2}}>
@@ -176,21 +160,21 @@ const CardView = ({navigation}) => {
                             width: 60,
                             height: 60,
                             borderRadius: 30,
-                            borderColor: 'rgba(255,255,255, 0.75)',
+                            borderColor: colors.whiteOpaqueHigh,
                             borderWidth: 4,
                             alignItems: 'center',
                             justifyContent: 'center',
                           }}>
                           <MaterialCommunityIcons
                             name="play"
-                            color={'#ffffff'}
+                            color={colors.white}
                             size={36}
                           />
                         </View>
                       </TouchableOpacity>
                       <Text
                         style={{
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: 'bold',
                           paddingLeft: 4,
                           paddingVertical: 8,
@@ -206,7 +190,7 @@ const CardView = ({navigation}) => {
           </View>
         }
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
         }
         keyExtractor={item => item._id.toString()}
       />
@@ -230,7 +214,7 @@ const CardView = ({navigation}) => {
           <TouchableOpacity onPress={dismissCart} style={{marginLeft: 'auto'}}>
             <MaterialCommunityIcons
               name="close"
-              color={'#ffffff'}
+              color={colors.white}
               size={24}
               style={{marginLeft: 6}}
             />
@@ -248,34 +232,11 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     marginBottom: 120,
   },
-  bottomSheet: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.65)',
-    width,
-    zIndex: 2,
-    display: 'none',
-  },
-  bottomSheetMenu: {
-    position: 'absolute',
-    alignSelf: 'center',
-    padding: 16,
-    backgroundColor: '#ffffff',
-    width: width - 32,
-    height: BOTTOM_SHEET_HEIGHT,
-    borderRadius: 15,
-    bottom: 16,
-  },
-  container: {
-    flex: 1,
-  },
   item: {
     backgroundColor: 'gray',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-  },
-  featuredItem: {
-    color: '#ffffff',
   },
   name: {
     fontSize: 32,

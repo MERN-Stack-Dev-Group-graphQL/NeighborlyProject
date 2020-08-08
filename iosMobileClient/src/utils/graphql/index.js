@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const FETCH_TOOLS_QUERY = gql`
-  query getTools {
-    getTools {
+  query getTools($cursor: String) {
+    getTools(cursor: $cursor) {
       edges {
         _id
         title
@@ -173,6 +173,12 @@ export const GET_CURRENT_USER = gql`
       email
       role
     }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($_id: ID!, $input: UserInput!) {
+    updateUser(_id: $_id, input: $input)
   }
 `;
 

@@ -117,6 +117,19 @@ const DrawerContent = props => {
               props.navigation.navigate('Track Tools');
             }}
           />
+          <DrawerItem
+            icon={({color, size}) => (
+              <MaterialCommunityIcons
+                name="cart-outline"
+                color={color}
+                size={size}
+              />
+            )}
+            label="Cart"
+            onPress={() => {
+              props.navigation.navigate('Cart');
+            }}
+          />
         </Drawer.Section>
         <Drawer.Section title="Preferences">
           <TouchableRipple

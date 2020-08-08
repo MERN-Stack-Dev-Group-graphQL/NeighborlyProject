@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef} from 'react';
 import {
   View,
   Image,
@@ -7,12 +7,7 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import {
-  useValue,
-  onScrollEvent,
-  interpolateColor,
-  useScrollHandler,
-} from 'react-native-redash';
+import {interpolateColor, useScrollHandler} from 'react-native-redash';
 import Animated, {
   multiply,
   divide,
@@ -20,6 +15,7 @@ import Animated, {
   Extrapolate,
 } from 'react-native-reanimated';
 import Slide, {SLIDE_HEIGHT, BORDER_RADIUS} from './slide';
+import {useTheme} from '@react-navigation/native';
 import {BG_IMAGE} from '_assets';
 import {SLIDES} from '_utils/graphql/mock';
 import FooterSlide from './footer-slide';
@@ -28,6 +24,7 @@ import Dot from './dot';
 const {width} = Dimensions.get('window');
 
 const Splash = ({navigation}) => {
+  const {colors} = useTheme();
   const scroll = useRef(null);
   const {scrollHandler, x} = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
@@ -36,11 +33,13 @@ const Splash = ({navigation}) => {
   });
 
   return (
-    <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
-      <View style={styles.container}>
+    <ImageBackground
+      source={BG_IMAGE}
+      style={[styles.backgroundImage, {backgroundColor: colors.primary}]}>
+      <View style={[styles.container, {backgroundColor: colors.white}]}>
         <StatusBar
           barStyle="light-content"
-          backgroundColor="#003167"
+          backgroundColor={colors.primary}
           translucent={true}
         />
 
@@ -84,7 +83,7 @@ const Splash = ({navigation}) => {
               backgroundColor,
             }}
           />
-          <View style={styles.footerContent}>
+          <View style={[styles.footerContent, {backgroundColor: colors.white}]}>
             <View style={styles.pagination}>
               {SLIDES.map((_, index) => (
                 <Dot key={index} currentIndex={divide(x, width)} {...{index}} />
@@ -140,7 +139,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
   },
   slider: {
     height: SLIDE_HEIGHT,
@@ -151,7 +149,6 @@ const styles = StyleSheet.create({
   },
   footerContent: {
     flex: 1,
-    backgroundColor: '#ffffff',
     borderTopLeftRadius: BORDER_RADIUS,
     borderTopRightRadius: BORDER_RADIUS,
   },
@@ -165,7 +162,6 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: '#003167',
     overflow: 'hidden',
     justifyContent: 'center',
     width,

@@ -1,17 +1,30 @@
 import React from 'react';
-import {View, Text, TextInput as RNTextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput as RNTextInput,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const TextInput = ({iconValid, iconError, touched, error, ...props}) => {
+const {width} = Dimensions.get('window');
+const TextInput = ({iconValid, iconError, touched, error, style, ...props}) => {
+  const {colors} = useTheme();
   const errColor = !touched
-    ? 'rgba(16, 43, 70, 0.25)'
+    ? colors.primaryDarkOpaque
     : error
-    ? '#FF4858'
-    : '#003167';
+    ? colors.alertHigh
+    : colors.primary;
 
   return (
     <View>
-      <View style={[styles.formContainer, {borderColor: errColor}]}>
+      <View
+        style={[
+          styles.formContainer,
+          {...style, borderColor: errColor, backgroundColor: colors.white},
+        ]}>
         <View style={styles.formFieldIcon}>
           <MaterialCommunityIcons
             name={!error ? iconValid : iconError}
@@ -29,7 +42,9 @@ const TextInput = ({iconValid, iconError, touched, error, ...props}) => {
         )}
       </View>
       {error && touched ? (
-        <Text style={styles.errorMessage}>{error}</Text>
+        <Text style={[styles.errorMessage, {color: colors.accentLight}]}>
+          {error}
+        </Text>
       ) : null}
     </View>
   );
@@ -39,10 +54,8 @@ const styles = StyleSheet.create({
   formContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    height: 50,
-    width: '100%',
-    maxWidth: 320,
+    minHeight: 50,
+    width: width - 32,
     borderRadius: 25,
     paddingHorizontal: 16,
     marginBottom: 16,
@@ -56,7 +69,6 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
     paddingHorizontal: 10,
     marginBottom: 16,
   },

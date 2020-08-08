@@ -10,35 +10,26 @@ import {
 } from 'react-native';
 import {currencyFormat} from '_utils/currencyFormat';
 import {useTheme} from '@react-navigation/native';
+import {CardImage} from '_core/card/card-image';
 import LinearGradient from 'react-native-linear-gradient';
 import StarCount from '_core/review/starcount';
-import * as routes from '_utils/constants/routes';
+import Avatar from '_core/avatar';
 
 const {width} = Dimensions.get('window');
 
 const CardFeature = ({tool, navigation, handleCart, cartCount, y, index}) => {
   const {colors} = useTheme();
-  const [buttonState, setButtonState] = useState(true);
-  const ImageBlock = path => {
-    if (path.url.length > 1) {
-      return (
-        <Image
-          style={styles.toolImage}
-          source={{
-            uri: `${routes.LOCAL_HOST}${path.url}`,
-          }}
-        />
-      );
-    }
-    return (
-      <Image
-        style={styles.toolImage}
-        source={{
-          uri: `${routes.LOCAL_HOST}}/assets/img/default.jpg`,
-        }}
-      />
-    );
-  };
+  const [avatar, setAvatar] = useState({
+    styles: {
+      position: 'absolute',
+      height: 30,
+      width: 30,
+      borderRadius: 25,
+      top: -35,
+      left: 0,
+    },
+    url: 'https://randomuser.me/api/portraits/men/1.jpg',
+  });
 
   const starCount = 4;
   const rateCount = 252;
@@ -58,12 +49,14 @@ const CardFeature = ({tool, navigation, handleCart, cartCount, y, index}) => {
         {
           alignSelf: 'center',
           marginVertical: 10,
+          backgroundColor: colors.white,
+          shadowColor: colors.black,
         },
       ]}
       key={index}>
       <TouchableOpacity style={{flex: 1}} onPress={onPress}>
         <View style={styles.cardImage}>
-          <ImageBlock url={tool.url} />
+          <CardImage path={tool.url} />
           <LinearGradient
             colors={['transparent', colors.primary]}
             style={styles.linearGradient}
@@ -72,12 +65,7 @@ const CardFeature = ({tool, navigation, handleCart, cartCount, y, index}) => {
 
         <View style={styles.cardBody}>
           <View style={styles.avatarWrapper}>
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-              }}
-            />
+            <Avatar avatar={avatar} />
           </View>
           <Text style={styles.cardTitle}>{tool.title}</Text>
           <View style={styles.starCountWrapper}>
@@ -103,8 +91,6 @@ const styles = StyleSheet.create({
     width: width / 2,
     marginRight: 10,
     borderRadius: 15,
-    backgroundColor: '#ffffff',
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -128,9 +114,6 @@ const styles = StyleSheet.create({
   },
   cardBase: {
     flex: 1,
-  },
-  toolImage: {
-    ...StyleSheet.absoluteFillObject,
   },
   avatarWrapper: {
     position: 'relative',

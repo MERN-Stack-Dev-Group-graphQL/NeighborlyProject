@@ -1,12 +1,12 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {UserContext} from '_utils/context';
 import AuthNavigator from '_navigations/auth-navigator';
 import DrawerNavigator from '_navigations/drawer-navigator';
+import SplashScreen from '_scenes/splash-screen';
 import Modal from '_scenes/modal';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {UserContext} from '_utils/context';
-import SplashScreen from '_scenes/splash-screen';
 
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();

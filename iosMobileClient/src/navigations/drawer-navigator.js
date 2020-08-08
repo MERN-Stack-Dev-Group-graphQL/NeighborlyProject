@@ -1,15 +1,18 @@
 import React from 'react';
-import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {Image, TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import TabNavigator from './tab-navigator';
 import DrawerContent from './drawer-content';
 import ProfileScreen from '_scenes/profile';
+import EditProfileScreen from '_scenes/edit-profile';
 import AccountActivityScreen from '_scenes/account-activity';
 import NotificationsScreen from '_scenes/notifications';
 import FiltersScreen from '_scenes/filters';
 import SavedToolsScreen from '_scenes/tools/saved';
 import TrackToolsScreen from '_scenes/tools/track';
+import CartScreen from '_scenes/cart';
+import {useTheme} from '@react-navigation/native';
 
 const AppDrawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -52,12 +55,50 @@ const screenOptions = ({navigation, route}) => ({
 });
 
 const Profile = () => {
+  const {colors} = useTheme();
+
   return (
     <Stack.Navigator initialRouteName="Profile" screenOptions={screenOptions}>
       <Stack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{headerTitle: 'Profile'}}
+        options={{
+          headerTitle: 'User Profile',
+          headerMode: 'none',
+          headerRight: () => {},
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          headerTitle: 'Edit Profile',
+          headerRight: () => (
+            <View style={styles.headerRightNav}>
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={[styles.applyBtn, {color: colors.white}]}>
+                  Apply
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          headerTitle: 'Shopping Cart',
+          headerRight: () => (
+            <View style={styles.headerRightNav}>
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={[styles.applyBtn, {color: colors.white}]}>
+                  Apply
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -131,6 +172,18 @@ const TrackTools = () => {
   );
 };
 
+const Cart = () => {
+  return (
+    <Stack.Navigator initialRouteName="Cart" screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{headerTitle: 'Cart'}}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const DrawerNavigator = () => {
   return (
     <AppDrawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
@@ -145,6 +198,7 @@ const DrawerNavigator = () => {
       <AppDrawer.Screen name="Filters" component={Filters} />
       <AppDrawer.Screen name="Saved Tools" component={SavedTools} />
       <AppDrawer.Screen name="Track Tools" component={TrackTools} />
+      <AppDrawer.Screen name="Cart" component={Cart} />
     </AppDrawer.Navigator>
   );
 };
@@ -171,6 +225,10 @@ const styles = StyleSheet.create({
   brandLogoImage: {
     width: 168,
     height: 30,
+  },
+  applyBtn: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

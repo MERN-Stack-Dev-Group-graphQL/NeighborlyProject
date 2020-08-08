@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {BRAND_LOGO} from '_assets';
-import * as Animatable from 'react-native-animatable';
 import {useTheme} from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 
 const SplashScreen = () => {
   const {colors} = useTheme();
@@ -24,9 +24,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    color: '#ffffff',
   },
 });
 

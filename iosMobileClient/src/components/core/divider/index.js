@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-const Divider = () => {
-  return <View style={styles.divider} />;
+const Divider = ({style}) => {
+  return <View style={[styles.divider, {...style}]} />;
 };
 
 const styles = StyleSheet.create({

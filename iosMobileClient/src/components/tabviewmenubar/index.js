@@ -1,5 +1,6 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {useTheme} from '@react-navigation/native';
 import CardView from '_scenes/home/cardview';
 import ListView from '_scenes/home/listview';
 import HomeMapView from '_scenes/home/mapview';
@@ -8,13 +9,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const Tab = createMaterialTopTabNavigator();
 
 const HomeTabBarTop = () => {
+  const {colors} = useTheme();
+
   return (
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
-        activeTintColor: '#ffffff',
-        style: {backgroundColor: '#003167'},
-        indicatorStyle: {backgroundColor: '#318FE6', height: 3},
+        activeTintColor: colors.white,
+        style: {backgroundColor: colors.primary},
+        indicatorStyle: {backgroundColor: colors.seconday, height: 3},
       }}>
       <Tab.Screen
         name="Card View"
@@ -23,7 +26,7 @@ const HomeTabBarTop = () => {
           tabBarIcon: () => (
             <MaterialCommunityIcons
               name="cards-variant"
-              color={'#318FE6'}
+              color={colors.seconday}
               size={24}
             />
           ),
@@ -36,7 +39,7 @@ const HomeTabBarTop = () => {
           tabBarIcon: () => (
             <MaterialCommunityIcons
               name="format-list-bulleted-square"
-              color={'#318FE6'}
+              color={colors.seconday}
               size={24}
             />
           ),
@@ -49,7 +52,7 @@ const HomeTabBarTop = () => {
           tabBarIcon: () => (
             <MaterialCommunityIcons
               name="map-marker-outline"
-              color={'#318FE6'}
+              color={colors.seconday}
               size={24}
             />
           ),

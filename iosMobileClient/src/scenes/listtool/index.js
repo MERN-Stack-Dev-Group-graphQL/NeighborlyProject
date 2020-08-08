@@ -8,27 +8,29 @@ import {
   Dimensions,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as Animatable from 'react-native-animatable';
 import {useTheme} from '@react-navigation/native';
 import {BRAND_LOGO} from '_assets';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Animatable from 'react-native-animatable';
 
 const {width} = Dimensions.get('window');
 
 const ListTool = () => {
   const {colors} = useTheme();
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
       <View style={[styles.alignContent, {paddingHorizontal: 40}]}>
         <TouchableOpacity
           style={{marginBottom: 24, width: width - 64}}
           onPress={() => {}}>
-          <View style={styles.addFirstTool}>
+          <View
+            style={[styles.addFirstTool, {borderColor: colors.blackOpaqueLow}]}>
             <MaterialCommunityIcons
               name="plus"
-              color={'#003167'}
+              color={colors.primary}
               size={80}
               style={{opacity: 0.15}}
             />
@@ -72,7 +74,7 @@ const ListTool = () => {
             }}>
             Let's get neighborly!
           </Text>
-          <Text style={{color: 'white', fontSize: 12}}>
+          <Text style={{color: colors.whiteOpaqueHigh, fontSize: 12}}>
             Add your first tool by tapping icon above
           </Text>
         </View>
@@ -96,9 +98,9 @@ const styles = StyleSheet.create({
   },
   addFirstTool: {
     padding: 32,
-    borderColor: 'rgba(0,0,0,0.25)',
     borderWidth: 1,
     borderStyle: 'dashed',
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -106,12 +108,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
+    alignSelf: 'center',
     padding: 10,
-    width,
+    width: width - 32,
     left: 16,
     right: 16,
     bottom: 16,
-    borderRadius: 15,
+    borderRadius: 50,
   },
   brandLogo: {
     width: 50,

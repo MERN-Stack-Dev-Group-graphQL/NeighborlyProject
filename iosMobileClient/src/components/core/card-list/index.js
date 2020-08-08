@@ -1,34 +1,28 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {currencyFormat} from '_utils/currencyFormat';
 import StarCount from '_core/review/starcount';
 import LinearGradient from 'react-native-linear-gradient';
-import * as routes from '_utils/constants/routes';
+import {CardImage} from '_core/card/card-image';
+import {currencyFormat} from '_utils/currencyFormat';
+import Avatar from '_core/avatar';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
 const CardList = ({tool, navigation, handleCart, cartCount}) => {
   const [buttonState, setButtonState] = useState(true);
-  const ImageBlock = path => {
-    if (path.url.length > 1) {
-      return (
-        <Image
-          style={styles.toolImage}
-          source={{
-            uri: `${routes.LOCAL_HOST}${path.url}`,
-          }}
-        />
-      );
-    }
-    return (
-      <Image
-        style={styles.toolImage}
-        source={{
-          uri: `${routes.LOCAL_HOST}${path.url}`,
-        }}
-      />
-    );
-  };
+  const [avatar, setAvatar] = useState({
+    styles: {
+      position: 'absolute',
+      height: 40,
+      width: 40,
+      borderRadius: 20,
+      transform: [{translateY: -8}],
+      left: -8,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+    },
+    url: 'https://randomuser.me/api/portraits/men/1.jpg',
+  });
 
   const starCount = 4;
   const rateCount = 252;
@@ -39,7 +33,6 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
       tool: tool,
       starCount,
       rateCount,
-      otherParam: 'anything you want here',
     });
   };
 
@@ -55,16 +48,11 @@ const CardList = ({tool, navigation, handleCart, cartCount}) => {
       <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
         <View style={styles.cardBody}>
           <View style={[styles.cardImage, {flex: 1}]}>
-            <ImageBlock url={tool.url} />
+            <CardImage path={tool.url} />
+            <Avatar avatar={avatar} />
             <LinearGradient
               colors={['transparent', '#003167']}
               style={styles.linearGradient}
-            />
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-              }}
             />
           </View>
           <View style={{paddingHorizontal: 10, flex: 2}}>

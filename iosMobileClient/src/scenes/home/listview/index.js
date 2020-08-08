@@ -1,5 +1,6 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import {useQuery} from '@apollo/client';
+import {useTheme} from '@react-navigation/native';
 import {FETCH_TOOLS_QUERY} from '_utils/graphql';
 import Loader from '_core/loader';
 import CardList from '_core/card-list';
@@ -12,18 +13,13 @@ import {
 } from 'react-native';
 
 const ListView = ({navigation}) => {
+  const {colors} = useTheme();
   const [refreshing, setRefreshing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const {loading, data, refetch} = useQuery(FETCH_TOOLS_QUERY);
-
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    refetch();
-    setRefreshing(false);
-  }, [refreshing]);
-
-  useEffect(() => {});
+  const {data, loading, refetch} = useQuery(FETCH_TOOLS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
 
   const handleAddedToCart = () => {
     if (addedToCart) {
@@ -39,12 +35,12 @@ const ListView = ({navigation}) => {
 
   return (
     <View>
-      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
       <ScrollView
         style={styles.homeScrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
         }>
         {loading ? (
           <Loader loading={loading} />

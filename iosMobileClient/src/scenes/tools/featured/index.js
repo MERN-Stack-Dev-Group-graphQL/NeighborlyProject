@@ -31,7 +31,7 @@ const FeaturedTools = ({navigation}) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const {loading, data, error, refetch} = useQuery(FETCH_TOOLS_QUERY, {
+  const {data, loading, error, refetch} = useQuery(FETCH_TOOLS_QUERY, {
     fetchPolicy: 'cache-and-network',
   });
 
@@ -46,15 +46,6 @@ const FeaturedTools = ({navigation}) => {
       setCartCount(cartCount + 1);
     }
   };
-
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-
-    wait(1000).then(() => {
-      refetch();
-      setRefreshing(false);
-    });
-  }, [refreshing]);
 
   if (loading) {
     return <Loader loading={loading} />;
@@ -99,9 +90,9 @@ const FeaturedTools = ({navigation}) => {
           <Text
             style={{
               color: '#000000',
-              fontSize: 32,
+              fontSize: 30,
               fontWeight: 'bold',
-              lineHeight: 30,
+              lineHeight: 36,
               paddingBottom: 20,
             }}>
             Check out some of our most popular tools
@@ -124,7 +115,7 @@ const FeaturedTools = ({navigation}) => {
               );
             }}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }
             keyExtractor={item => item._id.toString()}
           />

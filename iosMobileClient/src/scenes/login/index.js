@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {AuthContext} from '_utils/context/';
 import {AppButton, AppButtonOutline} from '_core/button';
+import {useTheme} from '@react-navigation/native';
 import {Formik} from 'formik';
 import AuthContainer from '_components/auth-container';
 import DismissKeyboard from '_core/dismiss-keyboard';
@@ -38,6 +39,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginScreen = ({navigation}) => {
+  const {colors} = useTheme();
   const {loginUser} = useContext(AuthContext);
   const [userData, setUserData] = useState({
     login: '',
@@ -67,7 +69,9 @@ const LoginScreen = ({navigation}) => {
   };
 
   return (
-    <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
+    <ImageBackground
+      source={BG_IMAGE}
+      style={[styles.backgroundImage, {backgroundColor: colors.primary}]}>
       <DismissKeyboard>
         <AuthContainer>
           <StatusBar
@@ -147,7 +151,9 @@ const LoginScreen = ({navigation}) => {
                   <TouchableHighlight
                     onPress={() => navigation.navigate('ForgotPassword')}>
                     <View style={styles.forgotPassword}>
-                      <Text style={styles.buttonText}>Forgot password?</Text>
+                      <Text style={[styles.buttonText, {color: colors.white}]}>
+                        Forgot password?
+                      </Text>
                     </View>
                   </TouchableHighlight>
                 </View>
@@ -170,7 +176,7 @@ const LoginScreen = ({navigation}) => {
             style={styles.goBackButton}>
             <MaterialCommunityIcons
               name="close"
-              color={'rgba(255,255,255,1)'}
+              color={colors.white}
               size={24}
             />
           </TouchableOpacity>
@@ -181,24 +187,9 @@ const LoginScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  label: {
-    width: 200,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#ffffff',
-    fontSize: 14,
-    marginBottom: 16,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: '#003167',
     justifyContent: 'center',
     width: '100%',
     height: '100%',
@@ -209,15 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
-  errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    maxWidth: 320,
-  },
-  buttonText: {
-    color: 'rgba(255, 255, 255, 0.85)',
-  },
+  buttonText: {},
   goBackButton: {
     position: 'absolute',
     flexDirection: 'row',

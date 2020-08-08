@@ -1,11 +1,16 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 const FooterSlide = ({header, description, last, onPress, onSkip}) => {
+  const {colors} = useTheme();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>{header}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={[styles.header, {color: colors.black}]}>{header}</Text>
+      <Text style={[styles.description, {color: colors.blackOpaqueHigh}]}>
+        {description}
+      </Text>
 
       <View style={styles.footerButtons}>
         {last ? (
@@ -13,7 +18,9 @@ const FooterSlide = ({header, description, last, onPress, onSkip}) => {
         ) : (
           <TouchableOpacity onPress={onSkip} style={{flex: 1}}>
             <View>
-              <Text style={styles.skipText}>Skip</Text>
+              <Text style={[styles.skipText, {color: colors.blackOpaque}]}>
+                Skip
+              </Text>
             </View>
           </TouchableOpacity>
         )}
@@ -22,9 +29,9 @@ const FooterSlide = ({header, description, last, onPress, onSkip}) => {
           <View
             style={[
               styles.cta,
-              {backgroundColor: last ? '#0B57BF' : '#ECA900'},
+              {backgroundColor: last ? colors.primaryLight : colors.accent},
             ]}>
-            <Text style={{fontSize: 20, color: '#ffffff'}}>
+            <Text style={{fontSize: 20, color: colors.white}}>
               {last ? "Let's get Started" : 'Next'}
             </Text>
           </View>
@@ -44,14 +51,12 @@ const styles = StyleSheet.create({
     fontSize: 26,
     lineHeight: 30,
     fontWeight: 'bold',
-    color: 'rgba(0,0,0,1)',
     marginTop: 12,
     marginBottom: 8,
   },
   description: {
     fontSize: 16,
     lineHeight: 20,
-    color: 'rgba(0,0,0,0.75)',
     marginBottom: 16,
   },
   footerButtons: {
@@ -61,7 +66,6 @@ const styles = StyleSheet.create({
   },
   skipText: {
     fontWeight: 'bold',
-    color: 'rgba(0,0,0,0.5)',
   },
   cta: {
     flexDirection: 'row',

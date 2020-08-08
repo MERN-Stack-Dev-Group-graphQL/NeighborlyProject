@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 const {width} = Dimensions.get('window');
 const ratio = 300 / 260;
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   cardTitle: {
     textTransform: 'capitalize',
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     paddingRight: 55,
     marginBottom: 4,
@@ -73,12 +73,13 @@ export const styles = StyleSheet.create({
   },
   actionWrapper: {
     position: 'absolute',
-    top: 10,
-    right: 10,
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    top: 10,
+    right: 10,
+    left: 10,
+    display: 'flex',
   },
   actionText: {
     fontSize: 12,
@@ -116,6 +117,14 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.85)',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  locationTool: {
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    alignItems: 'center',
   },
   likeTool: {
     marginLeft: 'auto',

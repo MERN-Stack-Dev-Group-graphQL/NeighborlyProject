@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CheckBox = ({label, onChange, checked, ...props}) => {
+  const {colors} = useTheme();
+
   return (
     <TouchableOpacity
       style={{justifyContent: 'center'}}
@@ -14,17 +17,21 @@ const CheckBox = ({label, onChange, checked, ...props}) => {
             marginRight: 10,
             height: 20,
             width: 20,
-            color: '#000',
+            color: colors.black,
             borderRadius: 5,
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: 1,
-            borderColor: checked ? 'rgba(255, 194, 11, 1)' : '#ffffff',
-            backgroundColor: checked ? 'rgba(255, 194, 11, 1)' : '#003167',
+            borderColor: checked ? colors.accentLight : colors.white,
+            backgroundColor: checked ? colors.accentLight : colors.primary,
           }}>
-          <MaterialCommunityIcons name="check" color="#003167" size={16} />
+          <MaterialCommunityIcons
+            name="check"
+            color={colors.primary}
+            size={16}
+          />
         </View>
-        <Text style={styles.label}>{label}</Text>
+        <Text style={{color: colors.white}}>{label}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -45,14 +52,6 @@ const styles = StyleSheet.create({
   formControl: {
     flex: 1,
     padding: 0,
-  },
-  label: {
-    color: '#ffffff',
-  },
-  errorMessage: {
-    color: 'rgba(255, 194, 11, 1)',
-    paddingHorizontal: 10,
-    marginBottom: 16,
   },
 });
 

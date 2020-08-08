@@ -6,6 +6,7 @@ import { mkdir } from 'fs';
 const { ObjectID } = require('mongodb');
 const { validateToolInput } = require('../../util/validators');
 const database = process.env.MONGODB_DB;
+
 const toCursorHash = (string) => Buffer.from(string).toString('base64');
 const fromCursorHash = (string) => {
   console.log(string, 'test string');
@@ -15,10 +16,21 @@ const fromCursorHash = (string) => {
 const toolsResolver = {
   Query: {
     getTools: async (parent, { cursor, limit = 9 }, context, info) => {
-      const cursorOptions = cursor ? { createdAt: { $lt: fromCursorHash(cursor) } } : {};
-      const allTools = await mongoDao.getAllDocs(database, 'tools', cursorOptions, limit);
-      const hasNextPage = allTools.length > limit;
-      const edges = hasNextPage ? allTools.slice(0, -1) : allTools;
+      // console.log(cursor, 'test cursor');
+      const cursorOptions = cursor
+        ? {
+            createdAt: {
+              $lt: fromCursorHash(cursor),
+            },
+          }
+        : {};
+
+      // const cursorOptions = cursor ? { createdAt: { $lt: fromCursorHash(cursor) } } : {};
+      // console.log(cursorOptions, 'test option');
+
+      const tools = await mongoDao.getAllDocs(database, 'tools', cursorOptions, limit);
+      const hasNextPage = tools.length > limit;
+      const edges = hasNextPage ? tools.slice(0, -1) : tools;
       return {
         edges,
         pageInfo: {
@@ -161,7 +173,7 @@ const toolsResolver = {
       const result = await mongoDao.updateOneDoc(database, 'tools', '_id', args);
 
       if (result.matchedCount === 0) {
-        console.error(`Delete failed! ${result.matchedCount} document(s) matched the query criteria`);
+        console.error(`Update failed! ${result.matchedCount} document(s) matched the query criteria`);
         console.log(`${result.modifiedCount} document(s) was/were updated`);
         return false;
       } else {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const CATEGORIES = [
   {
     id: 1,
@@ -38,21 +36,44 @@ export const CATEGORIES = [
   },
 ];
 
+export const SEARCH_CATEGORIES = [
+  {
+    title: 'Filter',
+    iconLeft: 'tune',
+    iconRight: '',
+  },
+  {
+    title: 'Tool',
+    iconLeft: '',
+    iconRight: 'chevron-down',
+  },
+  {
+    title: 'Make',
+    iconLeft: '',
+    iconRight: 'chevron-down',
+  },
+  {
+    title: 'Model',
+    iconLeft: '',
+    iconRight: 'chevron-down',
+  },
+];
+
 export const DYI = [
   {
     _id: '5ef93b481e19268d5460f1ec',
     title: 'DIY built in bookcases',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    videoUrl: require('_assets/images/pexels-one.jpg'),
+    videoUrl: require('_assets/videos/video2.mp4'),
     videoThumbnail: require('_assets/images/pexels-one.jpg'),
   },
   {
     _id: '5ef7ed7b3a13ed79b349914d',
-    title: 'DIY window grids/mullions',
+    title: 'DIY window mullions',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    videoUrl: require('_assets/images/pexels-two.jpg'),
+    videoUrl: require('_assets/videos/video1.mp4'),
     videoThumbnail: require('_assets/images/pexels-two.jpg'),
   },
   {
@@ -60,16 +81,16 @@ export const DYI = [
     title: 'DIY shutters',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    videoUrl: require('_assets/images/pexels-one.jpg'),
-    videoThumbnail: require('_assets/images/pexels-one.jpg'),
+    videoUrl: require('_assets/videos/video2.mp4'),
+    videoThumbnail: require('_assets/images/pexels-three.jpg'),
   },
   {
     _id: '5ef7ec873a13ed79b348814a',
     title: 'DIY patio',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, vitae. Illum, unde. Hic unde exercitationem illum placeat ratione corrupti, magnam aut natus, accusamus aspernatur tempora! Dicta consequatur ab repellat vel!',
-    videoUrl: require('_assets/images/pexels-two.jpg'),
-    videoThumbnail: require('_assets/images/pexels-two.jpg'),
+    videoUrl: require('_assets/videos/video1.mp4'),
+    videoThumbnail: require('_assets/images/pexels-four.jpg'),
   },
 ];
 

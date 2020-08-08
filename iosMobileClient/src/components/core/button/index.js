@@ -4,6 +4,54 @@ import {useTheme} from '@react-navigation/native';
 
 TouchableOpacity.defaultProps = {activeOpacity: 0.8};
 
+export const AppButton = ({onPress, title, style}) => {
+  const {colors} = useTheme();
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.buttonContainer,
+        {...style, backgroundColor: colors.accentLight},
+      ]}
+      onPress={onPress}>
+      <Text style={[styles.buttonText, {color: colors.primary}]}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export const AppButtonOutline = ({onPress, title, style}) => {
+  const {colors} = useTheme();
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.buttonContainer,
+        styles.buttonContainerOutline,
+        {...style, backgroundColor: 'transparent', borderColor: colors.white},
+      ]}
+      onPress={onPress}>
+      <Text
+        style={[
+          styles.buttonText,
+          styles.buttonTextOutline,
+          {color: colors.white},
+        ]}>
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+export const TextButton = ({onPress, title}) => {
+  const {colors} = useTheme();
+
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {},
   buttonContainer: {
@@ -16,54 +64,21 @@ const styles = StyleSheet.create({
     height: 50,
     lineHeight: 50,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 194, 11, 1)',
     textTransform: 'uppercase',
     marginBottom: 16,
     paddingVertical: 10,
     paddingHorizontal: 12,
   },
   buttonContainerOutline: {
-    backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 1)',
   },
   buttonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#003167',
     alignSelf: 'center',
     textTransform: 'uppercase',
   },
   buttonTextOutline: {
-    color: 'rgba(255, 255,255, 1)',
     fontWeight: 'normal',
   },
 });
-
-export const AppButton = ({onPress, title}) => {
-  const {colors} = useTheme();
-
-  return (
-    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-      <Text style={[styles.buttonText, {color: colors.primary}]}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
-
-export const AppButtonOutline = ({onPress, title}) => {
-  return (
-    <TouchableOpacity
-      style={[styles.buttonContainer, styles.buttonContainerOutline]}
-      onPress={onPress}>
-      <Text style={[styles.buttonText, styles.buttonTextOutline]}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
-
-export const TextButton = ({onPress, title}) => {
-  return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text>{title}</Text>
-    </TouchableOpacity>
-  );
-};

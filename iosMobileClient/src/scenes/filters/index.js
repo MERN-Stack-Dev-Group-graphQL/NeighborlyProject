@@ -1,11 +1,14 @@
 import React from 'react';
 import {StatusBar, StyleSheet, Text, View, Button} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 
 const Filters = ({navigation}) => {
+  const {colors} = useTheme();
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#003167" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
       <View style={styles.alignContent}>
         <Text>Filters Page</Text>

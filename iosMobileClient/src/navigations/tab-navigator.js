@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useTheme} from '@react-navigation/native';
 import HomeTopTabScreen from '_components/tabviewmenubar';
 import SearchScreen from '_scenes/search';
 import ListScreen from '_scenes/listtool';
@@ -9,7 +10,10 @@ import ChatScreen from '_scenes/chat';
 import ToolsScreen from '_scenes/tools';
 import ToolDetailsScreen from '_scenes/tools/details';
 import DIYDetails from '_scenes/diy/details';
+import Profile from '_scenes/profile';
+import EditProfile from '_scenes/edit-profile';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Avatar from '_core/avatar';
 
 const Stack = createStackNavigator();
 const AppTab = createBottomTabNavigator();
@@ -23,33 +27,44 @@ const BrandLogo = () => {
   );
 };
 
-const screenOptions = ({navigation, route}) => ({
-  headerTitle: props => <BrandLogo {...props} />,
-  headerRight: () => (
-    <View style={styles.headerRightNav}>
-      <Image
-        style={styles.avatar}
-        source={{
-          uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-        }}
-      />
-      <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <Image
-          style={styles.hamburgerMenu}
-          source={require('../assets/images/hamburger.png')}
-        />
-      </TouchableOpacity>
-    </View>
-  ),
-  headerStyle: {
-    backgroundColor: '#003167',
-    shadowOffset: {height: 0, width: 0},
-  },
-  headerTintColor: 'rgba(255,255,255, 1)',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-});
+const screenOptions = ({navigation, route}) => {
+  const {colors} = useTheme();
+  const avatar = {
+    styles: {
+      height: 36,
+      width: 36,
+      borderRadius: 18,
+      borderWidth: 2,
+      borderColor: colors.white,
+    },
+    url: 'https://randomuser.me/api/portraits/men/1.jpg',
+  };
+
+  return {
+    headerTitle: props => <BrandLogo {...props} />,
+    headerRight: () => (
+      <View style={styles.headerRightNav}>
+        <TouchableOpacity onPress={() => navigation.push('Profile')}>
+          <Avatar avatar={avatar} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <Image
+            style={styles.hamburgerMenu}
+            source={require('../assets/images/hamburger.png')}
+          />
+        </TouchableOpacity>
+      </View>
+    ),
+    headerStyle: {
+      backgroundColor: colors.primary,
+      shadowOffset: {height: 0, width: 0},
+    },
+    headerTintColor: colors.white,
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
+};
 
 const HomeTabScreen = () => {
   return (
@@ -64,6 +79,16 @@ const HomeTabScreen = () => {
         name="DIY Detail"
         component={DIYDetails}
         options={({route}) => ({title: route.params.name})}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={() => ({title: 'User Profile'})}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={() => ({title: 'Edit Profile'})}
       />
     </Stack.Navigator>
   );
@@ -93,6 +118,11 @@ const SearchTabScreen = () => {
         name="Search"
         component={SearchScreen}
         options={{headerTitle: 'Search'}}
+      />
+      <Stack.Screen
+        name="Tool Details"
+        component={ToolDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
       />
     </Stack.Navigator>
   );
@@ -128,6 +158,8 @@ const ChatTabScreen = () => {
 };
 
 const TabNavigator = () => {
+  const {colors} = useTheme();
+
   return (
     <AppTab.Navigator
       initialRouteName="Home"
@@ -153,7 +185,7 @@ const TabNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#0B57BF',
+        activeTintColor: colors.primary,
         inactiveTintColor: 'gray',
       }}>
       <AppTab.Screen name="Search" component={SearchTabScreen} />
@@ -171,13 +203,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 16,
-  },
-  avatar: {
-    height: 36,
-    width: 36,
-    borderRadius: 18,
-    borderWidth: 2,
-    borderColor: '#ffffff',
   },
   hamburgerMenu: {
     width: 30,

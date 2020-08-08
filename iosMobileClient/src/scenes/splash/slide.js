@@ -1,11 +1,13 @@
 import React from 'react';
-import {Text, View, Image, Dimensions, StyleSheet} from 'react-native';
+import {Text, View, Dimensions, StyleSheet} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 export const SLIDE_HEIGHT = 0.61 * height;
 export const BORDER_RADIUS = 45;
 
 const Slide = ({title, right}) => {
+  const {colors} = useTheme();
   const transform = [
     {translateY: (SLIDE_HEIGHT - 100) / 2},
     {translateX: right ? width / 2 - 50 : -width / 2 + 50},
@@ -15,7 +17,7 @@ const Slide = ({title, right}) => {
   return (
     <View style={styles.container}>
       <View style={[styles.titleContainer, {transform}]}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, {color: colors.whiteOpaque}]}>{title}</Text>
       </View>
     </View>
   );
@@ -34,7 +36,6 @@ const styles = StyleSheet.create({
     fontSize: 80,
     lineHeight: 80,
     fontWeight: 'bold',
-    color: 'rgba(255,255,255,0.05)',
     textAlign: 'center',
   },
 });

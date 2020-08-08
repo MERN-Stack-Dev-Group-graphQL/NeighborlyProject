@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,18 +10,20 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {currencyFormat} from '_utils/currencyFormat';
 import LinearGradient from 'react-native-linear-gradient';
-import StarCount from '_core/review/starcount';
-import * as routes from '_utils/constants/routes';
 import {FETCH_TOOLS_BY_ID_QUERY} from '_utils/graphql';
 import {useQuery} from '@apollo/client';
+import {useTheme} from '@react-navigation/native';
+import {CardImage} from '_core/card/card-image';
+import {currencyFormat} from '_utils/currencyFormat';
+import StarCount from '_core/review/starcount';
 import Loader from '_core/loader';
 import Error from '_core/error';
 
 const {height} = Dimensions.get('window');
 
 const ToolDetails = ({route, navigation}) => {
+  const {colors} = useTheme();
   const {itemId, tool, starCount, rateCount} = route.params;
   const {loading, error, data} = useQuery(FETCH_TOOLS_BY_ID_QUERY, {
     fetchPolicy: 'cache-and-network',
@@ -29,27 +31,6 @@ const ToolDetails = ({route, navigation}) => {
       toolId: itemId,
     },
   });
-
-  const ImageBlock = path => {
-    if (path.url.length > 1) {
-      return (
-        <Image
-          source={{
-            uri: `${routes.LOCAL_HOST}${path.url}`,
-          }}
-          style={styles.imageBlock}
-        />
-      );
-    }
-    return (
-      <Image
-        source={{
-          uri: `${routes.LOCAL_HOST}/assets/img/default.jpg`,
-        }}
-        style={styles.imageBlock}
-      />
-    );
-  };
 
   if (loading) {
     return <Loader loading={loading} />;
@@ -59,17 +40,42 @@ const ToolDetails = ({route, navigation}) => {
     return <Error error={error} />;
   }
 
-  // console.log(data);
-  // const {getToolById} = data;
-  // let tool = {...getToolById};
+  const toolFeatures = [
+    {
+      header: 'Make',
+      detail: tool.make,
+    },
+    {
+      header: 'Model',
+      detail: tool.model,
+    },
+    {
+      header: 'Color',
+      detail: tool.color,
+    },
+    {
+      header: 'Dimensions',
+      detail: tool.dimensions,
+    },
+    {
+      header: 'Item Weight',
+      detail: tool.weight,
+    },
+    {
+      header: 'Electrical Ratings',
+      detail: tool.electricalRatings,
+    },
+  ];
 
   return (
-    <ScrollView style={styles.cardWrapper}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={[styles.cardWrapper, {backgroundColor: colors.white}]}>
       <View>
         <View style={styles.cardImage}>
-          <ImageBlock url={tool.url} />
+          <CardImage path={tool.url} />
           <LinearGradient
-            colors={['transparent', '#003167']}
+            colors={['transparent', colors.primary]}
             style={styles.linearGradient}
           />
         </View>
@@ -89,42 +95,14 @@ const ToolDetails = ({route, navigation}) => {
           <Text style={styles.cardText}>{tool.description}</Text>
 
           <View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Manufacturer:</Text>
+            {toolFeatures.map((feature, index) => (
+              <View style={styles.row} key={index}>
+                <View style={styles.colLeft}>
+                  <Text style={styles.text}>{feature.header}</Text>
+                </View>
+                <Text>{feature.detail}</Text>
               </View>
-              <Text>{tool.make}</Text>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Model:</Text>
-              </View>
-              <Text>{tool.model}</Text>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Color:</Text>
-              </View>
-              <Text>{tool.color}</Text>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Dimensions:</Text>
-              </View>
-              <Text>{tool.dimensions}</Text>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Item Weight:</Text>
-              </View>
-              <Text>{tool.weight}</Text>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.colLeft}>
-                <Text style={styles.text}>Electrical Ratings:</Text>
-              </View>
-              <Text>{tool.electricalRatings}</Text>
-            </View>
+            ))}
             <View style={styles.row}>
               <View style={styles.colLeft}>
                 <Text style={styles.text}>Item ID:</Text>
@@ -134,11 +112,15 @@ const ToolDetails = ({route, navigation}) => {
           </View>
 
           <TouchableOpacity
-            style={styles.addToCart}
+            style={[styles.addToCart, {backgroundColor: colors.primaryLight}]}
             onPress={() => {
-              Alert.alert(`${tool.title} added to cart.`);
+              setTimeout(() => {
+                Alert.alert(`${tool.title} added to cart.`);
+              }, 100);
             }}>
-            <Text style={styles.cartText}>Add to Cart</Text>
+            <Text style={[styles.cartText, {color: colors.white}]}>
+              Add to Cart
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -147,12 +129,8 @@ const ToolDetails = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  imageBlock: {
-    ...StyleSheet.absoluteFillObject,
-  },
   cardWrapper: {
     flex: 1,
-    backgroundColor: '#ffffff',
     margin: 10,
     borderRadius: 5,
     shadowOffset: {
@@ -200,7 +178,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   cartText: {
-    color: '#fff',
     textTransform: 'uppercase',
   },
   toolImage: {
@@ -235,7 +212,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 'auto',
     borderRadius: 25,
-    backgroundColor: '#0b57bf',
   },
 });
 

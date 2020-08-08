@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import {AuthContext} from '_utils/context/';
+import {useTheme} from '@react-navigation/native';
 import {AppButton} from '_components/core/button';
 import TextInput from '_components/form/text-input';
 import Loader from '_core/loader';
@@ -53,6 +54,7 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({navigation}) => {
+  const {colors} = useTheme();
   const {registerUser} = useContext(AuthContext);
   const [userData, setUserData] = useState({
     username: '',
@@ -110,9 +112,14 @@ const RegisterScreen = ({navigation}) => {
 
   return (
     <DismissKeyboard>
-      <ImageBackground source={BG_IMAGE} style={styles.backgroundImage}>
+      <ImageBackground
+        source={BG_IMAGE}
+        style={[styles.backgroundImage, {backgroundColor: colors.primary}]}>
         <AuthContainer>
-          <StatusBar barStyle="light-content" backgroundColor="#003167" />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colors.primary}
+          />
           <Loader loading={loading} />
 
           <Animatable.Image
@@ -238,8 +245,9 @@ const RegisterScreen = ({navigation}) => {
           </Formik>
 
           <TouchableHighlight onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.paragraph}>
-              Already have an account? <Text style={styles.label}>Login </Text>
+            <Text style={[styles.paragraph, {color: colors.white}]}>
+              Already have an account?{' '}
+              <Text style={[styles.label, {color: colors.white}]}>Login </Text>
               here.
             </Text>
           </TouchableHighlight>
@@ -249,7 +257,7 @@ const RegisterScreen = ({navigation}) => {
             style={styles.goBackButton}>
             <MaterialCommunityIcons
               name="close"
-              color={'rgba(255,255,255,1)'}
+              color={colors.white}
               size={24}
             />
           </TouchableOpacity>
@@ -263,20 +271,12 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     textTransform: 'uppercase',
-    color: '#ffffff',
     fontSize: 14,
     marginBottom: 16,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: '#003167',
     justifyContent: 'center',
     width: '100%',
     height: '100%',
@@ -288,7 +288,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.85)',
     marginBottom: 10,
   },
   goBackButton: {
